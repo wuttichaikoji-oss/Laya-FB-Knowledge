@@ -1,8 +1,9 @@
 {
-  "apiKey": "YOUR_API_KEY",
-  "authDomain": "YOUR_PROJECT.firebaseapp.com",
-  "projectId": "YOUR_PROJECT_ID",
-  "storageBucket": "YOUR_PROJECT.firebasestorage.app",
-  "messagingSenderId": "YOUR_MESSAGING_SENDER_ID",
-  "appId": "YOUR_APP_ID"
+  "apiKey": "AIzaSyAaiMSOeGDahZuVDqWhgeuSHBf129wXv6g",
+  "authDomain": "laya-training.firebaseapp.com",
+  "projectId": "laya-training",
+  "storageBucket": "laya-training.firebasestorage.app",
+  "messagingSenderId": "843807988908",
+  "appId": "1:843807988908:web:cda1a814a2bcb41c4a9309",
+  "measurementId": "G-QB481YNZCJ"
 }

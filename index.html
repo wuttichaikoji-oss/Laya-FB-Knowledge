@@ -1,394 +1,133 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Laya F&B Academy Firebase Edition</title>
-<style>
-:root{
-  --bg:#f4f7fb;--panel:#ffffff;--text:#14213d;--muted:#5b6b84;--line:#dbe4f0;--brand:#1d4ed8;--brand2:#0f766e;--soft:#eef4ff;--danger:#dc2626;
-}
-*{box-sizing:border-box} body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text)}
-header{position:sticky;top:0;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:10}
-.container{max-width:1080px;margin:0 auto;padding:16px}
-.hero{display:flex;justify-content:space-between;gap:12px;align-items:center}
-.brand{font-size:1.35rem;font-weight:800}
-.sub{font-size:.95rem;color:var(--muted)}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:16px;box-shadow:0 6px 22px rgba(20,33,61,.05)}
-.grid{display:grid;gap:14px}.grid-2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
-button,input,textarea,select{font:inherit}
-input,textarea,select{width:100%;padding:12px;border-radius:14px;border:1px solid var(--line);background:#fff;color:var(--text)}
-textarea{min-height:90px;resize:vertical}
-button{border:none;border-radius:14px;padding:12px 14px;font-weight:700;cursor:pointer;background:var(--brand);color:#fff}
-button.secondary{background:#e8eef9;color:var(--text)} button.success{background:var(--brand2)} button.danger{background:var(--danger)}
-button.ghost{background:#fff;color:var(--brand);border:1px solid #bfd0f5}
-.row{display:flex;gap:10px;flex-wrap:wrap}.row>*{flex:1 1 160px}
-.hidden{display:none}
-.pillbar{display:flex;gap:8px;overflow:auto;padding-bottom:4px;margin-top:12px}
-.pill{white-space:nowrap;background:#fff;border:1px solid var(--line);padding:10px 12px;border-radius:999px;color:var(--text);cursor:pointer}
-.pill.active{background:var(--soft);border-color:#bfd0f5;color:var(--brand);font-weight:700}
-.lesson-list{display:grid;gap:10px}
-.lesson-btn{text-align:left;padding:14px 16px;border-radius:16px;background:#fff;border:1px solid var(--line);cursor:pointer}
-.lesson-btn.active{background:var(--soft);border-color:#bfd0f5}
-.reader{background:#fff;border:1px solid var(--line);border-radius:22px;padding:18px}
-.reader h2{font-size:1.9rem;line-height:1.15;margin:0 0 8px}
-.reader p{line-height:1.7}
-.section{border:1px solid var(--line);border-radius:18px;padding:14px;margin-top:12px;background:#fbfdff}
-.term{padding:12px;border:1px solid var(--line);border-radius:14px;background:#fff;margin-bottom:8px}
-.term strong{display:block;font-size:1.05rem}
-.meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}.chip{background:var(--soft);color:var(--brand);padding:6px 10px;border-radius:999px;font-size:.88rem}
-.small{font-size:.92rem;color:var(--muted)}
-.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.kpi{padding:14px;border-radius:18px;background:#fff;border:1px solid var(--line)}.kpi .n{font-size:1.8rem;font-weight:800;margin-top:6px}
-label{display:block;margin:10px 0 6px;color:#334155;font-weight:700}
-.notice{padding:12px 14px;border-radius:16px;background:#fff7ed;border:1px solid #fed7aa;color:#9a3412}
-.ok{background:#ecfdf5;border-color:#a7f3d0;color:#065f46}
-.footer{padding:24px;text-align:center;color:var(--muted)}
-@media (max-width:760px){.hero{align-items:flex-start;flex-direction:column}.kpis{grid-template-columns:1fr}.reader h2{font-size:1.55rem}}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Laya F&B Academy v3.0 Lite</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-<header>
-  <div class="container hero">
-    <div>
-      <div class="brand">Laya F&B Academy · Firebase Edition</div>
-      <div class="sub">ล็อกอินเก็บข้อมูลส่วนตัวของพนักงาน · อ่านง่าย · ใช้งานบนมือถือ</div>
-    </div>
-    <div class="row" style="max-width:420px;width:100%">
-      <button id="btnOpenConfig" class="secondary">ตั้งค่า Firebase</button>
-      <button id="btnLogout" class="danger hidden">ออกจากระบบ</button>
-    </div>
-  </div>
-</header>
-
-<main class="container grid" style="margin-top:14px">
-  <section id="setupNotice" class="notice">
-    ยังไม่ได้เชื่อม Firebase — กดปุ่ม <strong>ตั้งค่า Firebase</strong> แล้ววางค่า config ของโปรเจกต์ก่อนใช้งานจริง
-  </section>
-
-  <section id="authCard" class="card grid grid-2">
-    <div>
-      <h2 style="margin-top:0">พนักงานล็อกอิน</h2>
-      <p class="small">ใช้ email/password ของแต่ละคน เพื่อเก็บ progress, note และผลการเรียนของตัวเอง</p>
-      <label>อีเมล</label>
-      <input id="email" type="email" placeholder="name@hotel.com" />
-      <label>รหัสผ่าน</label>
-      <input id="password" type="password" placeholder="อย่างน้อย 6 ตัวอักษร" />
-      <div class="row" style="margin-top:12px">
-        <button id="btnLogin">เข้าสู่ระบบ</button>
-        <button id="btnRegister" class="success">สมัครผู้ใช้ใหม่</button>
-      </div>
-      <p id="authMsg" class="small"></p>
-    </div>
-    <div class="card" style="background:#fbfdff">
-      <h3 style="margin-top:0">ทำไมควรใช้ Firebase</h3>
-      <div class="small">ข้อมูลจะผูกกับบัญชีของพนักงานแต่ละคน เช่น</div>
-      <div class="meta" style="margin-top:10px">
-        <span class="chip">ประวัติการเรียน</span>
-        <span class="chip">โน้ตส่วนตัว</span>
-        <span class="chip">หัวข้อที่อ่านจบ</span>
-        <span class="chip">ใช้ข้ามเครื่องได้</span>
-      </div>
-      <div class="small">เหมาะถ้าพนักงานล็อกอินในมือถือของตัวเอง และต้องการให้ข้อมูลไม่หายเมื่อเปลี่ยนเครื่อง</div>
-    </div>
-  </section>
-
-  <section id="app" class="hidden grid">
-    <section class="card grid grid-2">
-      <div>
-        <h2 style="margin-top:0">โปรไฟล์พนักงาน</h2>
-        <div class="small" id="userEmail"></div>
-        <label>ชื่อที่แสดง</label>
-        <input id="displayName" placeholder="เช่น Somchai" />
-        <label>Outlet</label>
-        <select id="outlet">
-          <option>The Taste</option>
-          <option>Mangrove</option>
-          <option>Lounge / Bar</option>
-          <option>Banquet</option>
-          <option>Room Service</option>
-        </select>
-        <label>ตำแหน่ง</label>
-        <select id="role">
-          <option>Service Staff</option>
-          <option>Captain</option>
-          <option>Supervisor</option>
-        </select>
-        <div class="row" style="margin-top:12px">
-          <button id="btnSaveProfile" class="success">บันทึกโปรไฟล์</button>
-          <button id="btnSync" class="secondary">ดึงข้อมูลล่าสุด</button>
+  <div id="app">
+    <section id="authView" class="screen center-screen">
+      <div class="auth-card">
+        <div class="brand-row">
+          <div class="brand-badge">Laya</div>
+          <div>
+            <h1>Laya F&amp;B Academy v3.0 Lite</h1>
+            <p class="sub">เรียบง่าย อ่านง่าย ใช้งานจริงได้บนมือถือ</p>
+          </div>
         </div>
-        <p id="profileMsg" class="small"></p>
-      </div>
-      <div>
-        <h2 style="margin-top:0">ภาพรวมของฉัน</h2>
-        <div class="kpis">
-          <div class="kpi"><div class="small">อ่านจบแล้ว</div><div class="n" id="doneCount">0</div></div>
-          <div class="kpi"><div class="small">รายการโปรด</div><div class="n" id="favCount">0</div></div>
-          <div class="kpi"><div class="small">โน้ตที่บันทึก</div><div class="n" id="noteCount">0</div></div>
+
+        <div class="auth-switch">
+          <button class="pill active" data-mode="login">เข้าสู่ระบบ</button>
+          <button class="pill" data-mode="register">สมัครผู้ใช้ใหม่</button>
         </div>
-        <div class="section" style="margin-top:14px">
-          <div class="small">แนวคิดของเวอร์ชันนี้: เน้นใช้งานง่าย ไม่รก และเก็บข้อมูลแยกตามพนักงานอัตโนมัติ</div>
+
+        <form id="authForm" class="stack gap-12">
+          <label>
+            <span>อีเมล</span>
+            <input id="email" type="email" placeholder="name@example.com" required>
+          </label>
+          <label>
+            <span>รหัสผ่าน</span>
+            <input id="password" type="password" placeholder="อย่างน้อย 6 ตัวอักษร" required>
+          </label>
+          <label id="displayNameWrap" class="hidden">
+            <span>ชื่อพนักงาน</span>
+            <input id="displayName" type="text" placeholder="เช่น Noi / Beer / Parawi">
+          </label>
+          <button class="primary-btn" type="submit" id="authSubmit">เข้าสู่ระบบ</button>
+        </form>
+
+        <div class="mini-actions">
+          <button id="demoModeBtn" class="text-btn">เข้าแบบ Local Demo</button>
+          <button id="firebaseSetupBtn" class="text-btn">ดูค่า Firebase</button>
+        </div>
+
+        <div class="info-box">
+          <strong>พร้อมใช้งานกับ Firebase แล้ว</strong>
+          <p>พนักงานล็อกอินด้วยบัญชีของตัวเองเพื่อเก็บความคืบหน้า รายการโปรด และโน้ตส่วนตัวแยกตามบัญชี</p>
+          <p class="muted">ถ้าต้องการทดลองก่อน ก็ยังเข้าแบบ Local Demo ได้เช่นเดิม</p>
         </div>
       </div>
     </section>
 
-    <section class="card">
-      <h2 style="margin-top:0">เลือกหมวดความรู้</h2>
-      <div class="pillbar" id="categoryBar"></div>
-    </section>
+    <section id="mainView" class="screen hidden">
+      <header class="topbar">
+        <div>
+          <div class="brand-inline">Laya F&amp;B Academy</div>
+          <h2>Quick Learning</h2>
+        </div>
+        <div class="topbar-actions">
+          <button id="openSettings" class="ghost-btn">ตั้งค่า</button>
+          <button id="logoutBtn" class="ghost-btn">ออกจากระบบ</button>
+        </div>
+      </header>
 
-    <section class="grid grid-2">
-      <aside class="card">
-        <h3 style="margin-top:0">รายการบทเรียน</h3>
-        <div id="lessonList" class="lesson-list"></div>
-      </aside>
-      <section class="reader" id="reader">
-        <div class="small">เลือกบทเรียนจากด้านซ้าย</div>
+      <section class="hero-card">
+        <div>
+          <p class="eyebrow">ยินดีต้อนรับ</p>
+          <h3 id="welcomeName">พนักงาน</h3>
+          <p class="hero-text">เลือกหมวดที่ต้องการอ่านได้ทันที เนื้อหาถูกออกแบบให้สั้น ชัด และใช้งานได้จริงในห้องอาหาร</p>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-box"><span>อ่านจบ</span><strong id="doneCount">0</strong></div>
+          <div class="stat-box"><span>รายการโปรด</span><strong id="favCount">0</strong></div>
+          <div class="stat-box"><span>โน้ต</span><strong id="noteCount">0</strong></div>
+        </div>
       </section>
-    </section>
-  </section>
-</main>
 
-<div id="configModal" class="hidden" style="position:fixed;inset:0;background:rgba(15,23,42,.45);z-index:50;padding:16px;overflow:auto">
-  <div class="container" style="max-width:760px">
-    <div class="card">
-      <div class="row">
-        <h2 style="margin:0;flex:1">ตั้งค่า Firebase</h2>
-        <button id="btnCloseConfig" class="secondary" style="max-width:160px">ปิด</button>
+      <section class="toolbar">
+        <div class="search-wrap">
+          <input id="searchInput" type="search" placeholder="ค้นหาหัวข้อ เช่น allergy, wine, taking order">
+        </div>
+        <div class="chips" id="categoryChips"></div>
+      </section>
+
+      <section id="listView" class="content-grid"></section>
+      <section id="readerView" class="reader hidden"></section>
+    </section>
+  </div>
+
+  <dialog id="settingsModal" class="modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>ตั้งค่า</h3>
+        <button class="icon-btn" data-close="settingsModal">✕</button>
       </div>
-      <p class="small">วางค่า Firebase config ของโปรเจกต์คุณด้านล่าง ระบบจะเก็บไว้ในเบราว์เซอร์เครื่องนี้</p>
-      <label>firebaseConfig (JSON)</label>
-      <textarea id="firebaseConfigInput" placeholder='{
-  "apiKey":"...",
-  "authDomain":"...",
-  "projectId":"...",
-  "storageBucket":"...",
-  "messagingSenderId":"...",
-  "appId":"..."
-}'></textarea>
-      <div class="row" style="margin-top:12px">
-        <button id="btnSaveConfig">บันทึก config</button>
-        <button id="btnClearConfig" class="danger">ล้าง config</button>
-      </div>
-      <div class="section">
-        <h3 style="margin-top:0">ก่อนใช้ ต้องเปิดใน Firebase</h3>
-        <ol class="small" style="line-height:1.8;padding-left:18px">
-          <li>Authentication → เปิด Email/Password</li>
-          <li>Firestore Database → Create database</li>
-          <li>Rules เบื้องต้น: ให้ user อ่าน/เขียนได้เฉพาะข้อมูลของตัวเอง</li>
-        </ol>
+      <div class="stack gap-16">
+        <div class="info-box">
+          <strong>Firebase Config</strong>
+          <p>ไฟล์นี้ฝังค่า Firebase ของโปรเจกต์ laya-training ไว้แล้ว พร้อมใช้งานทันที</p>
+        </div>
+        <textarea id="firebaseConfigInput" rows="10" placeholder='วาง JSON config ที่นี่ เช่น { "apiKey": "..." }'></textarea>
+        <div class="row gap-8">
+          <button id="saveFirebaseConfig" class="primary-btn">บันทึกค่า Firebase</button>
+          <button id="clearFirebaseConfig" class="ghost-btn">ล้างค่า</button>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+  </dialog>
 
-<script type="module">
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js';
-import { getFirestore, doc, setDoc, getDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js';
-
-const lessons = {
-  'English for F&B': [
-    {
-      id:'eng-core', title:'Core Restaurant Vocabulary', level:'Beginner', summary:'คำศัพท์พื้นฐานที่ใช้ในห้องอาหารทุกวัน',
-      vocab:[
-        ['Menu','เมนูอาหาร / เครื่องดื่ม'],['Reservation','การจองโต๊ะ'],['Order','คำสั่งอาหาร'],['Bill / Check','ใบเสร็จ'],['Recommendation','คำแนะนำเมนู']
-      ],
-      phrases:[
-        ['Here is the menu.','นี่คือเมนูค่ะ/ครับ'],['Are you ready to order?','พร้อมสั่งอาหารหรือยังคะ/ครับ'],['Would you like the bill?','ต้องการรับบิลเลยไหมคะ/ครับ']
-      ],
-      tips:['ใช้ประโยคสั้น ชัด สุภาพ','พูดช้าเล็กน้อยเวลารับออเดอร์','ถ้าลูกค้าลังเล ให้แนะนำเมนูเด่น 1-2 รายการ']
-    },
-    {
-      id:'eng-allergy', title:'Food Allergy English', level:'Beginner', summary:'ประโยคสำคัญเมื่อแขกแจ้งอาการแพ้อาหาร',
-      vocab:[['Allergy','อาการแพ้อาหาร'],['Nuts','ถั่วเปลือกแข็ง'],['Shellfish','อาหารทะเลเปลือกแข็ง'],['Dairy','นมและผลิตภัณฑ์นม'],['Cross-contamination','การปนเปื้อนข้าม']],
-      phrases:[['Do you have any food allergies?','คุณมีอาการแพ้อาหารอะไรไหมคะ/ครับ'],['I will inform the kitchen.','ฉัน/ผมจะแจ้งครัวให้ทันที'],['We cannot guarantee zero cross-contamination.','เราไม่สามารถรับประกันได้ 100% ว่าจะไม่มีการปนเปื้อนข้าม']],
-      tips:['ห้ามเดา ถ้าไม่แน่ใจให้เช็กกับครัวทันที','ทวนสารก่อภูมิแพ้ที่ลูกค้าแจ้งทุกครั้ง','ถ้าเสี่ยง ให้แจ้งอย่างตรงไปตรงมา']
-    },
-    {
-      id:'eng-complaint', title:'Handling Complaints', level:'Intermediate', summary:'ประโยคอังกฤษเวลาลูกค้าไม่พอใจ',
-      vocab:[['Delay','ความล่าช้า'],['Apologize','ขอโทษ'],['Replace','เปลี่ยนใหม่'],['Immediately','ทันที'],['Manager','ผู้จัดการ']],
-      phrases:[['I am sorry for the delay.','ขออภัยสำหรับความล่าช้าค่ะ/ครับ'],['Let me replace it for you.','ขออนุญาตเปลี่ยนให้ทันทีนะคะ/ครับ'],['I will call my supervisor to assist.','ฉัน/ผมจะเรียกหัวหน้ามาช่วยดูแลให้ค่ะ/ครับ']],
-      tips:['ฟังก่อน ไม่เถียง','ขอโทษก่อนอธิบาย','ถ้าแก้เองไม่ได้ ให้เรียกหัวหน้าเร็ว']
-    }
-  ],
-  'Food Allergy': [
-    {id:'allergy-basics', title:'Food Allergy Basics', level:'Core', summary:'แนวทางรับมือเมื่อลูกค้าแจ้งแพ้อาหาร', body:['ถามให้ชัดว่าแพ้อะไร','แจ้งครัวและหัวหน้าทันที','ทวนเมนูที่ปลอดภัยและเมนูที่เสี่ยง','ห้ามรับปากหากไม่มั่นใจ']},
-    {id:'cross', title:'Cross Contamination', level:'Core', summary:'การปนเปื้อนข้ามคืออะไรและต้องระวังอย่างไร', body:['ใช้อุปกรณ์แยกเมื่อจำเป็น','ระวังน้ำมันทอดร่วม','ระวังเขียง มีด ภาชนะ และซอสที่ใช้ร่วมกัน']}
-  ],
-  'Hygiene & SOP': [
-    {id:'handwash', title:'Hand Washing Standard', level:'Core', summary:'ล้างมือเมื่อไรและอย่างไร', body:['ก่อนเริ่มงาน','หลังจับเงินสด','หลังเข้าห้องน้ำ','หลังเก็บจานสกปรก','ล้างอย่างน้อย 20 วินาที']},
-    {id:'opening', title:'Opening Checklist', level:'Daily', summary:'สิ่งที่ต้องเช็กก่อนเปิดบริการ', body:['เช็กความสะอาดโต๊ะ-เก้าอี้','เช็กอุปกรณ์บนโต๊ะ','เช็ก POS และเมนู','brief ทีมก่อนเปิดร้าน']}
-  ]
-};
-
-let firebaseApp=null, auth=null, db=null, currentUser=null;
-let state={ profile:{}, progress:{} };
-let currentCategory='English for F&B';
-let currentLessonId='eng-core';
-
-const $ = id => document.getElementById(id);
-const categoryBar = $('categoryBar');
-const lessonList = $('lessonList');
-const reader = $('reader');
-
-function escapeHtml(s=''){return s.replace(/[&<>"']/g, m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));}
-
-function getSavedConfig(){ try{return JSON.parse(localStorage.getItem('laya_firebase_config')||'null')}catch{return null}}
-function setSetupState(ok){ $('setupNotice').className = ok ? 'notice ok' : 'notice'; $('setupNotice').innerHTML = ok ? 'เชื่อม Firebase แล้ว — พนักงานสามารถล็อกอินเพื่อเก็บข้อมูลของตัวเองได้' : 'ยังไม่ได้เชื่อม Firebase — กดปุ่ม <strong>ตั้งค่า Firebase</strong> แล้ววางค่า config ของโปรเจกต์ก่อนใช้งานจริง'; }
-
-function initFirebaseFromStorage(){
-  const cfg = getSavedConfig();
-  if(!cfg) { setSetupState(false); return false; }
-  try{
-    firebaseApp = initializeApp(cfg, 'laya-app');
-    auth = getAuth(firebaseApp);
-    db = getFirestore(firebaseApp);
-    setSetupState(true);
-    bindAuthListener();
-    return true;
-  }catch(err){
-    console.error(err);
-    setSetupState(false);
-    return false;
-  }
-}
-
-let authBound=false;
-function bindAuthListener(){
-  if(authBound || !auth) return; authBound=true;
-  onAuthStateChanged(auth, async (user)=>{
-    currentUser = user;
-    if(user){
-      $('authCard').classList.add('hidden'); $('app').classList.remove('hidden'); $('btnLogout').classList.remove('hidden');
-      $('userEmail').textContent = user.email || '';
-      await loadUserData();
-    }else{
-      $('authCard').classList.remove('hidden'); $('app').classList.add('hidden'); $('btnLogout').classList.add('hidden');
-    }
-  });
-}
-
-async function saveUserData(){
-  if(!currentUser || !db) return;
-  await setDoc(doc(db,'users',currentUser.uid), {
-    email: currentUser.email,
-    profile: state.profile,
-    progress: state.progress,
-    updatedAt: serverTimestamp()
-  }, {merge:true});
-}
-
-async function loadUserData(){
-  if(!currentUser || !db) return;
-  const snap = await getDoc(doc(db,'users',currentUser.uid));
-  if(snap.exists()){
-    const data = snap.data();
-    state.profile = data.profile || {};
-    state.progress = data.progress || {};
-  }else{
-    state.profile = { displayName:'', outlet:'The Taste', role:'Service Staff' };
-    state.progress = {};
-    await saveUserData();
-  }
-  $('displayName').value = state.profile.displayName || '';
-  $('outlet').value = state.profile.outlet || 'The Taste';
-  $('role').value = state.profile.role || 'Service Staff';
-  renderStats(); renderCategories();
-}
-
-function renderStats(){
-  const vals = Object.values(state.progress || {});
-  $('doneCount').textContent = vals.filter(v=>v.done).length;
-  $('favCount').textContent = vals.filter(v=>v.favorite).length;
-  $('noteCount').textContent = vals.filter(v=>v.note && v.note.trim()).length;
-}
-
-function renderCategories(){
-  categoryBar.innerHTML = Object.keys(lessons).map(cat=>`<button class="pill ${cat===currentCategory?'active':''}" data-cat="${cat}">${cat}</button>`).join('');
-  [...categoryBar.querySelectorAll('.pill')].forEach(btn=>btn.onclick=()=>{currentCategory=btn.dataset.cat; currentLessonId=lessons[currentCategory][0].id; renderCategories(); renderLessonList(); renderReader();});
-  renderLessonList(); renderReader();
-}
-
-function renderLessonList(){
-  lessonList.innerHTML = lessons[currentCategory].map(item=>{
-    const p = state.progress[item.id] || {};
-    return `<button class="lesson-btn ${item.id===currentLessonId?'active':''}" data-id="${item.id}">
-      <div style="font-weight:700">${escapeHtml(item.title)}</div>
-      <div class="small">${escapeHtml(item.summary)}</div>
-      <div class="meta" style="margin-top:8px">
-        <span class="chip">${escapeHtml(item.level||'')}</span>
-        ${p.done?'<span class="chip">อ่านจบแล้ว</span>':''}
-        ${p.favorite?'<span class="chip">รายการโปรด</span>':''}
+  <template id="cardTemplate">
+    <article class="lesson-card">
+      <div class="lesson-top">
+        <div>
+          <div class="tags"></div>
+          <h4 class="title"></h4>
+          <p class="summary"></p>
+        </div>
+        <button class="fav-btn">☆</button>
       </div>
-    </button>`;
-  }).join('');
-  [...lessonList.querySelectorAll('.lesson-btn')].forEach(btn=>btn.onclick=()=>{currentLessonId=btn.dataset.id; renderLessonList(); renderReader();});
-}
+      <div class="lesson-bottom">
+        <button class="open-btn primary-btn">เปิดอ่าน</button>
+      </div>
+    </article>
+  </template>
 
-function renderReader(){
-  const item = lessons[currentCategory].find(x=>x.id===currentLessonId);
-  if(!item) return;
-  const p = state.progress[item.id] || {done:false,favorite:false,note:''};
-  let html = `<div class="meta"><span class="chip">${escapeHtml(currentCategory)}</span><span class="chip">${escapeHtml(item.level||'')}</span></div>
-  <h2>${escapeHtml(item.title)}</h2><p>${escapeHtml(item.summary)}</p>`;
-  if(item.vocab){
-    html += `<div class="section"><h3 style="margin-top:0">คำศัพท์สำคัญ</h3>`;
-    html += item.vocab.map(v=>`<div class="term"><strong>${escapeHtml(v[0])}</strong><div class="small">${escapeHtml(v[1])}</div></div>`).join('');
-    html += `</div>`;
-  }
-  if(item.phrases){
-    html += `<div class="section"><h3 style="margin-top:0">ตัวอย่างประโยค</h3>`;
-    html += item.phrases.map(v=>`<div class="term"><strong>${escapeHtml(v[0])}</strong><div class="small">${escapeHtml(v[1])}</div></div>`).join('');
-    html += `</div>`;
-  }
-  if(item.body){
-    html += `<div class="section"><h3 style="margin-top:0">สาระสำคัญ</h3>` + item.body.map(t=>`<div class="term"><div>${escapeHtml(t)}</div></div>`).join('') + `</div>`;
-  }
-  if(item.tips){
-    html += `<div class="section"><h3 style="margin-top:0">เคล็ดลับหน้างาน</h3>` + item.tips.map(t=>`<div class="term"><div>${escapeHtml(t)}</div></div>`).join('') + `</div>`;
-  }
-  html += `<div class="section"><h3 style="margin-top:0">โน้ตของฉัน</h3><textarea id="lessonNote" placeholder="พิมพ์โน้ตสั้น ๆ ที่อยากจำ">${escapeHtml(p.note||'')}</textarea>
-  <div class="row" style="margin-top:12px">
-    <button id="btnDone" class="success">${p.done?'ยกเลิกอ่านจบ':'อ่านจบแล้ว'}</button>
-    <button id="btnFav" class="ghost">${p.favorite?'เอาออกจากรายการโปรด':'บันทึกเป็นรายการโปรด'}</button>
-    <button id="btnSaveNote" class="secondary">บันทึกโน้ต</button>
-  </div>
-  <p id="lessonMsg" class="small"></p></div>`;
-  reader.innerHTML = html;
-  $('btnDone').onclick = async ()=>{ensureProgress(item.id); state.progress[item.id].done=!state.progress[item.id].done; await saveUserData(); renderStats(); renderLessonList(); renderReader();};
-  $('btnFav').onclick = async ()=>{ensureProgress(item.id); state.progress[item.id].favorite=!state.progress[item.id].favorite; await saveUserData(); renderStats(); renderLessonList(); renderReader();};
-  $('btnSaveNote').onclick = async ()=>{ensureProgress(item.id); state.progress[item.id].note = $('lessonNote').value.trim(); await saveUserData(); renderStats(); $('lessonMsg').textContent='บันทึกโน้ตแล้ว';};
-}
-function ensureProgress(id){ if(!state.progress[id]) state.progress[id]={done:false,favorite:false,note:''}; }
-
-$('btnOpenConfig').onclick = ()=>{$('configModal').classList.remove('hidden'); $('firebaseConfigInput').value = JSON.stringify(getSavedConfig()||{},null,2); };
-$('btnCloseConfig').onclick = ()=>$('configModal').classList.add('hidden');
-$('btnSaveConfig').onclick = ()=>{
-  try{ const parsed = JSON.parse($('firebaseConfigInput').value); localStorage.setItem('laya_firebase_config', JSON.stringify(parsed)); location.reload(); }
-  catch{ alert('รูปแบบ JSON ไม่ถูกต้อง'); }
-};
-$('btnClearConfig').onclick = ()=>{ localStorage.removeItem('laya_firebase_config'); location.reload(); };
-
-$('btnRegister').onclick = async ()=>{
-  if(!auth) return $('authMsg').textContent='กรุณาตั้งค่า Firebase ก่อน';
-  try{ await createUserWithEmailAndPassword(auth, $('email').value.trim(), $('password').value); $('authMsg').textContent='สมัครสำเร็จ'; }
-  catch(err){ $('authMsg').textContent = err.message; }
-};
-$('btnLogin').onclick = async ()=>{
-  if(!auth) return $('authMsg').textContent='กรุณาตั้งค่า Firebase ก่อน';
-  try{ await signInWithEmailAndPassword(auth, $('email').value.trim(), $('password').value); $('authMsg').textContent='เข้าสู่ระบบสำเร็จ'; }
-  catch(err){ $('authMsg').textContent = err.message; }
-};
-$('btnLogout').onclick = async ()=>{ if(auth) await signOut(auth); };
-$('btnSaveProfile').onclick = async ()=>{
-  state.profile = { displayName:$('displayName').value.trim(), outlet:$('outlet').value, role:$('role').value };
-  await saveUserData(); $('profileMsg').textContent='บันทึกโปรไฟล์แล้ว';
-};
-$('btnSync').onclick = async ()=>{ await loadUserData(); $('profileMsg').textContent='อัปเดตข้อมูลล่าสุดแล้ว'; };
-
-initFirebaseFromStorage();
-</script>
-<div class="footer">Firebase config จะไม่ถูกฝังตายตัวในไฟล์นี้ · เหมาะสำหรับนำไปอัป GitHub Pages แล้วตั้งค่าใช้งานจริง</div>
+  <script type="module" src="app.js"></script>
 </body>
 </html>

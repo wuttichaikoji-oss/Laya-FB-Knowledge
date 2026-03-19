@@ -1,21 +1,12 @@
-Laya F&B Academy - Firebase Edition
+Laya F&B Academy v3.0 Lite - Firebase Ready
 
-สิ่งที่ต้องทำก่อนใช้งานจริง
-1) สร้าง Firebase Project
-2) เปิด Authentication > Sign-in method > Email/Password
-3) สร้าง Firestore Database
-4) เปิดไฟล์ index.html หรืออัปขึ้น GitHub Pages
-5) กดปุ่ม "ตั้งค่า Firebase" แล้ววางค่า config JSON ของโปรเจกต์
-6) สมัครผู้ใช้พนักงานแต่ละคนด้วย email/password
+ไฟล์นี้ฝังค่า Firebase ของโปรเจกต์ laya-training ไว้แล้ว
+จึงสามารถเปิดใช้งานได้ทันทีหลังจากเปิดใช้บริการต่อไปนี้ใน Firebase Console:
 
-โครงสร้างข้อมูล
-- users/{uid}
-  - email
-  - profile
-  - progress
-  - updatedAt
+1) Authentication > Sign-in method > เปิด Email/Password
+2) Firestore Database > Create database
+3) แนะนำให้ตั้ง Rules ตามนี้
 
-Firestore Rules ตัวอย่าง
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
@@ -24,3 +15,11 @@ service cloud.firestore {
     }
   }
 }
+
+ระบบจะบันทึกข้อมูลต่อบัญชีพนักงาน เช่น
+- บทที่อ่านจบ
+- รายการโปรด
+- โน้ตส่วนตัว
+- โปรไฟล์เบื้องต้น
+
+ถ้ายังไม่พร้อมใช้ Firebase สามารถกด Local Demo ได้
