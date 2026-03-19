@@ -38,7 +38,7 @@
       <p id="authMsg" class="msg"></p>
       <div class="tip-box">
         <strong>หมายเหตุ</strong>
-        <p>ถ้านำไปอัป GitHub Pages แล้วล็อกอินไม่ได้ ให้เพิ่มโดเมน GitHub Pages ของคุณใน Firebase Authentication > Settings > Authorized domains</p>
+        <p>ถ้านำไปอัป GitHub Pages แล้วล็อกอินไม่ได้ ให้เพิ่มโดเมน GitHub Pages ของคุณใน Firebase Authentication &gt; Settings &gt; Authorized domains</p>
       </div>
     </div>
   </div>
@@ -51,6 +51,7 @@
       </div>
       <div class="top-actions">
         <button id="backBtn" class="ghost-btn hidden">← กลับ</button>
+        <button id="addLessonBtn" class="primary-btn">+ เพิ่มบทเรียน</button>
         <button id="logoutBtn" class="ghost-btn">ออกจากระบบ</button>
       </div>
     </header>
@@ -58,24 +59,126 @@
     <section class="hero">
       <div>
         <h3>หัวข้อการเทรน</h3>
-        <p>เลือกหัวข้อแล้วกดเปิดอ่านได้ทันที เนื้อหาเน้นอ่านง่ายและใช้หน้างานจริง</p>
+        <p>เลือกหัวข้อแล้วกดเปิดอ่านได้ทันที หรือกดเพิ่มบทเรียนเพื่อให้พนักงานในทีมช่วยกันสร้างคลังความรู้ร่วมกัน</p>
       </div>
       <div class="stats">
         <div class="stat"><span>อ่านจบ</span><strong id="doneCount">0</strong></div>
         <div class="stat"><span>โปรด</span><strong id="favCount">0</strong></div>
+        <div class="stat"><span>บทเรียนทีม</span><strong id="teamLessonCount">0</strong></div>
         <div class="stat"><span>การบันทึก</span><strong id="syncStatus">-</strong></div>
       </div>
     </section>
 
+    <section class="info-strip">
+      <div>
+        <strong>คลังความรู้ทีม</strong>
+        <span>ผู้ใช้ที่ล็อกอินสามารถเพิ่มบทเรียน บทความ หรือ SOP ใหม่ ๆ แล้วแชร์ให้เพื่อนในทีมอ่านร่วมกันได้</span>
+      </div>
+      <button id="openEditorSecondaryBtn" class="ghost-btn">เขียนบทเรียนใหม่</button>
+    </section>
+
     <section id="listSection">
       <div class="toolbar">
-        <input id="searchInput" class="search" type="search" placeholder="ค้นหาหัวข้อ เช่น English, allergy, hygiene, wine">
+        <input id="searchInput" class="search" type="search" placeholder="ค้นหาหัวข้อ เช่น English, allergy, hygiene, wine, SOP, buffet">
         <div id="filterChips" class="chips"></div>
       </div>
       <div id="lessonGrid" class="grid"></div>
     </section>
 
     <section id="readerSection" class="reader hidden"></section>
+  </div>
+
+  <div id="editorModal" class="modal hidden">
+    <div class="modal-backdrop" data-close-editor="true"></div>
+    <div class="modal-card">
+      <div class="modal-head">
+        <div>
+          <div class="eyebrow">Team Knowledge</div>
+          <h3 id="editorTitle">เพิ่มบทเรียนใหม่</h3>
+          <p class="small">บทเรียนที่บันทึกแล้วจะขึ้นในคลังความรู้ของทีมให้ผู้ใช้คนอื่นที่ล็อกอินเห็นได้</p>
+        </div>
+        <button id="closeEditorBtn" class="ghost-btn">ปิด</button>
+      </div>
+
+      <form id="lessonEditorForm" class="editor-form">
+        <div class="editor-grid two-col">
+          <label>ชื่อบทเรียน
+            <input id="editorLessonTitle" type="text" required placeholder="เช่น SOP การเสิร์ฟไวน์ในห้องอาหาร">
+          </label>
+          <label>หมวดหมู่
+            <input id="editorLessonCategory" type="text" placeholder="เช่น SOP / Service / Kitchen / Safety / Banquet">
+          </label>
+        </div>
+
+        <div class="editor-grid two-col">
+          <label>ระดับ
+            <select id="editorLessonLevel">
+              <option value="Team">Team</option>
+              <option value="Core">Core</option>
+              <option value="Advanced">Advanced</option>
+            </select>
+          </label>
+          <label>คำอธิบายสั้น
+            <input id="editorLessonSummary" type="text" placeholder="สรุปสั้น ๆ ว่าบทเรียนนี้เกี่ยวกับอะไร">
+          </label>
+        </div>
+
+        <div class="editor-grid two-col">
+          <div class="editor-block">
+            <h4>หัวข้อที่ 1</h4>
+            <label>ชื่อหัวข้อ
+              <input id="section1Title" type="text" placeholder="เช่น จุดสำคัญก่อนเริ่มกะ">
+            </label>
+            <label>เนื้อหา (1 บรรทัด = 1 bullet)
+              <textarea id="section1Items" placeholder="เขียนทีละบรรทัด เช่น&#10;เช็กอุปกรณ์ให้พร้อม&#10;เช็กยูนิฟอร์มให้เรียบร้อย"></textarea>
+            </label>
+          </div>
+          <div class="editor-block">
+            <h4>หัวข้อที่ 2</h4>
+            <label>ชื่อหัวข้อ
+              <input id="section2Title" type="text" placeholder="เช่น ขั้นตอนการปฏิบัติงาน">
+            </label>
+            <label>เนื้อหา (1 บรรทัด = 1 bullet)
+              <textarea id="section2Items" placeholder="เขียนทีละบรรทัด"></textarea>
+            </label>
+          </div>
+        </div>
+
+        <div class="editor-grid two-col">
+          <div class="editor-block">
+            <h4>หัวข้อที่ 3</h4>
+            <label>ชื่อหัวข้อ
+              <input id="section3Title" type="text" placeholder="เช่น สิ่งที่ต้องระวัง">
+            </label>
+            <label>เนื้อหา (1 บรรทัด = 1 bullet)
+              <textarea id="section3Items" placeholder="เขียนทีละบรรทัด"></textarea>
+            </label>
+          </div>
+          <div class="editor-block">
+            <h4>หัวข้อที่ 4</h4>
+            <label>ชื่อหัวข้อ
+              <input id="section4Title" type="text" placeholder="เช่น สรุปหน้างาน / key takeaway">
+            </label>
+            <label>เนื้อหา (1 บรรทัด = 1 bullet)
+              <textarea id="section4Items" placeholder="เขียนทีละบรรทัด"></textarea>
+            </label>
+          </div>
+        </div>
+
+        <label>Tips / ข้อแนะนำเพิ่ม (1 บรรทัด = 1 ข้อ)
+          <textarea id="editorLessonTips" placeholder="เช่น&#10;ก่อนเสิร์ฟให้ทวนออเดอร์ทุกครั้ง&#10;ถ้าไม่แน่ใจให้ถามหัวหน้าก่อน"></textarea>
+        </label>
+
+        <div class="editor-actions">
+          <button type="button" id="deleteLessonBtn" class="ghost-btn hidden">ลบบทเรียนนี้</button>
+          <div class="editor-actions-right">
+            <button type="button" id="cancelEditorBtn" class="ghost-btn">ยกเลิก</button>
+            <button type="submit" class="primary-btn" id="saveLessonBtn">บันทึกเข้าคลังความรู้</button>
+          </div>
+        </div>
+        <p id="editorMsg" class="msg"></p>
+      </form>
+    </div>
   </div>
 
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>

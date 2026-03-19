@@ -8,11 +8,11 @@ const FIREBASE_CONFIG = {
   measurementId: "G-QB481YNZCJ"
 };
 
-firebase.initializeApp(FIREBASE_CONFIG);
+if (!firebase.apps.length) firebase.initializeApp(FIREBASE_CONFIG);
 const auth = firebase.auth();
 const db = firebase.firestore();
 
-const lessons = window.LESSONS_DATA || [];
+const baseLessons = window.LESSONS_DATA || [];
 const ENGLISH_DATA = window.ENGLISH_DATA || {};
 const WINE_MEDIA = window.WINE_MEDIA || [];
 const ENGLISH_ORDER = ['restaurant', 'vegetables', 'fruits', 'orders', 'greeting'];
@@ -37,7 +37,11 @@ const state = {
   englishSearch: '',
   currentWineIndex: 0,
   saveTimer: null,
-  saving: false
+  saving: false,
+  communityLessons: [],
+  communityUnsub: null,
+  editorLessonId: null,
+  deletingLesson: false
 };
 
 const el = id => document.getElementById(id);
@@ -47,13 +51,28 @@ const lessonGrid = el('lessonGrid');
 const readerSection = el('readerSection');
 const listSection = el('listSection');
 const backBtn = el('backBtn');
+const addLessonBtn = el('addLessonBtn');
+const openEditorSecondaryBtn = el('openEditorSecondaryBtn');
+const editorModal = el('editorModal');
 
 function safeHTML(text) {
   return String(text ?? '').replace(/[&<>"']/g, s => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[s]));
 }
 
+function userLabel() {
+  return state.isDemo ? 'Demo User' : (state.user?.displayName || state.user?.email || 'พนักงาน');
+}
+
+function allLessons() {
+  return [...baseLessons, ...state.communityLessons];
+}
+
+function lessonById(id) {
+  return allLessons().find(item => item.id === id);
+}
+
 function lessonCats() {
-  return ['All', ...Array.from(new Set(lessons.map(l => l.category || 'General'))).sort()];
+  return ['All', ...Array.from(new Set(allLessons().map(l => l.category || 'General'))).sort()];
 }
 
 function mergeUserData(raw = {}) {
@@ -75,6 +94,39 @@ function mergeUserData(raw = {}) {
   return merged;
 }
 
+function timestampToISO(value) {
+  if (!value) return '';
+  if (typeof value === 'string') return value;
+  if (typeof value.toDate === 'function') return value.toDate().toISOString();
+  return '';
+}
+
+function formatDate(value) {
+  const iso = timestampToISO(value);
+  if (!iso) return '';
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return '';
+  return d.toLocaleDateString('th-TH', { day: '2-digit', month: 'short', year: '2-digit' }) + ' ' +
+    d.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
+}
+
+function splitLines(text) {
+  return String(text || '')
+    .split(/\r?\n/)
+    .map(line => line.trim())
+    .filter(Boolean);
+}
+
+function lessonProgress(id) {
+  state.userData.progress[id] ||= { openedCount: 0, completed: false, favorite: false };
+  return state.userData.progress[id];
+}
+
+function englishProgress(tab) {
+  state.userData.englishProgress[tab] ||= { openedCount: 0, completed: false };
+  return state.userData.englishProgress[tab];
+}
+
 function setAuthMode(mode) {
   state.mode = mode;
   document.querySelectorAll('.auth-tabs .tab').forEach(btn => btn.classList.toggle('active', btn.dataset.mode === mode));
@@ -90,9 +142,10 @@ async function saveUserData(immediate = false) {
     clearTimeout(state.saveTimer);
     state.saveTimer = null;
   }
-  const doSave = async () => {
+  const runSave = async () => {
     if (state.saving) return;
     state.saving = true;
+    updateHeader();
     try {
       if (state.isDemo) {
         localStorage.setItem('laya_demo_user_data', JSON.stringify(state.userData));
@@ -114,8 +167,8 @@ async function saveUserData(immediate = false) {
     }
   };
 
-  if (immediate) return doSave();
-  state.saveTimer = setTimeout(doSave, 500);
+  if (immediate) return runSave();
+  state.saveTimer = setTimeout(runSave, 500);
 }
 
 async function loadUserData() {
@@ -128,31 +181,90 @@ async function loadUserData() {
   state.userData = mergeUserData(snap.exists ? snap.data() : {});
 }
 
+function transformCommunityLesson(docId, raw = {}) {
+  return {
+    id: `community:${docId}`,
+    source: 'community',
+    firestoreId: docId,
+    category: raw.category || 'Team Knowledge',
+    level: raw.level || 'Team',
+    title: raw.title || 'Untitled Lesson',
+    summary: raw.summary || '',
+    sections: Array.isArray(raw.sections) ? raw.sections.map(section => ({
+      title: section?.title || 'หัวข้อ',
+      items: Array.isArray(section?.items) ? section.items.filter(Boolean) : []
+    })).filter(section => section.items.length || section.title) : [],
+    tips: Array.isArray(raw.tips) ? raw.tips.filter(Boolean) : [],
+    authorId: raw.authorId || '',
+    authorName: raw.authorName || 'Team Member',
+    createdAt: raw.createdAt || '',
+    updatedAt: raw.updatedAt || '',
+    publishedAt: raw.publishedAt || '',
+    type: 'team-article'
+  };
+}
+
+function saveDemoCommunity() {
+  localStorage.setItem('laya_demo_community_lessons', JSON.stringify(state.communityLessons.map(item => ({
+    ...item,
+    id: undefined,
+    source: undefined,
+    firestoreId: item.firestoreId,
+    createdAt: timestampToISO(item.createdAt),
+    updatedAt: timestampToISO(item.updatedAt),
+    publishedAt: timestampToISO(item.publishedAt)
+  }))));
+}
+
+function loadDemoCommunity() {
+  const raw = JSON.parse(localStorage.getItem('laya_demo_community_lessons') || '[]');
+  state.communityLessons = Array.isArray(raw)
+    ? raw.map(item => transformCommunityLesson(item.firestoreId || crypto.randomUUID(), item))
+    : [];
+  renderLessons();
+}
+
+function stopCommunitySubscription() {
+  if (typeof state.communityUnsub === 'function') {
+    state.communityUnsub();
+    state.communityUnsub = null;
+  }
+}
+
+function subscribeCommunityLessons() {
+  stopCommunitySubscription();
+  if (state.isDemo) {
+    loadDemoCommunity();
+    return;
+  }
+  if (!state.user) return;
+  state.communityUnsub = db.collection('community_lessons').onSnapshot(snapshot => {
+    state.communityLessons = snapshot.docs
+      .map(doc => transformCommunityLesson(doc.id, doc.data()))
+      .sort((a, b) => {
+        const aTime = new Date(timestampToISO(a.updatedAt) || timestampToISO(a.createdAt) || 0).getTime();
+        const bTime = new Date(timestampToISO(b.updatedAt) || timestampToISO(b.createdAt) || 0).getTime();
+        return bTime - aTime;
+      });
+    renderLessons();
+    if (state.currentLessonId?.startsWith('community:')) {
+      const stillThere = lessonById(state.currentLessonId);
+      if (!stillThere) closeLesson();
+      else openLesson(state.currentLessonId, { keepEnglishSearch: true, skipRecord: true });
+    }
+  }, err => {
+    console.error(err);
+  });
+}
+
 function updateHeader() {
-  const name = state.isDemo ? 'Demo User' : (state.user?.displayName || state.user?.email || 'พนักงาน');
-  el('welcomeName').textContent = name;
+  el('welcomeName').textContent = userLabel();
   el('doneCount').textContent = (state.userData.done || []).length;
   el('favCount').textContent = (state.userData.favorites || []).length;
+  el('teamLessonCount').textContent = state.communityLessons.length;
   const sync = el('syncStatus');
-  if (sync) sync.textContent = state.isDemo ? 'บันทึกในเครื่องนี้' : 'บันทึกในบัญชี Firebase';
-}
-
-function lessonProgress(id) {
-  state.userData.progress[id] ||= { openedCount: 0, completed: false, favorite: false };
-  return state.userData.progress[id];
-}
-
-function englishProgress(tab) {
-  state.userData.englishProgress[tab] ||= { openedCount: 0, completed: false };
-  return state.userData.englishProgress[tab];
-}
-
-function formatDate(iso) {
-  if (!iso) return '';
-  const d = new Date(iso);
-  if (Number.isNaN(d.getTime())) return '';
-  return d.toLocaleDateString('th-TH', { day: '2-digit', month: 'short', year: '2-digit' }) + ' ' +
-    d.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
+  if (state.saving) sync.textContent = 'กำลังบันทึก...';
+  else sync.textContent = state.isDemo ? 'บันทึกในเครื่องนี้' : 'บันทึกในบัญชี Firebase';
 }
 
 function renderChips() {
@@ -170,43 +282,62 @@ function renderChips() {
 function matchesLesson(lesson) {
   const q = state.search.trim().toLowerCase();
   const catOK = state.filter === 'All' || (lesson.category || 'General') === state.filter;
-  const hay = `${lesson.title} ${lesson.summary} ${lesson.category || ''}`.toLowerCase();
+  const hay = `${lesson.title} ${lesson.summary || ''} ${lesson.category || ''} ${lesson.authorName || ''}`.toLowerCase();
   return catOK && (!q || hay.includes(q));
+}
+
+function lessonSortValue(lesson) {
+  if (lesson.source === 'community') {
+    return new Date(timestampToISO(lesson.updatedAt) || timestampToISO(lesson.createdAt) || 0).getTime() + 1000000000000;
+  }
+  return 0;
 }
 
 function renderLessons() {
   updateHeader();
   renderChips();
-  lessonGrid.innerHTML = '';
+  const visibleLessons = allLessons()
+    .filter(matchesLesson)
+    .sort((a, b) => lessonSortValue(b) - lessonSortValue(a));
 
-  lessons.filter(matchesLesson).forEach(lesson => {
-    const card = document.createElement('article');
-    card.className = 'card';
+  lessonGrid.innerHTML = '';
+  if (!visibleLessons.length) {
+    lessonGrid.innerHTML = `<div class="empty-box">ไม่พบบทเรียนที่ตรงกับคำค้นหา</div>`;
+    return;
+  }
+
+  visibleLessons.forEach(lesson => {
     const prog = lessonProgress(lesson.id);
     const done = !!prog.completed;
     const fav = !!prog.favorite;
     const extra = prog.lastOpenedAt ? `เปิดล่าสุด ${formatDate(prog.lastOpenedAt)}` : 'ยังไม่เคยเปิด';
+    const authorText = lesson.source === 'community'
+      ? `<div class="mini-meta">โดย ${safeHTML(lesson.authorName || 'Team Member')} · ${safeHTML(formatDate(lesson.updatedAt) || formatDate(lesson.createdAt) || 'บทเรียนทีม')}</div>`
+      : '';
 
+    const card = document.createElement('article');
+    card.className = 'card';
     card.innerHTML = `
       <div class="tag-row">
         <span class="tag">${safeHTML(lesson.category || 'General')}</span>
         <span class="tag">${safeHTML(lesson.level || 'Core')}</span>
+        ${lesson.source === 'community' ? '<span class="tag team-tag">Team</span>' : ''}
         ${done ? '<span class="tag success-tag">อ่านจบแล้ว</span>' : ''}
       </div>
       <div>
         <h3>${safeHTML(lesson.title)}</h3>
         <p>${safeHTML(lesson.summary || '')}</p>
       </div>
+      ${authorText}
       <div class="mini-meta">${safeHTML(extra)} · เปิด ${prog.openedCount || 0} ครั้ง</div>
       <div class="card-actions">
         <button class="primary-btn open-btn">เปิดอ่าน</button>
         <button class="icon-btn fav-btn">${fav ? '★ โปรด' : '☆ โปรด'}</button>
       </div>
     `;
-
     card.querySelector('.open-btn').onclick = () => openLesson(lesson.id);
     card.querySelector('.fav-btn').onclick = async () => {
-      prog.favorite = !fav;
+      prog.favorite = !prog.favorite;
       prog.favoriteAt = prog.favorite ? new Date().toISOString() : null;
       state.userData.favorites = prog.favorite
         ? Array.from(new Set([...state.userData.favorites, lesson.id]))
@@ -218,14 +349,16 @@ function renderLessons() {
   });
 }
 
-function noteValue(id) { return state.userData.notes[id] || ''; }
+function noteValue(id) {
+  return state.userData.notes[id] || '';
+}
 
 function speak(text) {
   if (!('speechSynthesis' in window)) return;
   window.speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(text);
   u.lang = 'en-US';
-  u.rate = 0.9;
+  u.rate = 0.92;
   window.speechSynthesis.speak(u);
 }
 
@@ -241,7 +374,7 @@ function englishTabTitle(key) {
 }
 
 function filteredEnglishItems(tab) {
-  const items = (ENGLISH_DATA[tab]?.items || []);
+  const items = ENGLISH_DATA[tab]?.items || [];
   const q = state.englishSearch.trim().toLowerCase();
   if (!q) return items;
   return items.filter(item => (`${item.term} ${item.reading} ${item.meaning}`).toLowerCase().includes(q));
@@ -249,7 +382,7 @@ function filteredEnglishItems(tab) {
 
 function renderEnglishPack() {
   const key = state.englishTab in ENGLISH_DATA ? state.englishTab : 'restaurant';
-  const cat = ENGLISH_DATA[key] || { items: [] };
+  const cat = ENGLISH_DATA[key] || { items: [], title: '' };
   const prog = englishProgress(key);
   const rows = filteredEnglishItems(key).map(item => `
     <div class="vocab-row">
@@ -266,10 +399,10 @@ function renderEnglishPack() {
       <div class="english-hero">
         <div>
           <h3>English: F&B</h3>
-          <p class="small">แยกเป็น 5 แท็บย่อย เปิดอ่านง่ายขึ้น ค้นหาในแท็บได้ และมีปุ่มฟังเสียงทุกคำ</p>
+          <p class="small">รวมคำศัพท์ไว้ในหัวข้อเดียว แยกเป็น 5 แท็บ ค้นหาเร็ว และกดฟังเสียงได้ทุกคำ</p>
         </div>
         <div class="english-progress-box">
-          <div><strong>${cat.items.length}</strong><span>คำในหมวดนี้</span></div>
+          <div><strong>${cat.items?.length || 0}</strong><span>คำในหมวดนี้</span></div>
           <div><strong>${prog.openedCount || 0}</strong><span>เปิดอ่าน</span></div>
           <div><strong>${prog.completed ? 'ครบ' : 'ยังไม่จบ'}</strong><span>สถานะ</span></div>
         </div>
@@ -277,34 +410,35 @@ function renderEnglishPack() {
 
       <div class="english-tabs-wrap">
         ${ENGLISH_ORDER.map(tab => {
-          const tp = englishProgress(tab);
-          return `<button class="english-tab ${tab === key ? 'active' : ''}" data-etab="${tab}">${safeHTML(englishTabTitle(tab))}${tp.completed ? ' ✓' : ''}</button>`;
+          const tabProg = englishProgress(tab);
+          return `<button class="english-tab ${tab === key ? 'active' : ''}" data-etab="${tab}">${safeHTML(englishTabTitle(tab))}${tabProg.completed ? ' ✓' : ''}</button>`;
         }).join('')}
       </div>
 
       <div class="english-toolbar">
         <div class="english-tab-title">${safeHTML(cat.title || englishTabTitle(key))}</div>
-        <input id="englishSearchInput" class="search english-search" type="search" placeholder="ค้นคำศัพท์ในแท็บนี้" value="${safeHTML(state.englishSearch)}">
+        <input id="englishSearchInput" class="search english-search" type="search" value="${safeHTML(state.englishSearch)}" placeholder="ค้นหาในหมวดนี้ เช่น menu, order, banana, tomato">
       </div>
 
-      <div class="vocab-list">${rows || '<div class="empty-box">ไม่พบคำศัพท์ที่ค้นหา</div>'}</div>
+      <div class="vocab-list">
+        ${rows || '<div class="empty-box">ไม่พบคำศัพท์ในหมวดนี้</div>'}
+      </div>
 
       <div class="english-footer-row">
-        <div class="mini-meta">${prog.lastOpenedAt ? 'เปิดล่าสุด ' + safeHTML(formatDate(prog.lastOpenedAt)) : 'ยังไม่มีประวัติการเปิดในแท็บนี้'}</div>
-        <button id="englishDoneBtn" class="ghost-btn">${prog.completed ? 'ยกเลิกอ่านจบแท็บนี้' : 'ทำเครื่องหมายว่าอ่านจบแท็บนี้'}</button>
+        <div class="mini-meta">${prog.lastOpenedAt ? `เปิดล่าสุด ${safeHTML(formatDate(prog.lastOpenedAt))}` : 'ยังไม่มีประวัติการเปิดอ่านของแท็บนี้'}</div>
+        <button id="englishDoneBtn" class="ghost-btn">${prog.completed ? 'ยกเลิกอ่านหมวดนี้จบแล้ว' : 'ทำเครื่องหมายว่าอ่านหมวดนี้จบแล้ว'}</button>
       </div>
     </section>
   `;
 }
 
 function renderSections(lesson) {
-  const sections = (lesson.sections || []).map(section => `
+  return (lesson.sections || []).map(section => `
     <section class="section-box">
       <h3>${safeHTML(section.title)}</h3>
       <ul>${(section.items || []).map(item => `<li>${safeHTML(item)}</li>`).join('')}</ul>
     </section>
   `).join('');
-  return sections;
 }
 
 function renderTips(lesson) {
@@ -317,27 +451,27 @@ function renderTips(lesson) {
   `;
 }
 
-function renderWineDetail(w) {
-  if (!w) return '<div class="empty-box">ยังไม่มีข้อมูลไวน์</div>';
+function renderWineDetail(wine) {
+  if (!wine) return '<div class="empty-box">ยังไม่มีข้อมูลไวน์</div>';
   return `
     <div class="wine-detail-card">
       <div class="wine-detail-image-wrap">
-        <img src="${safeHTML(w.image)}" alt="${safeHTML(w.name)}" loading="lazy">
+        <img src="${safeHTML(wine.image)}" alt="${safeHTML(wine.name)}" loading="lazy">
       </div>
       <div class="wine-detail-copy">
-        <div class="tag-row wine-detail-tags">
-          <span class="tag">${safeHTML(w.category || 'Wine')}</span>
-          <span class="tag">${safeHTML(w.vintage || 'NV')}</span>
-          <span class="tag">${safeHTML(w.vineyard || '')}</span>
+        <div class="tag-row">
+          <span class="tag">${safeHTML(wine.category || 'Wine')}</span>
+          <span class="tag">${safeHTML(wine.vintage || 'NV')}</span>
+          <span class="tag">${safeHTML(wine.vineyard || '-')}</span>
         </div>
-        <h4>${safeHTML(w.name)}</h4>
-        <p class="wine-detail-pronounce">คำอ่าน: ${safeHTML(w.pronunciation || '-')}</p>
+        <h4>${safeHTML(wine.name)}</h4>
+        <p class="wine-detail-pronounce">คำอ่าน: ${safeHTML(wine.pronunciation || '-')}</p>
         <div class="wine-detail-grid">
-          <div class="wine-detail-item"><span>องุ่น</span><strong>${safeHTML(w.grape || '-')}</strong></div>
-          <div class="wine-detail-item"><span>สไตล์</span><strong>${safeHTML(w.category || '-')}</strong></div>
-          <div class="wine-detail-item wide"><span>รสชาติ</span><strong>${safeHTML(w.taste || '-')}</strong></div>
-          <div class="wine-detail-item wide"><span>จับคู่อาหาร</span><strong>${safeHTML(w.pair || '-')}</strong></div>
-          <div class="wine-detail-item wide"><span>วิธีพูดกับแขก</span><strong>${safeHTML(w.en || '-')}</strong></div>
+          <div class="wine-detail-item"><span>องุ่น</span><strong>${safeHTML(wine.grape || '-')}</strong></div>
+          <div class="wine-detail-item"><span>สไตล์</span><strong>${safeHTML(wine.category || '-')}</strong></div>
+          <div class="wine-detail-item wide"><span>รสชาติ</span><strong>${safeHTML(wine.taste || '-')}</strong></div>
+          <div class="wine-detail-item wide"><span>จับคู่อาหาร</span><strong>${safeHTML(wine.pair || '-')}</strong></div>
+          <div class="wine-detail-item wide"><span>วิธีพูดกับแขก</span><strong>${safeHTML(wine.en || '-')}</strong></div>
         </div>
       </div>
     </div>
@@ -347,28 +481,26 @@ function renderWineDetail(w) {
 function renderWineMedia() {
   const selected = WINE_MEDIA[state.currentWineIndex] || WINE_MEDIA[0];
   return `
-    <section class="wine-box wine-media-box wine-gallery-box">
+    <section class="wine-box">
       <div class="wine-head wine-head-modern">
         <div>
           <h3>Wine Reference Bottles</h3>
-          <p class="small">โชว์ขวดไวน์ก่อน แล้วแตะรูปที่ต้องการเพื่อเปิดรายละเอียดด้านล่าง ช่วยให้จำฉลากและขวดได้ง่ายขึ้น</p>
+          <p class="small">โชว์เฉพาะขวดก่อน แล้วกดเพื่อเปิดรายละเอียดด้านล่าง ช่วยให้พนักงานจำฉลากและชื่อไวน์ได้ง่ายขึ้น</p>
         </div>
         <div class="wine-hint">แตะรูปขวดเพื่อดูรายละเอียด</div>
       </div>
-      <div class="wine-grid wine-grid-gallery">
-        ${WINE_MEDIA.map((w, index) => `
+      <div class="wine-grid">
+        ${WINE_MEDIA.map((wine, index) => `
           <button class="wine-tile ${index === state.currentWineIndex ? 'active' : ''}" data-wine-index="${index}" type="button">
             <div class="wine-tile-image">
-              <img src="${safeHTML(w.image)}" alt="${safeHTML(w.name)}" loading="lazy">
+              <img src="${safeHTML(wine.image)}" alt="${safeHTML(wine.name)}" loading="lazy">
             </div>
-            <div class="wine-tile-name">${safeHTML(w.name)}</div>
-            <div class="wine-tile-meta">${safeHTML(w.category || 'Wine')}</div>
+            <div class="wine-tile-name">${safeHTML(wine.name)}</div>
+            <div class="wine-tile-meta">${safeHTML(wine.category || 'Wine')}</div>
           </button>
         `).join('')}
       </div>
-      <div id="wineDetailPanel" class="wine-detail-panel">
-        ${renderWineDetail(selected)}
-      </div>
+      <div id="wineDetailPanel" class="wine-detail-panel">${renderWineDetail(selected)}</div>
     </section>
   `;
 }
@@ -402,13 +534,21 @@ function recordEnglishOpen(tab) {
   saveUserData(false);
 }
 
+function canEditLesson(lesson) {
+  if (!lesson || lesson.source !== 'community') return false;
+  if (state.isDemo) return true;
+  return lesson.authorId && lesson.authorId === state.user?.uid;
+}
+
 function openLesson(id, opts = {}) {
-  const lesson = lessons.find(l => l.id === id);
+  const lesson = lessonById(id);
   if (!lesson) return;
   if (!opts.keepEnglishSearch) state.englishSearch = '';
   state.currentLessonId = id;
-  recordLessonOpen(id);
-  if (lesson.type === 'english-pack') recordEnglishOpen(state.englishTab);
+  if (!opts.skipRecord) {
+    recordLessonOpen(id);
+    if (lesson.type === 'english-pack') recordEnglishOpen(state.englishTab);
+  }
 
   const prog = lessonProgress(id);
   const note = noteValue(id);
@@ -419,12 +559,25 @@ function openLesson(id, opts = {}) {
   readerSection.classList.remove('hidden');
   backBtn.classList.remove('hidden');
 
+  const authorBox = lesson.source === 'community'
+    ? `
+      <section class="author-box">
+        <div>
+          <strong>บทเรียนจากทีม</strong>
+          <span>เขียนโดย ${safeHTML(lesson.authorName || 'Team Member')} · ${safeHTML(formatDate(lesson.updatedAt) || formatDate(lesson.createdAt) || '')}</span>
+        </div>
+        ${canEditLesson(lesson) ? '<button id="editCommunityLessonBtn" class="ghost-btn">แก้ไขบทเรียนนี้</button>' : ''}
+      </section>
+    `
+    : '';
+
   readerSection.innerHTML = `
     <article class="reader-card">
       <div class="reader-head">
         <div class="tag-row">
           <span class="tag">${safeHTML(lesson.category || 'General')}</span>
           <span class="tag">${safeHTML(lesson.level || 'Core')}</span>
+          ${lesson.source === 'community' ? '<span class="tag team-tag">Team</span>' : ''}
           ${isDone ? '<span class="tag success-tag">อ่านจบแล้ว</span>' : ''}
           ${isFav ? '<span class="tag fav-tag">รายการโปรด</span>' : ''}
         </div>
@@ -436,6 +589,7 @@ function openLesson(id, opts = {}) {
         <div class="mini-meta">เปิด ${prog.openedCount || 0} ครั้ง · ${prog.lastOpenedAt ? 'ล่าสุด ' + safeHTML(formatDate(prog.lastOpenedAt)) : 'ยังไม่มีประวัติ'}</div>
       </div>
 
+      ${authorBox}
       ${lesson.type === 'english-pack' ? renderEnglishPack() : renderSections(lesson)}
       ${lesson.id === 'wine-basic' ? renderWineMedia() : ''}
       ${lesson.type === 'english-pack' ? '' : renderTips(lesson)}
@@ -455,18 +609,18 @@ function openLesson(id, opts = {}) {
 
   readerSection.querySelectorAll('[data-etab]').forEach(btn => btn.addEventListener('click', () => {
     state.englishTab = btn.dataset.etab;
-    openLesson(id, { keepEnglishSearch: false });
+    openLesson(id, { keepEnglishSearch: false, skipRecord: false });
   }));
 
   readerSection.querySelectorAll('[data-speak]').forEach(btn => btn.addEventListener('click', () => speak(btn.dataset.speak)));
 
   if (lesson.id === 'wine-basic') bindWineInteractions();
 
-  const searchInput = el('englishSearchInput');
-  if (searchInput) {
-    searchInput.addEventListener('input', e => {
+  const englishSearchInput = el('englishSearchInput');
+  if (englishSearchInput) {
+    englishSearchInput.addEventListener('input', e => {
       state.englishSearch = e.target.value;
-      openLesson(id, { keepEnglishSearch: true });
+      openLesson(id, { keepEnglishSearch: true, skipRecord: true });
     });
   }
 
@@ -477,15 +631,20 @@ function openLesson(id, opts = {}) {
       ep.completed = !ep.completed;
       ep.completedAt = ep.completed ? new Date().toISOString() : null;
       await saveUserData(true);
-      openLesson(id, { keepEnglishSearch: true });
+      openLesson(id, { keepEnglishSearch: true, skipRecord: true });
     };
+  }
+
+  const editBtn = el('editCommunityLessonBtn');
+  if (editBtn) {
+    editBtn.onclick = () => openEditorForLesson(lesson);
   }
 
   el('saveNoteBtn').onclick = async () => {
     state.userData.notes[id] = el('noteInput').value;
     prog.noteUpdatedAt = new Date().toISOString();
     await saveUserData(true);
-    openLesson(id, { keepEnglishSearch: true });
+    openLesson(id, { keepEnglishSearch: true, skipRecord: true });
   };
 
   el('lessonFavBtn').onclick = async () => {
@@ -495,7 +654,7 @@ function openLesson(id, opts = {}) {
       ? Array.from(new Set([...state.userData.favorites, id]))
       : state.userData.favorites.filter(x => x !== id);
     await saveUserData(true);
-    openLesson(id, { keepEnglishSearch: true });
+    openLesson(id, { keepEnglishSearch: true, skipRecord: true });
   };
 
   el('doneBtn').onclick = async () => {
@@ -505,7 +664,7 @@ function openLesson(id, opts = {}) {
       ? Array.from(new Set([...state.userData.done, id]))
       : state.userData.done.filter(x => x !== id);
     await saveUserData(true);
-    openLesson(id, { keepEnglishSearch: true });
+    openLesson(id, { keepEnglishSearch: true, skipRecord: true });
   };
 }
 
@@ -517,13 +676,156 @@ function closeLesson() {
   renderLessons();
 }
 
+function resetEditorForm() {
+  state.editorLessonId = null;
+  el('editorTitle').textContent = 'เพิ่มบทเรียนใหม่';
+  el('editorMsg').textContent = '';
+  el('lessonEditorForm').reset();
+  el('editorLessonLevel').value = 'Team';
+  el('deleteLessonBtn').classList.add('hidden');
+}
+
+function openEditor() {
+  if (!state.isDemo && !state.user) return;
+  resetEditorForm();
+  editorModal.classList.remove('hidden');
+}
+
+function fillEditorFromLesson(lesson) {
+  resetEditorForm();
+  state.editorLessonId = lesson.firestoreId;
+  el('editorTitle').textContent = 'แก้ไขบทเรียนของทีม';
+  el('editorLessonTitle').value = lesson.title || '';
+  el('editorLessonCategory').value = lesson.category || '';
+  el('editorLessonLevel').value = lesson.level || 'Team';
+  el('editorLessonSummary').value = lesson.summary || '';
+  [0,1,2,3].forEach(index => {
+    const section = lesson.sections?.[index] || { title: '', items: [] };
+    el(`section${index+1}Title`).value = section.title || '';
+    el(`section${index+1}Items`).value = (section.items || []).join('\n');
+  });
+  el('editorLessonTips').value = (lesson.tips || []).join('\n');
+  el('deleteLessonBtn').classList.remove('hidden');
+}
+
+function openEditorForLesson(lesson) {
+  if (!canEditLesson(lesson)) return;
+  fillEditorFromLesson(lesson);
+  editorModal.classList.remove('hidden');
+}
+
+function closeEditor() {
+  editorModal.classList.add('hidden');
+  resetEditorForm();
+}
+
+function buildEditorPayload() {
+  const title = el('editorLessonTitle').value.trim();
+  const category = el('editorLessonCategory').value.trim() || 'Team Knowledge';
+  const level = el('editorLessonLevel').value || 'Team';
+  const summary = el('editorLessonSummary').value.trim();
+  const sections = [0,1,2,3].map(index => ({
+    title: el(`section${index+1}Title`).value.trim(),
+    items: splitLines(el(`section${index+1}Items`).value)
+  })).filter(section => section.title || section.items.length);
+  const tips = splitLines(el('editorLessonTips').value);
+
+  if (!title) throw new Error('กรุณาใส่ชื่อบทเรียน');
+  if (!summary) throw new Error('กรุณาใส่คำอธิบายสั้น');
+  if (!sections.length) throw new Error('กรุณาใส่อย่างน้อย 1 หัวข้อย่อย');
+  return { title, category, level, summary, sections, tips };
+}
+
+async function saveCommunityLesson(payload) {
+  const authorName = userLabel();
+  if (state.isDemo) {
+    const docId = state.editorLessonId || crypto.randomUUID();
+    const raw = {
+      ...payload,
+      authorId: 'demo-user',
+      authorName,
+      createdAt: state.editorLessonId ? (state.communityLessons.find(item => item.firestoreId === docId)?.createdAt || new Date().toISOString()) : new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      publishedAt: new Date().toISOString()
+    };
+    const lesson = transformCommunityLesson(docId, raw);
+    const idx = state.communityLessons.findIndex(item => item.firestoreId === docId);
+    if (idx >= 0) state.communityLessons[idx] = lesson;
+    else state.communityLessons.unshift(lesson);
+    saveDemoCommunity();
+    renderLessons();
+    if (state.currentLessonId === `community:${docId}`) openLesson(`community:${docId}`, { skipRecord: true });
+    return;
+  }
+
+  const baseData = {
+    ...payload,
+    authorId: state.user.uid,
+    authorName,
+    updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+    publishedAt: firebase.firestore.FieldValue.serverTimestamp()
+  };
+  if (state.editorLessonId) {
+    await db.collection('community_lessons').doc(state.editorLessonId).set(baseData, { merge: true });
+  } else {
+    await db.collection('community_lessons').add({
+      ...baseData,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+  }
+}
+
+async function deleteCommunityLesson() {
+  if (!state.editorLessonId) return;
+  if (!confirm('ลบบทเรียนนี้ออกจากคลังความรู้ทีมใช่หรือไม่')) return;
+  if (state.isDemo) {
+    state.communityLessons = state.communityLessons.filter(item => item.firestoreId !== state.editorLessonId);
+    saveDemoCommunity();
+    closeEditor();
+    closeLesson();
+    return;
+  }
+  await db.collection('community_lessons').doc(state.editorLessonId).delete();
+  closeEditor();
+  closeLesson();
+}
+
 backBtn.addEventListener('click', closeLesson);
 el('searchInput').addEventListener('input', e => { state.search = e.target.value; renderLessons(); });
+addLessonBtn.addEventListener('click', openEditor);
+openEditorSecondaryBtn.addEventListener('click', openEditor);
+el('closeEditorBtn').addEventListener('click', closeEditor);
+el('cancelEditorBtn').addEventListener('click', closeEditor);
+el('deleteLessonBtn').addEventListener('click', async () => {
+  if (state.deletingLesson) return;
+  state.deletingLesson = true;
+  try {
+    await deleteCommunityLesson();
+  } catch (err) {
+    el('editorMsg').textContent = err.message || 'ลบบทเรียนไม่สำเร็จ';
+  } finally {
+    state.deletingLesson = false;
+  }
+});
+editorModal.querySelectorAll('[data-close-editor="true"]').forEach(node => node.addEventListener('click', closeEditor));
+
+el('lessonEditorForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  el('editorMsg').textContent = '';
+  try {
+    const payload = buildEditorPayload();
+    await saveCommunityLesson(payload);
+    closeEditor();
+  } catch (err) {
+    el('editorMsg').textContent = err.message || 'บันทึกบทเรียนไม่สำเร็จ';
+  }
+});
 
 el('demoBtn').addEventListener('click', async () => {
   state.isDemo = true;
-  state.user = { displayName: 'Demo User', email: 'demo@local' };
+  state.user = { uid: 'demo-user', displayName: 'Demo User', email: 'demo@local' };
   await loadUserData();
+  subscribeCommunityLessons();
   authView.classList.add('hidden');
   mainView.classList.remove('hidden');
   closeLesson();
@@ -553,47 +855,37 @@ el('authForm').addEventListener('submit', async e => {
   }
 });
 
-
-auth.onAuthStateChanged(async user => {
-  if (user) {
-    state.isDemo = false;
-    state.user = user;
-    await loadUserData();
-    authView.classList.add('hidden');
-    mainView.classList.remove('hidden');
-    closeLesson();
-  } else if (!state.isDemo) {
-    state.user = null;
-    authView.classList.remove('hidden');
-    mainView.classList.add('hidden');
-  }
-});
-
 el('logoutBtn').addEventListener('click', async () => {
+  stopCommunitySubscription();
   if (state.isDemo) {
     state.isDemo = false;
     state.user = null;
+    state.communityLessons = [];
     authView.classList.remove('hidden');
     mainView.classList.add('hidden');
+    closeEditor();
     return;
   }
   await auth.signOut();
 });
 
 auth.onAuthStateChanged(async user => {
+  stopCommunitySubscription();
   if (user) {
     state.isDemo = false;
     state.user = user;
     await loadUserData();
+    subscribeCommunityLessons();
     authView.classList.add('hidden');
     mainView.classList.remove('hidden');
     closeLesson();
   } else if (!state.isDemo) {
     state.user = null;
+    state.communityLessons = [];
     authView.classList.remove('hidden');
     mainView.classList.add('hidden');
   }
 });
 
 setAuthMode('login');
-renderChips();
+renderLessons();
