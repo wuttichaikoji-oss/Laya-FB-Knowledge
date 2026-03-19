@@ -35,6 +35,7 @@ const state = {
   search: '',
   englishTab: 'restaurant',
   englishSearch: '',
+  currentWineIndex: 0,
   saveTimer: null,
   saving: false
 };
@@ -316,33 +317,75 @@ function renderTips(lesson) {
   `;
 }
 
-function renderWineMedia() {
+function renderWineDetail(w) {
+  if (!w) return '<div class="empty-box">ยังไม่มีข้อมูลไวน์</div>';
   return `
-    <section class="wine-box wine-media-box">
-      <div class="wine-head">
-        <div>
-          <h3>Wine Reference Bottles</h3>
-          <p class="small">รวมรูปขวดจริงของไวน์หลักในรายการ เพื่อให้พนักงานจำฉลากและขวดได้ง่ายขึ้น</p>
+    <div class="wine-detail-card">
+      <div class="wine-detail-image-wrap">
+        <img src="${safeHTML(w.image)}" alt="${safeHTML(w.name)}" loading="lazy">
+      </div>
+      <div class="wine-detail-copy">
+        <div class="tag-row wine-detail-tags">
+          <span class="tag">${safeHTML(w.category || 'Wine')}</span>
+          <span class="tag">${safeHTML(w.vintage || 'NV')}</span>
+          <span class="tag">${safeHTML(w.vineyard || '')}</span>
+        </div>
+        <h4>${safeHTML(w.name)}</h4>
+        <p class="wine-detail-pronounce">คำอ่าน: ${safeHTML(w.pronunciation || '-')}</p>
+        <div class="wine-detail-grid">
+          <div class="wine-detail-item"><span>องุ่น</span><strong>${safeHTML(w.grape || '-')}</strong></div>
+          <div class="wine-detail-item"><span>สไตล์</span><strong>${safeHTML(w.category || '-')}</strong></div>
+          <div class="wine-detail-item wide"><span>รสชาติ</span><strong>${safeHTML(w.taste || '-')}</strong></div>
+          <div class="wine-detail-item wide"><span>จับคู่อาหาร</span><strong>${safeHTML(w.pair || '-')}</strong></div>
+          <div class="wine-detail-item wide"><span>วิธีพูดกับแขก</span><strong>${safeHTML(w.en || '-')}</strong></div>
         </div>
       </div>
-      <div class="wine-grid">
-        ${WINE_MEDIA.map(w => `
-          <article class="wine-card">
-            <div class="wine-thumb-wrap">
+    </div>
+  `;
+}
+
+function renderWineMedia() {
+  const selected = WINE_MEDIA[state.currentWineIndex] || WINE_MEDIA[0];
+  return `
+    <section class="wine-box wine-media-box wine-gallery-box">
+      <div class="wine-head wine-head-modern">
+        <div>
+          <h3>Wine Reference Bottles</h3>
+          <p class="small">โชว์ขวดไวน์ก่อน แล้วแตะรูปที่ต้องการเพื่อเปิดรายละเอียดด้านล่าง ช่วยให้จำฉลากและขวดได้ง่ายขึ้น</p>
+        </div>
+        <div class="wine-hint">แตะรูปขวดเพื่อดูรายละเอียด</div>
+      </div>
+      <div class="wine-grid wine-grid-gallery">
+        ${WINE_MEDIA.map((w, index) => `
+          <button class="wine-tile ${index === state.currentWineIndex ? 'active' : ''}" data-wine-index="${index}" type="button">
+            <div class="wine-tile-image">
               <img src="${safeHTML(w.image)}" alt="${safeHTML(w.name)}" loading="lazy">
             </div>
-            <div class="wine-content">
-              <h4>${safeHTML(w.name)}</h4>
-              <p><strong>คำอ่าน:</strong> ${safeHTML(w.pronunciation)}</p>
-              <p><strong>ประเภท:</strong> ${safeHTML(w.category)} · ${safeHTML(w.vintage)}</p>
-              <p><strong>รสชาติ:</strong> ${safeHTML(w.taste)}</p>
-              <p><strong>จับคู่:</strong> ${safeHTML(w.pair)}</p>
-            </div>
-          </article>
+            <div class="wine-tile-name">${safeHTML(w.name)}</div>
+            <div class="wine-tile-meta">${safeHTML(w.category || 'Wine')}</div>
+          </button>
         `).join('')}
+      </div>
+      <div id="wineDetailPanel" class="wine-detail-panel">
+        ${renderWineDetail(selected)}
       </div>
     </section>
   `;
+}
+
+function bindWineInteractions() {
+  const panel = document.getElementById('wineDetailPanel');
+  if (!panel) return;
+  readerSection.querySelectorAll('[data-wine-index]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const index = Number(btn.dataset.wineIndex || 0);
+      state.currentWineIndex = index;
+      const wine = WINE_MEDIA[index] || WINE_MEDIA[0];
+      readerSection.querySelectorAll('[data-wine-index]').forEach(tile => tile.classList.toggle('active', tile === btn));
+      panel.innerHTML = renderWineDetail(wine);
+      panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  });
 }
 
 function recordLessonOpen(id) {
@@ -416,6 +459,8 @@ function openLesson(id, opts = {}) {
   }));
 
   readerSection.querySelectorAll('[data-speak]').forEach(btn => btn.addEventListener('click', () => speak(btn.dataset.speak)));
+
+  if (lesson.id === 'wine-basic') bindWineInteractions();
 
   const searchInput = el('englishSearchInput');
   if (searchInput) {
@@ -505,6 +550,22 @@ el('authForm').addEventListener('submit', async e => {
     }
   } catch (err) {
     el('authMsg').textContent = err.message || 'เข้าสู่ระบบไม่สำเร็จ';
+  }
+});
+
+
+auth.onAuthStateChanged(async user => {
+  if (user) {
+    state.isDemo = false;
+    state.user = user;
+    await loadUserData();
+    authView.classList.add('hidden');
+    mainView.classList.remove('hidden');
+    closeLesson();
+  } else if (!state.isDemo) {
+    state.user = null;
+    authView.classList.remove('hidden');
+    mainView.classList.add('hidden');
   }
 });
 
