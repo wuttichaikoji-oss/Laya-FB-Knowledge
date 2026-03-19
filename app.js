@@ -227,8 +227,21 @@ const lessons = [
   }
 ];
 
-const ENGLISH_ORDER = ['restaurant', 'vegetables', 'fruits', 'takingOrders', 'conversation'];
+const ENGLISH_CANDIDATE_ORDER = [
+  ['restaurant'],
+  ['vegetables'],
+  ['fruits'],
+  ['orders', 'takingOrders'],
+  ['greeting', 'conversation']
+];
+function pickEnglishKey(candidates) {
+  return candidates.find(key => ENGLISH_DATA[key]) || candidates[0];
+}
+const ENGLISH_ORDER = ENGLISH_CANDIDATE_ORDER.map(pickEnglishKey);
 const DEFAULT_ENGLISH_SUBCATEGORY = ENGLISH_ORDER[0];
+function getEnglishMeta(key) {
+  return ENGLISH_DATA[key] || { title: key, items: [] };
+}
 
 const EMBEDDED_FIREBASE_CONFIG = {
   apiKey: "AIzaSyAaiMSOeGDahZuVDqWhgeuSHBf129wXv6g",
@@ -252,7 +265,7 @@ const state = {
   firebaseConfig: EMBEDDED_FIREBASE_CONFIG,
   firebaseReady: false,
   syncing: false,
-  englishPack: { subcategory: 'restaurant', query: '' }
+  englishPack: { subcategory: DEFAULT_ENGLISH_SUBCATEGORY, query: '' }
 };
 
 const el = (id) => document.getElementById(id);
@@ -509,7 +522,7 @@ function speakText(text) {
 function renderEnglishPack() {
   const currentKey = ENGLISH_DATA[state.englishPack.subcategory] ? state.englishPack.subcategory : DEFAULT_ENGLISH_SUBCATEGORY;
   state.englishPack.subcategory = currentKey;
-  const currentMeta = ENGLISH_DATA[currentKey] || { title: 'English: F&B', items: [] };
+  const currentMeta = getEnglishMeta(currentKey);
   const items = getEnglishItems();
   const total = ENGLISH_ORDER.reduce((sum, key) => sum + (ENGLISH_DATA[key]?.items?.length || 0), 0);
   if (!total) {
@@ -531,7 +544,7 @@ function renderEnglishPack() {
       </div>
 
       <div class="subtabs">
-        ${ENGLISH_ORDER.map(key => `<button class="subtab ${key === currentKey ? 'active' : ''}" data-subcat="${key}">${ENGLISH_DATA[key].title}</button>`).join('')}
+        ${ENGLISH_ORDER.map(key => `<button class="subtab ${key === currentKey ? 'active' : ''}" data-subcat="${key}">${getEnglishMeta(key).title}</button>`).join('')}
       </div>
 
       <div class="vocab-toolbar">
