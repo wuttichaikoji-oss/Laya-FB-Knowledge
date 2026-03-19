@@ -107,3 +107,32 @@ input,textarea{width:100%;border:1px solid var(--line);border-radius:14px;paddin
 .vocab-row{align-items:center}
 .vocab-main{min-width:0}
 .vocab-main strong{word-break:break-word}
+
+.bullet-item{padding:11px 14px;border-radius:14px;background:#fff;border:1px solid var(--line);line-height:1.6}
+.empty-state{padding:14px;border-radius:14px;background:#fff;border:1px dashed var(--line);color:var(--muted)}
+.english-pack-head,.vocab-toolbar{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap}
+.muted-badge{padding:8px 12px;border-radius:999px;background:#eef2f6;color:var(--muted);font-size:13px;font-weight:700}
+.subtabs{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 12px}
+.subtab{padding:10px 14px;border-radius:999px;background:#eef2f6;color:var(--text);font-weight:600}
+.subtab.active{background:var(--text);color:#fff}
+.vocab-list{display:grid;gap:10px}
+.vocab-row{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:12px 14px;border-radius:14px;background:#fff;border:1px solid var(--line)}
+.vocab-main{min-width:0}
+.vocab-meta{color:var(--muted);margin-top:3px;line-height:1.45}
+.speak-mini{padding:10px 12px;border-radius:12px;background:#eef7f6;color:var(--primary-dark);font-weight:700;white-space:nowrap}
+.wine-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:14px}
+.wine-card{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 8px 20px rgba(18,35,56,.05)}
+.wine-image-wrap{aspect-ratio:3/4;background:#f5f7fa}
+.wine-image-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+.wine-card-body{padding:14px}
+.wine-card-title{font-size:16px;font-weight:800;line-height:1.35;margin-bottom:6px}
+.wine-card-pron,.wine-card-meta,.wine-card-pair{color:var(--muted);font-size:13px;line-height:1.5}
+.wine-card-note{margin:10px 0 8px;line-height:1.55}
+@media (max-width: 768px){
+  .vocab-row{flex-direction:column;align-items:flex-start}
+  .speak-mini{width:100%}
+  .wine-gallery{grid-template-columns:1fr 1fr}
+}
+@media (max-width: 520px){
+  .wine-gallery{grid-template-columns:1fr}
+}

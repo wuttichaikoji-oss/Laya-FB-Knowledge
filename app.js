@@ -526,6 +526,141 @@ const lessons = [
 
 ];
 
+const WINE_MEDIA = [
+  {
+    "category": "Sparkling",
+    "name": "Rothbury Estate Cuvée",
+    "pronunciation": "รอธ-เบอ-รี เอสเตท คู-เว่",
+    "vintage": "NV",
+    "vineyard": "Hunter Valley, Australia",
+    "taste": "สดชื่น กลิ่นซิตรัส แอปเปิ้ลเขียว ฟองละเอียด ดื่มง่าย",
+    "grape": "Blend (Chardonnay / Pinot Noir)",
+    "en": "Light and refreshing sparkling wine with crisp citrus and apple notes. Great as an aperitif or welcome drink.",
+    "pair": "Aperitif / Celebration",
+    "image": "https://images.unsplash.com/photo-1516594915697-87eb3b1c14ea?auto=format&fit=crop&w=1200&q=80"
+  },
+  {
+    "category": "Sparkling",
+    "name": "Zonin Prosecco Brut",
+    "pronunciation": "โซ-นิน โปร-เซค-โค บรูท",
+    "vintage": "NV",
+    "vineyard": "Veneto, Italy",
+    "taste": "แอปเปิ้ลเขียว ลูกแพร์ สด ซ่า ดื่มง่าย",
+    "grape": "Glera",
+    "en": "Fresh and fruity Prosecco with green apple and pear notes. Easy to drink and very popular for celebrations.",
+    "pair": "Celebration / Welcome drink",
+    "image": "https://images.unsplash.com/photo-1560512823-829485b8bf24?auto=format&fit=crop&w=1200&q=80"
+  },
+  {
+    "category": "Red",
+    "name": "Casillero del Diablo Reserva Carmenere",
+    "pronunciation": "คาซิลเลโร เดล ดิอาโบโล รีเซร์วา คาร์เมเนียร์",
+    "vintage": "Varies by lot",
+    "vineyard": "Central Valley, Chile",
+    "taste": "แบล็คเบอร์รี่ พลัม ช็อกโกแลต พริกไทยดำ โครงสร้างปานกลาง แทนนินนุ่ม",
+    "grape": "Carmenere",
+    "en": "Smooth and medium-bodied Chilean red with dark berries and soft spice. Perfect for guests who want a soft, easy-drinking red wine.",
+    "pair": "Steak / BBQ / Lamb",
+    "image": "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=1200&q=80"
+  },
+  {
+    "category": "Red",
+    "name": "Stone Town Cabernet Sauvignon Merlot",
+    "pronunciation": "สโตน ทาวน์ คาแบร์เนต์ โซวีญง เมอร์โลต์",
+    "vintage": "Varies by lot",
+    "vineyard": "South Africa",
+    "taste": "แบล็คเคอร์แรนต์ พลัม เข้มกว่าเล็กน้อย โครงสร้างชัด ฟินิชนุ่ม",
+    "grape": "Cabernet Sauvignon / Merlot",
+    "en": "Classic Cabernet-Merlot blend with rich black fruit and a smooth finish. A great match for grilled meats.",
+    "pair": "Grilled meat / Beef",
+    "image": "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=1200&q=80"
+  },
+  {
+    "category": "Red",
+    "name": "Sileni Pinot Noir",
+    "pronunciation": "ซี-เล-นี่ พิโนต์ นัวร์",
+    "vintage": "Varies by lot",
+    "vineyard": "Hawke’s Bay, New Zealand",
+    "taste": "เชอร์รี่ ราสเบอร์รี่ เนื้อสัมผัสนุ่ม ละมุน เบาดื่มง่าย",
+    "grape": "Pinot Noir",
+    "en": "Elegant Pinot Noir with fresh red berries and silky texture. Ideal for guests who prefer lighter red wines.",
+    "pair": "Duck / Fish / Light dishes",
+    "image": "https://images.unsplash.com/photo-1547595628-c61a29f496f0?auto=format&fit=crop&w=1200&q=80"
+  },
+  {
+    "category": "White",
+    "name": "Dr. Loosen Riesling Dry",
+    "pronunciation": "ด็อกเตอร์ ลูเซ่น รีสลิง ดราย",
+    "vintage": "Varies by lot",
+    "vineyard": "Mosel, Germany",
+    "taste": "เลมอน แอปเปิ้ลเขียว กลิ่นดอกไม้ กรดสดชัด สะอาดสดชื่น",
+    "grape": "Riesling",
+    "en": "Crisp and refreshing Riesling with bright citrus and floral notes. Excellent with seafood and spicy dishes.",
+    "pair": "Seafood / Thai food / Spicy dishes",
+    "image": "https://images.unsplash.com/photo-1569919659476-f0852f6834b7?auto=format&fit=crop&w=1200&q=80"
+  },
+  {
+    "category": "White",
+    "name": "Pighin Pinot Grigio",
+    "pronunciation": "พิ-กิน พิโนต์ กรีจิโอ",
+    "vintage": "Varies by lot",
+    "vineyard": "Friuli, Italy",
+    "taste": "แอปเปิ้ล ลูกแพร์ เบา สะอาด สด ดื่มง่าย",
+    "grape": "Pinot Grigio",
+    "en": "Light and clean white wine with apple and pear notes. A safe and easy recommendation for many guests.",
+    "pair": "General pairing / Easy choice",
+    "image": "https://images.unsplash.com/photo-1558001373-7b93ee48ffa0?auto=format&fit=crop&w=1200&q=80"
+  },
+  {
+    "category": "White",
+    "name": "Laurenz V Grüner Veltliner",
+    "pronunciation": "ลอเรนซ์ ฟาว กรูเนอร์ เฟลท์ลิเนอร์",
+    "vintage": "Varies by lot",
+    "vineyard": "Austria",
+    "taste": "ซิตรัส สมุนไพรอ่อน พริกไทยขาว ปากสัมผัสสดและคม",
+    "grape": "Grüner Veltliner",
+    "en": "Crisp and slightly spicy white wine that is very food-friendly. Great for guests who want something fresh and interesting.",
+    "pair": "Seafood / Salad / Light appetizers",
+    "image": "https://images.unsplash.com/photo-1474722883778-792e7990302f?auto=format&fit=crop&w=1200&q=80"
+  },
+  {
+    "category": "White",
+    "name": "Casillero del Diablo Sauvignon Blanc",
+    "pronunciation": "คาซิลเลโร เดล ดิอาโบโล โซวีญง บลองก์",
+    "vintage": "Varies by lot",
+    "vineyard": "Chile",
+    "taste": "เสาวรส ซิตรัส กลิ่นหญ้า สด เปรี้ยวชัด",
+    "grape": "Sauvignon Blanc",
+    "en": "Fresh and zesty Sauvignon Blanc with tropical fruit and citrus notes. One of the best choices for seafood.",
+    "pair": "Seafood / Fresh dishes",
+    "image": "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1200&q=80"
+  },
+  {
+    "category": "Rosé",
+    "name": "Whispering Angel Rosé",
+    "pronunciation": "วิสเพอริง แองเจิล โรเซ่",
+    "vintage": "Varies by lot",
+    "vineyard": "Provence, France",
+    "taste": "สตรอว์เบอร์รี่ พีช กลิ่นฟลอรัล เบา สด หอม",
+    "grape": "Grenache Blend",
+    "en": "Elegant Provence rosé with fresh strawberry and peach notes. Light, stylish, and very refreshing.",
+    "pair": "Beach vibe / Light lunch / Female guests",
+    "image": "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=1200&q=80"
+  },
+  {
+    "category": "Champagne",
+    "name": "Bollinger Special Cuvée",
+    "pronunciation": "โบลลงเช่ร์ สเปเชียล คู-เว่",
+    "vintage": "NV",
+    "vineyard": "Champagne, France",
+    "taste": "ขนมปังอบ เนย แอปเปิ้ล โครงสร้างหรู ซับซ้อน ฟองละเอียด",
+    "grape": "Pinot Noir dominant blend",
+    "en": "Rich and complex Champagne with toast, apple, and creamy texture. A premium choice for special occasions and VIP guests.",
+    "pair": "Celebration / VIP / Premium experience",
+    "image": "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=1200&q=80"
+  }
+];
+
 const ENGLISH_CANDIDATE_ORDER = [
   ['restaurant'],
   ['vegetables'],
@@ -768,6 +903,38 @@ function renderCustomSections(lesson) {
   `).join('');
 }
 
+function renderWineGallery() {
+  if (!Array.isArray(WINE_MEDIA) || !WINE_MEDIA.length) return '';
+  return `
+    <div class="section-block">
+      <div class="english-pack-head">
+        <div>
+          <h5>รูปและข้อมูลไวน์ในรายการ</h5>
+          <p class="reader-summary">รวมภาพและข้อมูลสั้น ๆ ของไวน์แต่ละตัวไว้ในบทเดียวกัน เพื่อให้พนักงานเปิดอ่านและเทียบขวดได้ง่ายขึ้น</p>
+        </div>
+        <div class="muted-badge">${WINE_MEDIA.length} รายการ</div>
+      </div>
+
+      <div class="wine-gallery">
+        ${WINE_MEDIA.map(w => `
+          <article class="wine-card">
+            <div class="wine-image-wrap">
+              <img src="${w.image}" alt="${w.name}" loading="lazy">
+            </div>
+            <div class="wine-card-body">
+              <div class="wine-card-title">${w.name}</div>
+              <div class="wine-card-pron">คำอ่าน: ${w.pronunciation}</div>
+              <div class="wine-card-meta">${w.category} • ${w.vineyard}</div>
+              <div class="wine-card-note">${w.taste}</div>
+              <div class="wine-card-pair">จับคู่แนะนำ: ${w.pair}</div>
+            </div>
+          </article>
+        `).join('')}
+      </div>
+    </div>
+  `;
+}
+
 function renderDefaultSections(lesson) {
   return `
     <div class="section-block">
@@ -903,7 +1070,7 @@ function openLesson(id) {
   const lessonContent = lesson.type === 'english-pack'
     ? renderEnglishPack()
     : (lesson.sections
-        ? renderCustomSections(lesson) + `
+        ? `${lesson.id === 'wine-basic' ? renderWineGallery() : ''}${renderCustomSections(lesson)}
           <div class="section-block">
             <h5>สรุปสั้นสำหรับหน้างาน</h5>
             <div class="tip-list">
