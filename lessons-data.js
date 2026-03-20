@@ -536,7 +536,7 @@ window.WINE_MEDIA = [
     "grape": "Blend (Chardonnay / Pinot Noir)",
     "en": "Light and refreshing sparkling wine with crisp citrus and apple notes. Great as an aperitif or welcome drink.",
     "pair": "Aperitif / Celebration",
-        "image": "https://manila-wine.com/media/catalog/product/cache/ab779e9c28832bdb1d1b6d48074ac569/r/o/rothbury_estate.jpg"
+    "image": "assets/wines/rothbury-estate-cuvee.png"
   },
   {
     "category": "Sparkling",
@@ -548,7 +548,7 @@ window.WINE_MEDIA = [
     "grape": "Glera",
     "en": "Fresh and fruity Prosecco with green apple and pear notes. Easy to drink and very popular for celebrations.",
     "pair": "Celebration / Welcome drink",
-        "image": "https://manila-wine.com/media/catalog/product/cache/ab779e9c28832bdb1d1b6d48074ac569/z/o/zonin---prosecco.jpg"
+    "image": "https://manila-wine.com/media/catalog/product/cache/ab779e9c28832bdb1d1b6d48074ac569/z/o/zonin---prosecco.jpg"
   },
   {
     "category": "Red",
@@ -560,7 +560,7 @@ window.WINE_MEDIA = [
     "grape": "Carmenere",
     "en": "Smooth and medium-bodied Chilean red with dark berries and soft spice. Perfect for guests who want a soft, easy-drinking red wine.",
     "pair": "Steak / BBQ / Lamb",
-            "image": "https://www.casillerodeldiablo.com/wp-content/uploads/2021/12/cdd_eng_ca_res.png"
+    "image": "https://www.casillerodeldiablo.com/wp-content/uploads/2021/12/cdd_eng_ca_res.png"
   },
   {
     "category": "Red",
@@ -572,7 +572,7 @@ window.WINE_MEDIA = [
     "grape": "Cabernet Sauvignon / Merlot",
     "en": "Classic Cabernet-Merlot blend with rich black fruit and a smooth finish. A great match for grilled meats.",
     "pair": "Grilled meat / Beef",
-        "image": "https://www.bbb.co.th/images/products/wine/south-africa-stone-town/stone-town-b.jpg"
+    "image": "https://www.bbb.co.th/images/products/wine/south-africa-stone-town/stone-town-b.jpg"
   },
   {
     "category": "Red",
@@ -584,7 +584,7 @@ window.WINE_MEDIA = [
     "grape": "Pinot Noir",
     "en": "Elegant Pinot Noir with fresh red berries and silky texture. Ideal for guests who prefer lighter red wines.",
     "pair": "Duck / Fish / Light dishes",
-        "image": "https://www.bbb.co.th/images/products/wine/new-zealand-sileni/cellar-selection-pinot-noir-b.jpg"
+    "image": "https://www.bbb.co.th/images/products/wine/new-zealand-sileni/cellar-selection-pinot-noir-b.jpg"
   },
   {
     "category": "White",
@@ -596,7 +596,7 @@ window.WINE_MEDIA = [
     "grape": "Riesling",
     "en": "Crisp and refreshing Riesling with bright citrus and floral notes. Excellent with seafood and spicy dishes.",
     "pair": "Seafood / Thai food / Spicy dishes",
-        "image": "https://kegnbottle.com/cdn/shop/files/dr-loosen-dr-l-dry-riesling-keg-n-bottle-228201.png?v=1741197993&width=2048"
+    "image": "assets/wines/dr-loosen-riesling-dry.png"
   },
   {
     "category": "White",
@@ -608,7 +608,7 @@ window.WINE_MEDIA = [
     "grape": "Pinot Grigio",
     "en": "Light and clean white wine with apple and pear notes. A safe and easy recommendation for many guests.",
     "pair": "General pairing / Easy choice",
-        "image": "https://www.saratogawine.com/wp-content/uploads/2024/01/6caf85d.png"
+    "image": "assets/wines/pighin-pinot-grigio.png"
   },
   {
     "category": "White",
@@ -620,7 +620,7 @@ window.WINE_MEDIA = [
     "grape": "Grüner Veltliner",
     "en": "Crisp and slightly spicy white wine that is very food-friendly. Great for guests who want something fresh and interesting.",
     "pair": "Seafood / Salad / Light appetizers",
-        "image": "https://assets.wine.com/winecom/image/upload/w_600%2Ch_400%2Cdpr_2.0%2Cc_fit%2Cq_auto%3Agood%2Cfl_progressive/yh4anzjns2spupmmdbec.jpg"
+    "image": "assets/wines/laurenz-v-gruner-veltliner.png"
   },
   {
     "category": "White",
@@ -632,7 +632,7 @@ window.WINE_MEDIA = [
     "grape": "Sauvignon Blanc",
     "en": "Fresh and zesty Sauvignon Blanc with tropical fruit and citrus notes. One of the best choices for seafood.",
     "pair": "Seafood / Fresh dishes",
-        "image": "https://www.casillerodeldiablo.com/wp-content/uploads/2021/12/cdd_eng_sb_sc-di_res.png"
+    "image": "assets/wines/casillero-del-diablo-sauvignon-blanc.png"
   },
   {
     "category": "Rosé",
@@ -644,7 +644,7 @@ window.WINE_MEDIA = [
     "grape": "Grenache Blend",
     "en": "Elegant Provence rosé with fresh strawberry and peach notes. Light, stylish, and very refreshing.",
     "pair": "Beach vibe / Light lunch / Female guests",
-        "image": "https://www.esclans.com/wp-content/uploads/2022/03/Whispering_angel_v1_01.png"
+    "image": "assets/wines/whispering-angel-rose.png"
   },
   {
     "category": "Champagne",
@@ -656,6 +656,6 @@ window.WINE_MEDIA = [
     "grape": "Pinot Noir dominant blend",
     "en": "Rich and complex Champagne with toast, apple, and creamy texture. A premium choice for special occasions and VIP guests.",
     "pair": "Celebration / VIP / Premium experience",
-        "image": "https://www.champagne-bollinger.com/_nuxt/image/e96a94.jpeg"
+    "image": "assets/wines/bollinger-special-cuvee.png"
   }
 ];
