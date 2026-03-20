@@ -15,6 +15,8 @@
 - Firestore:
   - `users/{uid}` สำหรับเก็บ progress / favorite / note
   - `community_lessons/{lessonId}` สำหรับคลังความรู้ที่ผู้ใช้ในทีมช่วยกันเพิ่ม
+  - `wine_catalog/{wineId}` สำหรับเก็บรายการขวดไวน์อ้างอิงทั้งชุด
+  - `wine_reference/{wineId}` สำหรับเก็บข้อมูลไวน์ที่ทีมช่วยกันเติม
 
 ## Firestore Rules ที่แนะนำ
 ใช้กฎนี้เพื่อให้
@@ -36,6 +38,10 @@ service cloud.firestore {
         && request.resource.data.authorId == request.auth.uid;
       allow update, delete: if request.auth != null
         && resource.data.authorId == request.auth.uid;
+    }
+
+    match /wine_catalog/{wineId} {
+      allow read, write: if request.auth != null;
     }
 
     match /wine_reference/{wineId} {
@@ -123,3 +129,9 @@ service firebase.storage {
 - รูปขวดใช้จากคลังกลางของระบบและไม่ต้องแก้ลิงก์รูปในหน้าแก้ไข
 - ปุ่ม `คืนค่าช่องที่กำลังแก้` จะโหลดค่าปัจจุบันกลับเข้าฟอร์ม
 - ปุ่ม `ลบข้อมูลที่แก้เพิ่ม` จะลบ override ใน Firebase/Demo และกลับไปใช้ข้อมูลเดิมของระบบ
+
+
+## Wine Reference ใน Firebase
+- เมื่อผู้ใช้ล็อกอินแล้วและเปิดหัวข้อ Wine Basic Service ระบบจะพยายามเพิ่มรายการขวดทั้งหมดเข้า `wine_catalog` ให้อัตโนมัติถ้ายังไม่มี
+- ถ้าต้องการกดเอง สามารถใช้ปุ่ม `เพิ่มรายการส่วนนี้เข้า Firebase` ในหน้า Wine Basic Service ได้
+- ข้อมูลที่ทีมช่วยกันเติม เช่น คำอ่าน รสชาติ การจับคู่อาหาร และวิธีพูดกับแขก จะถูกเก็บใน `wine_reference/{wineId}`

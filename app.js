@@ -148,9 +148,13 @@ const state = {
   saving: false,
   communityLessons: [],
   communityUnsub: null,
+  wineBaseCatalog: BASE_WINE_MEDIA.slice(),
   wineCatalog: BASE_WINE_MEDIA.slice(),
   wineOverrides: {},
   wineUnsub: null,
+  wineCatalogUnsub: null,
+  syncingWineCatalog: false,
+  wineCatalogSource: 'local',
   editingWineId: null,
   savingWine: false,
   editorLessonId: null,
@@ -224,15 +228,20 @@ function editableWineValue(key, value = '') {
 
 function mergeWineCatalog(overrides = {}) {
   state.wineOverrides = overrides && typeof overrides === 'object' ? overrides : {};
-  state.wineCatalog = BASE_WINE_MEDIA.map((base, index) => {
+  const baseList = (Array.isArray(state.wineBaseCatalog) && state.wineBaseCatalog.length)
+    ? state.wineBaseCatalog
+    : BASE_WINE_MEDIA;
+  const merged = baseList.map((base, index) => {
     const extra = state.wineOverrides[base.id] || {};
     return normalizeWineItem({
       ...base,
       ...extra,
       id: base.id,
-      image: sanitizeUrl(extra.image || base.image) || base.image
-    }, index);
+      image: sanitizeUrl(extra.image || base.image) || base.image,
+      order: typeof base.order === 'number' ? base.order : index
+    }, typeof base.order === 'number' ? base.order : index);
   });
+  state.wineCatalog = merged.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
   if (state.currentWineIndex >= state.wineCatalog.length) state.currentWineIndex = 0;
 }
 
@@ -253,6 +262,94 @@ function stopWineSubscription() {
     state.wineUnsub();
     state.wineUnsub = null;
   }
+}
+
+function stopWineCatalogSubscription() {
+  if (typeof state.wineCatalogUnsub === 'function') {
+    state.wineCatalogUnsub();
+    state.wineCatalogUnsub = null;
+  }
+}
+
+function setWineBaseCatalog(list = [], source = 'local') {
+  const incoming = Array.isArray(list) && list.length ? list : BASE_WINE_MEDIA;
+  const normalized = incoming.map((item, index) => normalizeWineItem({
+    ...item,
+    id: item.id || normalizeWineKey(item, index),
+    order: typeof item.order === 'number' ? item.order : index
+  }, typeof item.order === 'number' ? item.order : index));
+  const seen = new Set(normalized.map(item => item.id));
+  const extras = BASE_WINE_MEDIA.filter(item => !seen.has(item.id));
+  state.wineBaseCatalog = [...normalized, ...extras];
+  state.wineCatalogSource = source;
+  mergeWineCatalog(state.wineOverrides);
+}
+
+async function bootstrapWineCatalogToFirebase() {
+  if (state.isDemo || !state.user) return;
+  const batch = db.batch();
+  BASE_WINE_MEDIA.forEach((wine, index) => {
+    const docRef = db.collection('wine_catalog').doc(wine.id);
+    batch.set(docRef, {
+      id: wine.id,
+      order: typeof wine.order === 'number' ? wine.order : index,
+      name: wine.name || '',
+      pronunciation: wine.pronunciation || '',
+      category: wine.category || 'Wine',
+      vintage: wine.vintage || '',
+      vineyard: wine.vineyard || '',
+      taste: wine.taste || '',
+      grape: wine.grape || '',
+      en: wine.en || '',
+      pair: wine.pair || '',
+      image: wine.image || '',
+      sourceFile: wine.sourceFile || imageFileName(wine.image || ''),
+      seededAt: firebase.firestore.FieldValue.serverTimestamp(),
+      seededById: state.user.uid,
+      seededByName: userLabel()
+    }, { merge: true });
+  });
+  await batch.commit();
+}
+
+function subscribeWineCatalog() {
+  stopWineCatalogSubscription();
+  if (state.isDemo) {
+    setWineBaseCatalog(BASE_WINE_MEDIA, 'local');
+    return;
+  }
+  if (!state.user) {
+    setWineBaseCatalog(BASE_WINE_MEDIA, 'local');
+    return;
+  }
+  state.wineCatalogUnsub = db.collection('wine_catalog').orderBy('order').onSnapshot(async snapshot => {
+    if (snapshot.empty) {
+      setWineBaseCatalog(BASE_WINE_MEDIA, 'local');
+      if (!state.syncingWineCatalog) {
+        state.syncingWineCatalog = true;
+        try {
+          await bootstrapWineCatalogToFirebase();
+        } catch (err) {
+          console.error(err);
+          state.syncingWineCatalog = false;
+        }
+      }
+      syncWineViewIfOpen();
+      return;
+    }
+    state.syncingWineCatalog = false;
+    const list = snapshot.docs.map((doc, index) => ({
+      id: doc.id,
+      ...(doc.data() || {}),
+      order: typeof doc.data()?.order === 'number' ? doc.data().order : index
+    }));
+    setWineBaseCatalog(list, 'firebase');
+    syncWineViewIfOpen();
+  }, err => {
+    console.error(err);
+    setWineBaseCatalog(BASE_WINE_MEDIA, 'local');
+    syncWineViewIfOpen();
+  });
 }
 
 function subscribeWineReference() {
@@ -997,14 +1094,21 @@ function renderWineDetail(wine) {
 function renderWineMedia() {
   const wines = currentWineList();
   const selected = wines[state.currentWineIndex] || wines[0];
+  const sourceLabel = state.wineCatalogSource === 'firebase'
+    ? 'รายการขวดในส่วนนี้ดึงจาก Firebase แล้ว'
+    : 'รายการขวดชุดนี้ยังใช้จากไฟล์ในระบบ และจะถูกเพิ่มเข้า Firebase อัตโนมัติเมื่อเปิดหน้านี้หลังล็อกอิน';
   return `
     <section class="wine-box">
       <div class="wine-head wine-head-modern">
         <div>
           <h3>Wine Reference Bottles (${wines.length} ขวด)</h3>
           <p class="small">รวมรูปขวดไวน์ทั้งหมดที่อัปโหลดไว้ในบทเดียว กดที่ขวดเพื่อเปิดรายละเอียดด้านล่าง และถ้าข้อมูลยังไม่ครบสามารถกดแก้ไขแล้วบันทึกเข้า Firebase ได้เลย</p>
+          <div class="mini-meta">${safeHTML(sourceLabel)}</div>
         </div>
-        <div class="wine-hint">แตะรูปขวดเพื่อดูรายละเอียด</div>
+        <div class="wine-head-actions">
+          ${!state.isDemo && state.user ? '<button id="syncWineCatalogBtn" class="ghost-btn" type="button">เพิ่มรายการส่วนนี้เข้า Firebase</button>' : ''}
+          <div class="wine-hint">แตะรูปขวดเพื่อดูรายละเอียด</div>
+        </div>
       </div>
       <div class="wine-grid">
         ${wines.map((wine, index) => `
@@ -1026,6 +1130,30 @@ function renderWineMedia() {
 function bindWineInteractions() {
   const panel = document.getElementById('wineDetailPanel');
   if (!panel) return;
+
+  const syncBtn = document.getElementById('syncWineCatalogBtn');
+  if (syncBtn) {
+    syncBtn.addEventListener('click', async () => {
+      if (state.syncingWineCatalog) return;
+      state.syncingWineCatalog = true;
+      syncBtn.disabled = true;
+      const original = syncBtn.textContent;
+      syncBtn.textContent = 'กำลังเพิ่มเข้า Firebase...';
+      try {
+        await bootstrapWineCatalogToFirebase();
+        syncBtn.textContent = 'เพิ่มรายการส่วนนี้เข้า Firebase แล้ว';
+      } catch (err) {
+        console.error(err);
+        syncBtn.textContent = 'เพิ่มเข้า Firebase ไม่สำเร็จ';
+      } finally {
+        setTimeout(() => {
+          state.syncingWineCatalog = false;
+          syncBtn.disabled = false;
+          syncBtn.textContent = original;
+        }, 1600);
+      }
+    });
+  }
 
   const wireCurrentDetail = () => {
     panel.querySelectorAll('.wine-detail-image-wrap img').forEach(img => attachImageFallback(img, 'รูปขวดไม่พร้อมแสดง'));
@@ -1473,6 +1601,7 @@ el('demoBtn').addEventListener('click', async () => {
   state.user = { uid: 'demo-user', displayName: 'Demo User', email: 'demo@local' };
   await loadUserData();
   subscribeCommunityLessons();
+  subscribeWineCatalog();
   subscribeWineReference();
   authView.classList.add('hidden');
   mainView.classList.remove('hidden');
@@ -1506,10 +1635,13 @@ el('authForm').addEventListener('submit', async e => {
 el('logoutBtn').addEventListener('click', async () => {
   stopCommunitySubscription();
   stopWineSubscription();
+  stopWineCatalogSubscription();
   if (state.isDemo) {
     state.isDemo = false;
     state.user = null;
     state.communityLessons = [];
+    state.wineCatalogSource = 'local';
+    setWineBaseCatalog(BASE_WINE_MEDIA, 'local');
     mergeWineCatalog({});
     authView.classList.remove('hidden');
     mainView.classList.add('hidden');
@@ -1523,11 +1655,13 @@ el('logoutBtn').addEventListener('click', async () => {
 auth.onAuthStateChanged(async user => {
   stopCommunitySubscription();
   stopWineSubscription();
+  stopWineCatalogSubscription();
   if (user) {
     state.isDemo = false;
     state.user = user;
     await loadUserData();
     subscribeCommunityLessons();
+    subscribeWineCatalog();
     subscribeWineReference();
     authView.classList.add('hidden');
     mainView.classList.remove('hidden');
@@ -1535,6 +1669,8 @@ auth.onAuthStateChanged(async user => {
   } else if (!state.isDemo) {
     state.user = null;
     state.communityLessons = [];
+    state.wineCatalogSource = 'local';
+    setWineBaseCatalog(BASE_WINE_MEDIA, 'local');
     mergeWineCatalog({});
     authView.classList.remove('hidden');
     mainView.classList.add('hidden');

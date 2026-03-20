@@ -103,6 +103,7 @@ textarea{min-height:130px;resize:vertical}
 .wine-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;flex-wrap:wrap}
 .small{font-size:.85rem;color:var(--muted)}
 .wine-head-modern{align-items:center}
+.wine-head-actions{display:flex;flex-direction:column;align-items:flex-end;gap:10px}
 .wine-hint{padding:10px 14px;border-radius:999px;background:#f2fffd;border:1px solid #bfe9e4;color:var(--brand-dark);font-size:.88rem;font-weight:700}
 .wine-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px}
 .wine-tile{appearance:none;border:1px solid var(--line);background:#fff;border-radius:22px;padding:12px;display:grid;gap:10px;transition:.18s ease;box-shadow:0 4px 14px rgba(20,32,51,.04)}
@@ -152,6 +153,7 @@ textarea{min-height:130px;resize:vertical}
   .wine-tile-image{min-height:160px}
   .wine-tile-image img{height:150px}
   .wine-detail-grid{grid-template-columns:1fr}
+  .wine-head-actions{width:100%;align-items:stretch}
   .wine-hint{width:100%;text-align:center}
   .editor-grid.two-col{grid-template-columns:1fr}
   .top-actions,.editor-actions-right{width:100%}
