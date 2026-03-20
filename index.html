@@ -313,12 +313,13 @@
           <textarea id="wineEn" placeholder="เช่น Crisp and refreshing white wine that works very well with seafood."></textarea>
         </label>
 
-        <label>ลิงก์รูปขวด (ถ้าต้องการเปลี่ยน)
-          <input id="wineImage" type="url" placeholder="https://... หรือปล่อยว่างเพื่อใช้รูปเดิม">
-        </label>
+        <div class="wine-editor-note">
+          รูปขวดใช้จากคลังกลางของระบบ จึงไม่ต้องแก้ลิงก์รูปในหน้านี้ หากต้องการแก้เฉพาะข้อมูลข้อความให้กดบันทึกตามปกติ และถ้ากรอกผิดสามารถกด <strong>ลบข้อมูลที่แก้เพิ่ม</strong> เพื่อกลับไปใช้ข้อมูลเดิมได้
+        </div>
 
-        <div class="editor-actions">
-          <button type="button" id="resetWineBtn" class="ghost-btn">ล้างข้อมูลที่กรอกเพิ่ม</button>
+        <div class="editor-actions wine-editor-actions">
+          <button type="button" id="resetWineBtn" class="ghost-btn">คืนค่าช่องที่กำลังแก้</button>
+          <button type="button" id="deleteWineOverrideBtn" class="ghost-btn danger-btn">ลบข้อมูลที่แก้เพิ่ม</button>
           <div class="editor-actions-right">
             <button type="button" id="cancelWineBtn" class="ghost-btn">ยกเลิก</button>
             <button type="submit" class="primary-btn" id="saveWineBtn">บันทึกข้อมูลไวน์</button>

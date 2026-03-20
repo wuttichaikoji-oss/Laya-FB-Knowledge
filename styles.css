@@ -224,3 +224,30 @@ textarea{min-height:130px;resize:vertical}
 @media (max-width:720px){
   .wine-detail-top .ghost-btn,.wine-modal-card .editor-actions .ghost-btn,.wine-modal-card .editor-actions .primary-btn{width:100%}
 }
+
+
+.wine-editor-note{
+  background:#fff7ed;
+  border:1px solid #fed7aa;
+  color:#9a3412;
+  border-radius:14px;
+  padding:12px 14px;
+  font-size:13px;
+  line-height:1.55;
+}
+
+.wine-editor-actions{
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.danger-btn{
+  color:#b91c1c;
+  border-color:#fecaca;
+  background:#fff1f2;
+}
+
+.danger-btn:hover{
+  background:#ffe4e6;
+}

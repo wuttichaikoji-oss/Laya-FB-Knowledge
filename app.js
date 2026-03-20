@@ -1338,8 +1338,8 @@ function fillWineEditor(wine) {
   state.editingWineId = wine.id;
   el('wineEditorTitle').textContent = `แก้ไขข้อมูลไวน์: ${wine.name}`;
   el('wineEditorSubtitle').textContent = wine.incomplete
-    ? 'ขวดนี้ยังมีข้อมูลไม่ครบ สามารถเติมชื่อไวน์ คำอ่าน รสชาติ หรือจับคู่อาหาร แล้วกดบันทึกได้เลย'
-    : 'แก้ไขรายละเอียดไวน์ขวดนี้ แล้วกดบันทึกเพื่ออัปเดตคลังความรู้ร่วมกัน';
+    ? 'ขวดนี้ยังมีข้อมูลไม่ครบ สามารถเติมชื่อไวน์ คำอ่าน รสชาติ หรือจับคู่อาหาร แล้วกดบันทึกได้เลย หากกรอกผิดสามารถลบข้อมูลที่แก้เพิ่มเพื่อกลับไปใช้ข้อมูลเดิมได้'
+    : 'แก้ไขรายละเอียดไวน์ขวดนี้ แล้วกดบันทึกเพื่ออัปเดตคลังความรู้ร่วมกัน หากกรอกผิดสามารถลบข้อมูลที่แก้เพิ่มได้';
   el('wineName').value = editableWineValue('name', wine.name);
   el('winePronunciation').value = editableWineValue('pronunciation', wine.pronunciation);
   el('wineCategory').value = editableWineValue('category', wine.category || 'Wine');
@@ -1349,10 +1349,9 @@ function fillWineEditor(wine) {
   el('wineTaste').value = editableWineValue('taste', wine.taste);
   el('winePair').value = editableWineValue('pair', wine.pair);
   el('wineEn').value = editableWineValue('en', wine.en);
-  el('wineImage').value = wine.image || '';
   el('wineMsg').textContent = '';
   el('winePreviewBox').innerHTML = wine.image
-    ? `<img src="${safeHTML(wine.image)}" alt="${safeHTML(wine.name)}" loading="lazy"><div class="mini-meta">${safeHTML(wine.sourceFile || 'รูปขวดไวน์')}</div>`
+    ? `<img src="${safeHTML(wine.image)}" alt="${safeHTML(wine.name)}" loading="lazy"><div class="mini-meta">รูปขวดใช้จากคลังกลางของระบบ${safeHTML(wine.sourceFile ? ' • ' + wine.sourceFile : '')}</div>`
     : '<div class="preview-empty">ยังไม่มีรูปขวดในรายการนี้</div>';
   el('winePreviewBox').querySelectorAll('img').forEach(img => attachImageFallback(img, 'รูปขวดไม่พร้อมแสดง'));
 }
@@ -1385,13 +1384,8 @@ function buildWinePayload() {
     grape: el('wineGrape').value.trim(),
     taste: el('wineTaste').value.trim(),
     pair: el('winePair').value.trim(),
-    en: el('wineEn').value.trim(),
-    image: sanitizeUrl(el('wineImage').value.trim()) || ''
+    en: el('wineEn').value.trim()
   };
-  if (!payload.image) {
-    const current = currentWine();
-    payload.image = current?.image || '';
-  }
   return payload;
 }
 
@@ -1431,21 +1425,18 @@ editorModal.querySelectorAll('[data-close-editor="true"]').forEach(node => node.
 el('closeWineBtn').addEventListener('click', closeWineEditor);
 el('cancelWineBtn').addEventListener('click', closeWineEditor);
 wineModal.querySelectorAll('[data-close-wine="true"]').forEach(node => node.addEventListener('click', closeWineEditor));
-el('wineImage').addEventListener('input', () => {
-  const url = sanitizeUrl(el('wineImage').value.trim());
-  el('winePreviewBox').innerHTML = url
-    ? `<img src="${safeHTML(url)}" alt="wine preview" loading="lazy"><div class="mini-meta">Preview รูปขวดใหม่</div>`
-    : '<div class="preview-empty">ยังไม่มีรูปใหม่สำหรับขวดนี้</div>';
-  el('winePreviewBox').querySelectorAll('img').forEach(img => attachImageFallback(img, 'รูปขวดไม่พร้อมแสดง'));
+el('resetWineBtn').addEventListener('click', () => {
+  const wine = currentWine();
+  if (wine) fillWineEditor(wine);
 });
-el('resetWineBtn').addEventListener('click', async () => {
+el('deleteWineOverrideBtn').addEventListener('click', async () => {
   if (!state.editingWineId) return;
-  if (!confirm('ต้องการล้างข้อมูลที่กรอกเพิ่มของขวดนี้ แล้วกลับไปใช้ข้อมูลตั้งต้นใช่หรือไม่')) return;
+  if (!confirm('ต้องการลบข้อมูลที่แก้เพิ่มของขวดนี้ และกลับไปใช้ข้อมูลเดิมใช่หรือไม่')) return;
   try {
     await clearWineOverride(state.editingWineId);
     closeWineEditor();
   } catch (err) {
-    el('wineMsg').textContent = err.message || 'ล้างข้อมูลเพิ่มไม่สำเร็จ';
+    el('wineMsg').textContent = err.message || 'ลบข้อมูลไวน์ไม่สำเร็จ';
   }
 });
 el('wineForm').addEventListener('submit', async e => {
