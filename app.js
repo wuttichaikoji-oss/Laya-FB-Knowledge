@@ -929,6 +929,8 @@ function renderQuizButtonState() {
   const btn = el('quizBtn');
   if (!btn) return;
   btn.disabled = !state.quizOpen;
+  btn.type = 'button';
+  btn.setAttribute('aria-disabled', String(!state.quizOpen));
   btn.classList.toggle('is-disabled', !state.quizOpen);
   btn.textContent = state.quizOpen ? 'Quiz' : 'ปิดการสอบ';
   btn.title = state.quizOpen ? 'ทำแบบทดสอบ' : 'แอดมินปิดการสอบชั่วคราว';
@@ -943,7 +945,8 @@ function subscribeQuizSettings() {
   }
   state.quizSettingUnsub = db.collection('app_settings').doc('quiz_controls').onSnapshot(snap => {
     const data = snap.exists ? (snap.data() || {}) : {};
-    state.quizOpen = data.isOpen !== false;
+    const quizOpenValue = ('isOpen' in data) ? data.isOpen : (('quizEnabled' in data) ? data.quizEnabled : (('enabled' in data) ? data.enabled : true));
+    state.quizOpen = quizOpenValue !== false;
     renderQuizButtonState();
   }, err => {
     console.warn('quiz settings unavailable', err);
@@ -1183,6 +1186,21 @@ function openQuizModal() {
   renderQuizLauncher();
   quizModal.classList.remove('hidden');
 }
+
+window.__openQuizFromInline = function () {
+  try {
+    openQuizModal();
+  } catch (err) {
+    console.error('openQuizModal failed', err);
+    try {
+      renderQuizLauncher();
+      if (quizModal) quizModal.classList.remove('hidden');
+    } catch (innerErr) {
+      console.error('quiz fallback failed', innerErr);
+      alert('เปิด Quiz ไม่สำเร็จ กรุณารีเฟรชหน้าอีกครั้ง');
+    }
+  }
+};
 
 function closeQuizModal() {
   state.currentQuiz = null;
@@ -2072,7 +2090,7 @@ async function handleWineSave() {
 
 backBtn.addEventListener('click', closeLesson);
 el('searchInput').addEventListener('input', e => { state.search = e.target.value; renderLessons(); });
-el('quizBtn').addEventListener('click', openQuizModal);
+el('quizBtn').addEventListener('click', e => { e.preventDefault(); window.__openQuizFromInline(); });
 addLessonBtn.addEventListener('click', openEditor);
 openEditorSecondaryBtn.addEventListener('click', openEditor);
 el('closeEditorBtn').addEventListener('click', closeEditor);
