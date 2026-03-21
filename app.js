@@ -201,6 +201,41 @@ const editorModal = el('editorModal');
 const wineModal = el('wineModal');
 const quizModal = el('quizModal');
 
+function ensureQuizModal(){
+  let modal = document.getElementById('quizModal');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'quizModal';
+    modal.className = 'modal hidden';
+    modal.innerHTML = `
+      <div class="modal-backdrop" data-close-quiz="true"></div>
+      <div class="modal-card quiz-modal-card">
+        <div class="modal-head">
+          <div>
+            <div class="eyebrow">Quiz Mode</div>
+            <h3>แบบทดสอบวัดความรู้</h3>
+            <p class="small">สุ่มคำถามจากคลังความรู้เพื่อให้พนักงานฝึกและวัดความเข้าใจได้ทันที</p>
+          </div>
+          <button id="closeQuizBtn" class="ghost-btn" type="button">ปิด</button>
+        </div>
+        <div id="quizBody"></div>
+      </div>`;
+    document.body.appendChild(modal);
+  }
+  if (!modal.__quizBound) {
+    modal.__quizBound = true;
+    modal.querySelectorAll('[data-close-quiz="true"]').forEach(node => node.addEventListener('click', closeQuizModal));
+    const closeBtn = modal.querySelector('#closeQuizBtn');
+    if (closeBtn) closeBtn.addEventListener('click', closeQuizModal);
+  }
+  return modal;
+}
+
+function getQuizBody(){
+  const modal = ensureQuizModal();
+  return modal.querySelector('#quizBody');
+}
+
 function safeHTML(text) {
   return String(text ?? '').replace(/[&<>"']/g, s => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[s]));
 }
@@ -1183,8 +1218,9 @@ function openQuizModal() {
     alert('แอดมินปิดการสอบชั่วคราว');
     return;
   }
+  const modal = ensureQuizModal();
   renderQuizLauncher();
-  quizModal.classList.remove('hidden');
+  modal.classList.remove('hidden');
 }
 
 window.__openQuizFromInline = function () {
@@ -1193,8 +1229,20 @@ window.__openQuizFromInline = function () {
   } catch (err) {
     console.error('openQuizModal failed', err);
     try {
-      renderQuizLauncher();
-      if (quizModal) quizModal.classList.remove('hidden');
+      const modal = ensureQuizModal();
+      const body = getQuizBody();
+      if (body) {
+        body.innerHTML = `
+          <div class="quiz-launcher">
+            <div class="analysis-note">โหมดสำรองสำหรับเปิดแบบทดสอบ</div>
+            <div class="quiz-launch-actions">
+              <button id="startQuizBtnFallback" class="primary-btn">เริ่ม Quiz ทันที</button>
+            </div>
+          </div>`;
+        const startBtn = body.querySelector('#startQuizBtnFallback');
+        if (startBtn) startBtn.addEventListener('click', () => startQuiz('All', 10, 'smart'));
+      }
+      modal.classList.remove('hidden');
     } catch (innerErr) {
       console.error('quiz fallback failed', innerErr);
       alert('เปิด Quiz ไม่สำเร็จ กรุณารีเฟรชหน้าอีกครั้ง');
@@ -1204,7 +1252,8 @@ window.__openQuizFromInline = function () {
 
 function closeQuizModal() {
   state.currentQuiz = null;
-  quizModal.classList.add('hidden');
+  const modal = document.getElementById('quizModal');
+  if (modal) modal.classList.add('hidden');
 }
 
 function quizStatRow(label, value) {
@@ -1212,7 +1261,8 @@ function quizStatRow(label, value) {
 }
 
 function renderQuizLauncher() {
-  const body = el('quizBody');
+  const body = getQuizBody();
+  if (!body) throw new Error('quizBody missing');
   const attempts = state.userData.quizSummary?.attempts || 0;
   const bestScore = Math.round(state.userData.quizSummary?.bestScore || 0);
   const lastScore = Math.round(state.userData.quizSummary?.lastScore || 0);
@@ -1282,7 +1332,8 @@ function startQuiz(category = 'All', count = 10, sourceMode = 'curated') {
   const pool = category === 'All' ? bank : bank.filter(item => item.category === category);
   const selected = shuffle(pool).slice(0, Math.min(count, pool.length));
   if (!selected.length) {
-    el('quizBody').innerHTML = `<div class="empty-box">ยังไม่มีคำถามในหมวดนี้</div>`;
+    const body = getQuizBody();
+    if (body) body.innerHTML = `<div class="empty-box">ยังไม่มีคำถามในหมวดนี้</div>`;
     return;
   }
   state.currentQuiz = {
@@ -1299,7 +1350,8 @@ function renderQuizQuestion() {
   const quiz = state.currentQuiz;
   if (!quiz) return renderQuizLauncher();
   const q = quiz.questions[quiz.index];
-  const body = el('quizBody');
+  const body = getQuizBody();
+  if (!body) throw new Error('quizBody missing');
   const progressPct = Math.round(((quiz.index + 1) / quiz.questions.length) * 100);
   body.innerHTML = `
     <div class="quiz-progress-wrap">
@@ -1328,7 +1380,8 @@ function submitQuizAnswer(choiceIndex) {
   const q = quiz.questions[quiz.index];
   const correct = choiceIndex === q.answer;
   quiz.answers.push({ questionId: q.id, choiceIndex, correct, category: q.category });
-  const body = el('quizBody');
+  const body = getQuizBody();
+  if (!body) throw new Error('quizBody missing');
   body.innerHTML = `
     <div class="quiz-feedback-card ${correct ? 'correct' : 'wrong'}">
       <div class="quiz-feedback-badge">${correct ? 'ตอบถูก' : 'ยังไม่ถูก'}</div>
@@ -1386,7 +1439,8 @@ async function finishQuiz() {
   await saveUserData(true);
   await saveQuizAttemptRecord(attempt, quiz, analytics);
 
-  const body = el('quizBody');
+  const body = getQuizBody();
+  if (!body) throw new Error('quizBody missing');
   body.innerHTML = `
     <div class="quiz-result-card">
       <div class="quiz-score-circle ${scorePercent >= 80 ? 'good' : scorePercent >= 60 ? 'mid' : 'low'}">${Math.round(scorePercent)}%</div>
@@ -2090,7 +2144,10 @@ async function handleWineSave() {
 
 backBtn.addEventListener('click', closeLesson);
 el('searchInput').addEventListener('input', e => { state.search = e.target.value; renderLessons(); });
-el('quizBtn').addEventListener('click', e => { e.preventDefault(); window.__openQuizFromInline(); });
+const quizBtnNode = el('quizBtn');
+if (quizBtnNode) {
+  quizBtnNode.addEventListener('click', e => { e.preventDefault(); window.__openQuizFromInline(); });
+}
 addLessonBtn.addEventListener('click', openEditor);
 openEditorSecondaryBtn.addEventListener('click', openEditor);
 el('closeEditorBtn').addEventListener('click', closeEditor);
@@ -2110,8 +2167,7 @@ editorModal.querySelectorAll('[data-close-editor="true"]').forEach(node => node.
 el('closeWineBtn').addEventListener('click', closeWineEditor);
 el('cancelWineBtn').addEventListener('click', closeWineEditor);
 wineModal.querySelectorAll('[data-close-wine="true"]').forEach(node => node.addEventListener('click', closeWineEditor));
-el('closeQuizBtn').addEventListener('click', closeQuizModal);
-quizModal.querySelectorAll('[data-close-quiz="true"]').forEach(node => node.addEventListener('click', closeQuizModal));
+ensureQuizModal();
 el('resetWineBtn').addEventListener('click', () => {
   const wine = currentWine();
   if (wine) fillWineEditor(wine);
