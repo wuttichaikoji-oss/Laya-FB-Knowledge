@@ -959,6 +959,7 @@ function renderLessons() {
       <div class="card-actions">
         <button class="primary-btn open-btn">เปิดอ่าน</button>
         <button class="icon-btn fav-btn">${fav ? '★ โปรด' : '☆ โปรด'}</button>
+        ${canEditLesson(lesson) ? '<button class="ghost-btn lesson-edit-btn">แก้ไข</button><button class="danger-btn lesson-delete-btn">ลบ</button>' : ''}
       </div>
     `;
     card.querySelector('.open-btn').onclick = () => openLesson(lesson.id);
@@ -970,6 +971,24 @@ function renderLessons() {
         : state.userData.favorites.filter(x => x !== lesson.id);
       await saveUserData(true);
       renderLessons();
+    };
+    const lessonEditBtn = card.querySelector('.lesson-edit-btn');
+    if (lessonEditBtn) lessonEditBtn.onclick = () => openEditorForLesson(lesson);
+    const lessonDeleteBtn = card.querySelector('.lesson-delete-btn');
+    if (lessonDeleteBtn) lessonDeleteBtn.onclick = async () => {
+      if (!confirm(`ลบบทเรียน "${lesson.title}" ใช่หรือไม่`)) return;
+      try {
+        if (state.isDemo) {
+          state.communityLessons = state.communityLessons.filter(item => item.firestoreId !== lesson.firestoreId);
+          saveDemoCommunity();
+          renderLessons();
+          return;
+        }
+        await db.collection('community_lessons').doc(lesson.firestoreId).delete();
+        renderLessons();
+      } catch (err) {
+        alert(err.message || 'ลบบทเรียนไม่สำเร็จ');
+      }
     };
     lessonGrid.appendChild(card);
   });
@@ -1256,7 +1275,7 @@ function openLesson(id, opts = {}) {
           <strong>บทเรียนจากทีม</strong>
           <span>เขียนโดย ${safeHTML(lesson.authorName || 'Team Member')} · ${safeHTML(formatDate(lesson.updatedAt) || formatDate(lesson.createdAt) || '')}</span>
         </div>
-        ${canEditLesson(lesson) ? '<button id="editCommunityLessonBtn" class="ghost-btn">แก้ไขบทเรียนนี้</button>' : ''}
+        ${canEditLesson(lesson) ? '<div class="author-actions"><button id="editCommunityLessonBtn" class="ghost-btn">แก้ไขบทเรียนนี้</button><button id="deleteCommunityLessonReaderBtn" class="danger-btn">ลบบทเรียนนี้</button></div>' : ''}
       </section>
     `
     : '';
@@ -1328,6 +1347,25 @@ function openLesson(id, opts = {}) {
   const editBtn = el('editCommunityLessonBtn');
   if (editBtn) {
     editBtn.onclick = () => openEditorForLesson(lesson);
+  }
+
+  const deleteReaderBtn = el('deleteCommunityLessonReaderBtn');
+  if (deleteReaderBtn) {
+    deleteReaderBtn.onclick = async () => {
+      if (!confirm(`ลบบทเรียน "${lesson.title}" ใช่หรือไม่`)) return;
+      try {
+        if (state.isDemo) {
+          state.communityLessons = state.communityLessons.filter(item => item.firestoreId !== lesson.firestoreId);
+          saveDemoCommunity();
+          closeLesson();
+          return;
+        }
+        await db.collection('community_lessons').doc(lesson.firestoreId).delete();
+        closeLesson();
+      } catch (err) {
+        alert(err.message || 'ลบบทเรียนไม่สำเร็จ');
+      }
+    };
   }
 
   el('saveNoteBtn').onclick = async () => {
