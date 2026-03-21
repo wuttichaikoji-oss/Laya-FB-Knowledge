@@ -14,7 +14,7 @@
     <div class="auth-card">
       <div class="logo">Laya</div>
       <h1>Laya F&B Academy</h1>
-      <p class="sub">เวอร์ชันพร้อมอัป GitHub Pages และล็อกอินด้วย Firebase</p>
+      <p class="sub">เวอร์ชันพร้อมอัป GitHub Pages และล็อกอินด้วย Firebase โดยใช้รหัสพนักงาน</p>
 
       <div class="auth-tabs">
         <button class="tab active" data-mode="login">เข้าสู่ระบบ</button>
@@ -22,8 +22,8 @@
       </div>
 
       <form id="authForm" class="stack">
-        <label>อีเมล
-          <input id="email" type="email" required placeholder="name@example.com">
+        <label>รหัสพนักงาน
+          <input id="employeeCode" type="text" required placeholder="เช่น FB001 / HK023 / MGR01" autocomplete="username">
         </label>
         <label>รหัสผ่าน
           <input id="password" type="password" required placeholder="อย่างน้อย 6 ตัวอักษร">
@@ -38,7 +38,7 @@
       <p id="authMsg" class="msg"></p>
       <div class="tip-box">
         <strong>หมายเหตุ</strong>
-        <p>ถ้านำไปอัป GitHub Pages แล้วล็อกอินไม่ได้ ให้เพิ่มโดเมน GitHub Pages ของคุณใน Firebase Authentication &gt; Settings &gt; Authorized domains</p>
+        <p>ระบบนี้ใช้ “รหัสพนักงาน + รหัสผ่าน” แต่จะสร้างอีเมลภายในระบบให้อัตโนมัติบน Firebase หากอัป GitHub Pages แล้วล็อกอินไม่ได้ ให้เพิ่มโดเมน GitHub Pages ของคุณใน Firebase Authentication &gt; Settings &gt; Authorized domains</p>
       </div>
     </div>
   </div>

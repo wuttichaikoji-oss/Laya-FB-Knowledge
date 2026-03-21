@@ -133,9 +133,29 @@ const defaultUserData = () => ({
   englishProgress: {}
 });
 
+function normalizeEmployeeCode(raw = '') {
+  const value = String(raw || '').trim();
+  const collapsed = value.replace(/\s+/g, '').toUpperCase();
+  const normalized = collapsed.replace(/[^A-Z0-9._-]/g, '');
+  if (!normalized) throw new Error('กรุณากรอกรหัสพนักงาน');
+  if (normalized.length < 3) throw new Error('รหัสพนักงานสั้นเกินไป');
+  return normalized;
+}
+
+function employeeCodeToEmail(code = '') {
+  const normalized = normalizeEmployeeCode(code).toLowerCase();
+  return `emp.${normalized}@laya-training.local`;
+}
+
+function employeeCodeFromEmail(email = '') {
+  const match = String(email || '').trim().match(/^emp\.([a-z0-9._-]+)@laya-training\.local$/i);
+  return match ? match[1].toUpperCase() : '';
+}
+
 const state = {
   mode: 'login',
   user: null,
+  accountProfile: null,
   isDemo: false,
   userData: defaultUserData(),
   currentLessonId: null,
@@ -178,7 +198,12 @@ function safeHTML(text) {
 }
 
 function userLabel() {
-  return state.isDemo ? 'Demo User' : (state.user?.displayName || state.user?.email || 'พนักงาน');
+  if (state.isDemo) return 'Demo User';
+  return state.user?.displayName
+    || state.accountProfile?.displayName
+    || state.accountProfile?.employeeCode
+    || employeeCodeFromEmail(state.user?.email)
+    || 'พนักงาน';
 }
 
 function allLessons() {
@@ -736,7 +761,9 @@ async function saveUserData(immediate = false) {
       } else if (state.user) {
         await db.collection('users').doc(state.user.uid).set({
           email: state.user.email || '',
-          displayName: state.user.displayName || '',
+          displayName: state.user.displayName || state.accountProfile?.displayName || '',
+          employeeCode: state.accountProfile?.employeeCode || employeeCodeFromEmail(state.user.email),
+          employeeCodeNorm: (state.accountProfile?.employeeCode || employeeCodeFromEmail(state.user.email) || '').toUpperCase(),
           done: state.userData.done,
           favorites: state.userData.favorites,
           notes: state.userData.notes,
@@ -762,7 +789,12 @@ async function loadUserData() {
   }
   if (!state.user) return;
   const snap = await db.collection('users').doc(state.user.uid).get();
-  state.userData = mergeUserData(snap.exists ? snap.data() : {});
+  const raw = snap.exists ? snap.data() : {};
+  state.accountProfile = {
+    employeeCode: raw.employeeCode || employeeCodeFromEmail(state.user.email),
+    displayName: raw.displayName || state.user.displayName || ''
+  };
+  state.userData = mergeUserData(raw);
 }
 
 function transformCommunityLesson(docId, raw = {}) {
@@ -1599,6 +1631,7 @@ el('lessonEditorForm').addEventListener('submit', async e => {
 el('demoBtn').addEventListener('click', async () => {
   state.isDemo = true;
   state.user = { uid: 'demo-user', displayName: 'Demo User', email: 'demo@local' };
+  state.accountProfile = { employeeCode: 'DEMO', displayName: 'Demo User' };
   await loadUserData();
   subscribeCommunityLessons();
   subscribeWineCatalog();
@@ -1610,11 +1643,13 @@ el('demoBtn').addEventListener('click', async () => {
 
 el('authForm').addEventListener('submit', async e => {
   e.preventDefault();
-  const email = el('email').value.trim();
+  const employeeCodeInput = el('employeeCode').value.trim();
   const password = el('password').value;
   const displayName = el('displayName').value.trim();
   el('authMsg').textContent = '';
   try {
+    const employeeCode = normalizeEmployeeCode(employeeCodeInput);
+    const email = employeeCodeToEmail(employeeCode);
     if (state.mode === 'login') {
       await auth.signInWithEmailAndPassword(email, password);
     } else {
@@ -1622,6 +1657,8 @@ el('authForm').addEventListener('submit', async e => {
       if (displayName) await cred.user.updateProfile({ displayName });
       await db.collection('users').doc(cred.user.uid).set({
         email,
+        employeeCode,
+        employeeCodeNorm: employeeCode,
         displayName,
         ...defaultUserData(),
         createdAt: firebase.firestore.FieldValue.serverTimestamp()
@@ -1639,6 +1676,7 @@ el('logoutBtn').addEventListener('click', async () => {
   if (state.isDemo) {
     state.isDemo = false;
     state.user = null;
+    state.accountProfile = null;
     state.communityLessons = [];
     state.wineCatalogSource = 'local';
     setWineBaseCatalog(BASE_WINE_MEDIA, 'local');
@@ -1668,6 +1706,7 @@ auth.onAuthStateChanged(async user => {
     closeLesson();
   } else if (!state.isDemo) {
     state.user = null;
+    state.accountProfile = null;
     state.communityLessons = [];
     state.wineCatalogSource = 'local';
     setWineBaseCatalog(BASE_WINE_MEDIA, 'local');

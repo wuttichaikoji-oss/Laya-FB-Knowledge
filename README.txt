@@ -23,3 +23,6 @@ service cloud.firestore {
 - โปรไฟล์เบื้องต้น
 
 ถ้ายังไม่พร้อมใช้ Firebase สามารถกด Local Demo ได้
+
+
+ล็อกอินเวอร์ชันนี้ใช้ “รหัสพนักงาน + รหัสผ่าน” โดยแอปจะสร้างอีเมลภายในระบบให้อัตโนมัติบน Firebase Authentication เช่น FB001 -> emp.fb001@laya-training.local
