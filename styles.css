@@ -304,3 +304,6 @@ textarea{min-height:130px;resize:vertical}
 .admin-table th { color:#6b7280; font-weight:600; }
 .admin-toolbar { display:flex; gap:10px; flex-wrap:wrap; justify-content:space-between; align-items:center; }
 .small-muted { color:#6b7280; font-size:13px; }
+
+
+#quizBtn.is-disabled{opacity:.6;cursor:not-allowed;}

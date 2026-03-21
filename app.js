@@ -183,7 +183,9 @@ const state = {
   editorLessonId: null,
   deletingLesson: false,
   currentQuiz: null,
-  smartGeneratedQuiz: []
+  smartGeneratedQuiz: [],
+  quizOpen: true,
+  quizSettingUnsub: null
 };
 
 const el = id => document.getElementById(id);
@@ -916,6 +918,40 @@ function isAdminLike() {
   return ['admin', 'supervisor'].includes((state.accountProfile?.role || '').toLowerCase());
 }
 
+function stopQuizSettingSubscription() {
+  if (state.quizSettingUnsub) {
+    state.quizSettingUnsub();
+    state.quizSettingUnsub = null;
+  }
+}
+
+function renderQuizButtonState() {
+  const btn = el('quizBtn');
+  if (!btn) return;
+  btn.disabled = !state.quizOpen;
+  btn.classList.toggle('is-disabled', !state.quizOpen);
+  btn.textContent = state.quizOpen ? 'Quiz' : 'ปิดการสอบ';
+  btn.title = state.quizOpen ? 'ทำแบบทดสอบ' : 'แอดมินปิดการสอบชั่วคราว';
+}
+
+function subscribeQuizSettings() {
+  stopQuizSettingSubscription();
+  if (state.isDemo || !state.user) {
+    state.quizOpen = true;
+    renderQuizButtonState();
+    return;
+  }
+  state.quizSettingUnsub = db.collection('app_settings').doc('quiz_controls').onSnapshot(snap => {
+    const data = snap.exists ? (snap.data() || {}) : {};
+    state.quizOpen = data.isOpen !== false;
+    renderQuizButtonState();
+  }, err => {
+    console.warn('quiz settings unavailable', err);
+    state.quizOpen = true;
+    renderQuizButtonState();
+  });
+}
+
 function quizSourceOptions() {
   return [
     { value: 'curated', label: 'คลังข้อสอบหลัก' },
@@ -1113,7 +1149,9 @@ async function saveQuizAttemptRecord(attempt, quiz, analytics) {
       generatedFromTeamKnowledge: quiz.sourceMode !== 'curated',
       strengths: analytics.strengths,
       focusAreas: analytics.focus,
+      weaknesses: analytics.focus,
       categoryBreakdown: analytics.rows,
+      categoryStats: Object.fromEntries((analytics.rows || []).map(row => [row.category || 'General', { correct: Number(row.correct || 0), total: Number(row.total || 0) }])),
       questionIds: quiz.questions.map(q => q.id),
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       completedAt: attempt.completedAt
@@ -1138,6 +1176,10 @@ function shuffle(list = []) {
 }
 
 function openQuizModal() {
+  if (!state.quizOpen) {
+    alert('แอดมินปิดการสอบชั่วคราว');
+    return;
+  }
   renderQuizLauncher();
   quizModal.classList.remove('hidden');
 }
@@ -2103,6 +2145,7 @@ el('demoBtn').addEventListener('click', async () => {
   subscribeCommunityLessons();
   subscribeWineCatalog();
   subscribeWineReference();
+  subscribeQuizSettings();
   authView.classList.add('hidden');
   mainView.classList.remove('hidden');
   closeLesson();
@@ -2145,6 +2188,7 @@ el('logoutBtn').addEventListener('click', async () => {
   stopCommunitySubscription();
   stopWineSubscription();
   stopWineCatalogSubscription();
+  stopQuizSettingSubscription();
   if (state.isDemo) {
     state.isDemo = false;
     state.user = null;
@@ -2153,6 +2197,8 @@ el('logoutBtn').addEventListener('click', async () => {
     state.wineCatalogSource = 'local';
     setWineBaseCatalog(BASE_WINE_MEDIA, 'local');
     mergeWineCatalog({});
+    state.quizOpen = true;
+    renderQuizButtonState();
     authView.classList.remove('hidden');
     mainView.classList.add('hidden');
     closeEditor();
@@ -2166,6 +2212,7 @@ auth.onAuthStateChanged(async user => {
   stopCommunitySubscription();
   stopWineSubscription();
   stopWineCatalogSubscription();
+  stopQuizSettingSubscription();
   if (user) {
     state.isDemo = false;
     state.user = user;
@@ -2173,6 +2220,7 @@ auth.onAuthStateChanged(async user => {
     subscribeCommunityLessons();
     subscribeWineCatalog();
     subscribeWineReference();
+    subscribeQuizSettings();
     authView.classList.add('hidden');
     mainView.classList.remove('hidden');
     closeLesson();
@@ -2183,6 +2231,8 @@ auth.onAuthStateChanged(async user => {
     state.wineCatalogSource = 'local';
     setWineBaseCatalog(BASE_WINE_MEDIA, 'local');
     mergeWineCatalog({});
+    state.quizOpen = true;
+    renderQuizButtonState();
     authView.classList.remove('hidden');
     mainView.classList.add('hidden');
   }
@@ -2191,3 +2241,4 @@ auth.onAuthStateChanged(async user => {
 setAuthMode('login');
 mergeWineCatalog({});
 renderLessons();
+renderQuizButtonState();
