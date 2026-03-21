@@ -253,3 +253,30 @@ textarea{min-height:130px;resize:vertical}
 .danger-btn:hover{
   background:#ffe4e6;
 }
+
+
+.quiz-modal-card{width:min(100%,980px)}
+.quiz-home,.quiz-history-box,#quizRunner{display:grid;gap:14px}
+.quiz-setup-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.quiz-info-box{padding:14px 16px;border:1px solid var(--line);border-radius:18px;background:#f7fbff;line-height:1.7}
+.quiz-history-item,.admin-attempt-card,.admin-user-card{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:#fff}
+.quiz-progress-row{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
+.quiz-prompt{line-height:1.7;white-space:normal}
+.quiz-options{display:grid;gap:10px;margin-top:12px}
+.quiz-option{appearance:none;border:1px solid var(--line);background:#fff;border-radius:16px;padding:14px 16px;text-align:left;font:inherit;cursor:pointer}
+.quiz-option:hover{border-color:#bdd5f1;background:#fbfdff}
+.quiz-option.correct{border-color:#9ad7bf;background:#ecfdf3}
+.quiz-option.wrong{border-color:#f3b6b6;background:#fff1f1}
+.quiz-feedback{margin-top:12px;padding:12px 14px;border-radius:14px;line-height:1.6}
+.quiz-feedback.ok{background:#ecfdf3;border:1px solid #9ad7bf;color:#166534}
+.quiz-feedback.bad{background:#fff1f1;border:1px solid #f3b6b6;color:#991b1b}
+.quiz-result-score{font-size:2rem;font-weight:800;color:var(--brand-dark)}
+.quiz-result-score span{font-size:1rem;color:var(--muted);margin-left:8px}
+.admin-summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+.stat-card{padding:14px;border:1px solid var(--line);border-radius:16px;background:#fff;display:grid;gap:6px}
+.stat-card span{color:var(--muted);font-size:.88rem}
+.stat-card strong{font-size:1.25rem;color:var(--brand-dark)}
+.admin-user-list,.admin-attempt-list{display:grid;gap:10px}
+.admin-user-card{display:grid;gap:8px}
+.admin-user-skills{display:grid;gap:6px;color:var(--muted);font-size:.94rem}
+@media (max-width:720px){.quiz-setup-grid{grid-template-columns:1fr}.quiz-history-item,.admin-attempt-card{flex-direction:column}}

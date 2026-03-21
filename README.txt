@@ -1,4 +1,4 @@
-Laya F&B Academy - Employee Code Login + Team Knowledge
+Laya F&B Academy v3.0 Lite - Firebase Ready
 
 ไฟล์นี้ฝังค่า Firebase ของโปรเจกต์ laya-training ไว้แล้ว
 จึงสามารถเปิดใช้งานได้ทันทีหลังจากเปิดใช้บริการต่อไปนี้ใน Firebase Console:
@@ -10,29 +10,8 @@ Laya F&B Academy - Employee Code Login + Team Knowledge
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-
-    function signedIn() {
-      return request.auth != null;
-    }
-
-    function isOwner(userId) {
-      return signedIn() && request.auth.uid == userId;
-    }
-
     match /users/{userId} {
-      allow read, write: if isOwner(userId);
-      match /{document=**} {
-        allow read, write: if isOwner(userId);
-      }
-    }
-
-    // คลังบทเรียนที่ทุกคนในทีมช่วยกันเพิ่มได้
-    match /community_lessons/{lessonId} {
-      allow read: if signedIn();
-      allow create: if signedIn()
-        && request.resource.data.ownerUid == request.auth.uid;
-      allow update, delete: if signedIn()
-        && resource.data.ownerUid == request.auth.uid;
+      allow read, write: if request.auth != null && request.auth.uid == userId;
     }
   }
 }
@@ -43,40 +22,17 @@ service cloud.firestore {
 - โน้ตส่วนตัว
 - โปรไฟล์เบื้องต้น
 
-และในเวอร์ชันนี้
-- ทุกคนที่ล็อกอินแล้วกด “+ เพิ่มบทเรียน” ได้
-- บทเรียนที่สร้างจะขึ้นในคลังความรู้ของทีม
-- เจ้าของบทเรียนแก้ไขและลบบทเรียนของตัวเองได้
-
 ถ้ายังไม่พร้อมใช้ Firebase สามารถกด Local Demo ได้
 
-ล็อกอินเวอร์ชันนี้ใช้ “รหัสพนักงาน + รหัสผ่าน”
-โดยแอปจะสร้างอีเมลภายในระบบให้อัตโนมัติบน Firebase Authentication เช่น
-FB001 -> emp.fb001@laya-training.local
 
-
-## Admin delete lessons
-- Add `role: "admin"` to `users/{uid}` in Firestore for any account that should be an admin.
-- Example user doc fields: `employeeCode`, `displayName`, `role`.
-- Suggested Firestore rules for team lessons:
-
-```javascript
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    function signedIn() { return request.auth != null; }
-    function isAdmin() {
-      return signedIn()
-        && exists(/databases/$(database)/documents/users/$(request.auth.uid))
-        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "admin";
-    }
-
-    match /community_lessons/{lessonId} {
-      allow read: if signedIn();
-      allow create: if signedIn() && request.resource.data.authorId == request.auth.uid;
-      allow update: if signedIn() && (resource.data.authorId == request.auth.uid || isAdmin());
-      allow delete: if signedIn() && (resource.data.authorId == request.auth.uid || isAdmin());
-    }
-  }
+QUIZ ATTEMPTS RULES
+เพิ่ม collection นี้ใน Firestore Rules เพื่อเก็บคะแนน Quiz และให้ supervisor/admin ดูคะแนนทีมได้
+match /quiz_attempts/{attemptId} {
+  allow create: if request.auth != null;
+  allow read: if request.auth != null && (
+    resource.data.userUid == request.auth.uid ||
+    get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in ['supervisor', 'admin']
+  );
+  allow update, delete: if request.auth != null &&
+    get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in ['supervisor', 'admin'];
 }
-```

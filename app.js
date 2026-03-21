@@ -130,8 +130,10 @@ const defaultUserData = () => ({
   favorites: [],
   notes: {},
   progress: {},
-  englishProgress: {}
+  englishProgress: {},
+  quiz: { attempts: [], bestScore: 0, lastScore: 0, lastAttemptAt: '' }
 });
+
 
 function normalizeEmployeeCode(raw = '') {
   const value = String(raw || '').trim();
@@ -155,7 +157,6 @@ function employeeCodeFromEmail(email = '') {
 const state = {
   mode: 'login',
   user: null,
-  accountProfile: null,
   isDemo: false,
   userData: defaultUserData(),
   currentLessonId: null,
@@ -178,7 +179,11 @@ const state = {
   editingWineId: null,
   savingWine: false,
   editorLessonId: null,
-  deletingLesson: false
+  deletingLesson: false,
+  userProfile: null,
+  quizBank: [],
+  quizSession: null,
+  adminQuizData: []
 };
 
 const el = id => document.getElementById(id);
@@ -192,6 +197,8 @@ const addLessonBtn = el('addLessonBtn');
 const openEditorSecondaryBtn = el('openEditorSecondaryBtn');
 const editorModal = el('editorModal');
 const wineModal = el('wineModal');
+const quizModal = el('quizModal');
+const adminQuizModal = el('adminQuizModal');
 
 function safeHTML(text) {
   return String(text ?? '').replace(/[&<>"']/g, s => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[s]));
@@ -199,9 +206,9 @@ function safeHTML(text) {
 
 function userLabel() {
   if (state.isDemo) return 'Demo User';
-  return state.user?.displayName
-    || state.accountProfile?.displayName
-    || state.accountProfile?.employeeCode
+  return state.userProfile?.displayName
+    || state.user?.displayName
+    || state.userProfile?.employeeCode
     || employeeCodeFromEmail(state.user?.email)
     || 'พนักงาน';
 }
@@ -225,6 +232,7 @@ function mergeUserData(raw = {}) {
   merged.notes = raw.notes && typeof raw.notes === 'object' ? raw.notes : {};
   merged.progress = raw.progress && typeof raw.progress === 'object' ? raw.progress : {};
   merged.englishProgress = raw.englishProgress && typeof raw.englishProgress === 'object' ? raw.englishProgress : {};
+  merged.quiz = raw.quiz && typeof raw.quiz === 'object' ? { attempts: Array.isArray(raw.quiz.attempts) ? raw.quiz.attempts : [], bestScore: Number(raw.quiz.bestScore || 0), lastScore: Number(raw.quiz.lastScore || 0), lastAttemptAt: raw.quiz.lastAttemptAt || '' } : { attempts: [], bestScore: 0, lastScore: 0, lastAttemptAt: '' };
 
   merged.done.forEach(id => {
     merged.progress[id] ||= {};
@@ -761,14 +769,15 @@ async function saveUserData(immediate = false) {
       } else if (state.user) {
         await db.collection('users').doc(state.user.uid).set({
           email: state.user.email || '',
-          displayName: state.user.displayName || state.accountProfile?.displayName || '',
-          employeeCode: state.accountProfile?.employeeCode || employeeCodeFromEmail(state.user.email),
-          employeeCodeNorm: (state.accountProfile?.employeeCode || employeeCodeFromEmail(state.user.email) || '').toUpperCase(),
+          employeeCode: state.userProfile?.employeeCode || employeeCodeFromEmail(state.user.email),
+          employeeCodeNorm: (state.userProfile?.employeeCode || employeeCodeFromEmail(state.user.email) || '').toUpperCase(),
+          displayName: state.userProfile?.displayName || state.user.displayName || '',
           done: state.userData.done,
           favorites: state.userData.favorites,
           notes: state.userData.notes,
           progress: state.userData.progress,
           englishProgress: state.userData.englishProgress,
+          quiz: state.userData.quiz,
           updatedAt: firebase.firestore.FieldValue.serverTimestamp()
         }, { merge: true });
       }
@@ -788,14 +797,19 @@ async function loadUserData() {
     return;
   }
   if (!state.user) return;
+
   const snap = await db.collection('users').doc(state.user.uid).get();
   const raw = snap.exists ? snap.data() : {};
-  state.accountProfile = {
-    employeeCode: raw.employeeCode || employeeCodeFromEmail(state.user.email),
-    displayName: raw.displayName || state.user.displayName || '',
-    role: raw.role || 'staff'
-  };
+  state.userProfile = { ...(raw || {}), employeeCode: raw.employeeCode || employeeCodeFromEmail(state.user.email) };
   state.userData = mergeUserData(raw);
+}
+
+function userRole() {
+  return String(state.userProfile?.role || 'staff').toLowerCase();
+}
+
+function isAdminLike() {
+  return ['supervisor', 'admin'].includes(userRole());
 }
 
 function transformCommunityLesson(docId, raw = {}) {
@@ -883,14 +897,388 @@ function subscribeCommunityLessons() {
   });
 }
 
+
 function updateHeader() {
-  el('welcomeName').textContent = userLabel();
-  el('doneCount').textContent = (state.userData.done || []).length;
-  el('favCount').textContent = (state.userData.favorites || []).length;
-  el('teamLessonCount').textContent = state.communityLessons.length;
-  const sync = el('syncStatus');
-  if (state.saving) sync.textContent = 'กำลังบันทึก...';
-  else sync.textContent = state.isDemo ? 'บันทึกในเครื่องนี้' : 'บันทึกในบัญชี Firebase';
+  el('welcomeName').textContent = state.isDemo ? 'Quick Learning (Demo)' : `สวัสดี, ${userLabel()}`;
+  el('doneCount').textContent = String(state.userData.done.length || 0);
+  el('favCount').textContent = String(state.userData.favorites.length || 0);
+  el('teamLessonCount').textContent = String(state.communityLessons.length || 0);
+  el('syncStatus').textContent = state.isDemo ? 'เครื่องนี้' : (state.saving ? 'กำลังบันทึก...' : 'Firebase');
+  el('quizBestStat').textContent = state.userData?.quiz?.bestScore ? `${state.userData.quiz.bestScore}%` : '-';
+  const adminBtn = el('openAdminQuizBtn');
+  if (adminBtn) adminBtn.classList.toggle('hidden', !isAdminLike());
+}
+
+
+
+function shuffleArray(list = []) {
+  const arr = list.slice();
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function pickRandom(list = [], count = 1, exclude = []) {
+  const ex = new Set(exclude);
+  return shuffleArray(list.filter(item => !ex.has(item))).slice(0, count);
+}
+
+function normalizeTextSnippet(text = '', max = 140) {
+  const clean = String(text || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  if (!clean) return '';
+  return clean.length > max ? clean.slice(0, max - 1).trim() + '…' : clean;
+}
+
+function buildQuizBank() {
+  const questions = [];
+  const pushQ = q => {
+    if (!q || !q.prompt || !Array.isArray(q.options) || q.options.length < 2) return;
+    if (q.correctIndex < 0 || q.correctIndex >= q.options.length) return;
+    questions.push({ id: q.id || `q-${questions.length + 1}`, scope: q.scope || 'all', category: q.category || 'General', ...q });
+  };
+
+  Object.entries(ENGLISH_DATA || {}).forEach(([tab, pack]) => {
+    const items = Array.isArray(pack.items) ? pack.items : [];
+    items.forEach((item, idx) => {
+      const wrong = pickRandom(items.map(x => x.meaning), 3, [item.meaning]);
+      const options = shuffleArray([item.meaning, ...wrong]).slice(0, 4);
+      pushQ({
+        id: `eng-${tab}-${idx}`,
+        scope: 'english',
+        category: 'English',
+        prompt: `คำศัพท์ "${item.term}" แปลว่าอะไร`,
+        options,
+        correctIndex: options.indexOf(item.meaning),
+        explanation: `${item.term} อ่านว่า ${item.reading} แปลว่า ${item.meaning}`
+      });
+    });
+  });
+
+  const lessonCandidates = allLessons().filter(lesson => lesson.id !== 'english-fnb' && lesson.id !== 'wine-basic');
+  const lessonTitles = lessonCandidates.map(l => l.title);
+  lessonCandidates.forEach(lesson => {
+    (lesson.sections || []).forEach((section, sIdx) => {
+      const pool = [];
+      if (Array.isArray(section.items)) pool.push(...section.items);
+      if (section.content) pool.push(...splitLines(section.content));
+      pool.filter(Boolean).slice(0, 4).forEach((fact, fIdx) => {
+        const wrong = pickRandom(lessonTitles, 3, [lesson.title]);
+        const options = shuffleArray([lesson.title, ...wrong]).slice(0, 4);
+        pushQ({
+          id: `lesson-${lesson.id}-${sIdx}-${fIdx}`,
+          scope: 'lessons',
+          category: lesson.category || 'Lesson',
+          prompt: `ข้อมูลนี้อยู่ในหัวข้อใด
+
+“${normalizeTextSnippet(fact, 120)}”`,
+          options,
+          correctIndex: options.indexOf(lesson.title),
+          explanation: `ข้อนี้มาจากบท ${lesson.title} → ${section.title || 'หัวข้อย่อย'}`
+        });
+      });
+    });
+    if (lesson.summary) {
+      const wrong = pickRandom(lessonTitles, 3, [lesson.title]);
+      const options = shuffleArray([lesson.title, ...wrong]).slice(0, 4);
+      pushQ({
+        id: `lesson-summary-${lesson.id}`,
+        scope: 'lessons',
+        category: lesson.category || 'Lesson',
+        prompt: `คำอธิบายนี้หมายถึงบทเรียนใด
+
+“${normalizeTextSnippet(lesson.summary, 140)}”`,
+        options,
+        correctIndex: options.indexOf(lesson.title),
+        explanation: `คำอธิบายนี้เป็น summary ของบท ${lesson.title}`
+      });
+    }
+  });
+
+  const wines = currentWineList();
+  wines.forEach((wine, idx) => {
+    const otherNames = wines.filter(w => w.id !== wine.id).map(w => w.name);
+    if (wine.grape && wine.grape !== '-') {
+      const options = shuffleArray([wine.grape, ...pickRandom(wines.map(w => w.grape).filter(Boolean), 3, [wine.grape])]).slice(0, 4);
+      pushQ({
+        id: `wine-grape-${idx}`,
+        scope: 'wine',
+        category: 'Wine',
+        prompt: `ไวน์ ${wine.name} ใช้องุ่นอะไร`,
+        options,
+        correctIndex: options.indexOf(wine.grape),
+        explanation: `${wine.name} ใช้องุ่น ${wine.grape}`
+      });
+    }
+    if (wine.category && wine.category !== '-') {
+      const cats = Array.from(new Set(wines.map(w => w.category).filter(Boolean)));
+      const options = shuffleArray([wine.category, ...pickRandom(cats, 3, [wine.category])]).slice(0, 4);
+      pushQ({
+        id: `wine-cat-${idx}`,
+        scope: 'wine',
+        category: 'Wine',
+        prompt: `${wine.name} เป็นไวน์ประเภทใด`,
+        options,
+        correctIndex: options.indexOf(wine.category),
+        explanation: `${wine.name} จัดอยู่ในกลุ่ม ${wine.category}`
+      });
+    }
+    if (wine.pair && wine.pair !== '-') {
+      const options = shuffleArray([wine.name, ...pickRandom(otherNames, 3, [wine.name])]).slice(0, 4);
+      pushQ({
+        id: `wine-pair-${idx}`,
+        scope: 'wine',
+        category: 'Wine',
+        prompt: `ไวน์ตัวใดเหมาะจับคู่กับอาหารลักษณะนี้
+
+“${normalizeTextSnippet(wine.pair, 120)}”`,
+        options,
+        correctIndex: options.indexOf(wine.name),
+        explanation: `${wine.name} เหมาะจับคู่กับ ${wine.pair}`
+      });
+    }
+  });
+
+  state.quizBank = questions;
+  return questions;
+}
+
+function quizScopedBank(scope = 'all') {
+  const bank = state.quizBank.length ? state.quizBank : buildQuizBank();
+  if (scope === 'all') return bank;
+  return bank.filter(q => q.scope === scope);
+}
+
+function quizHistoryHTML() {
+  const attempts = state.userData?.quiz?.attempts || [];
+  if (!attempts.length) return '<div class="empty-box">ยังไม่มีประวัติการทำ Quiz</div>';
+  return attempts.slice().reverse().slice(0, 5).map(item => `
+    <div class="quiz-history-item">
+      <strong>${item.score}/${item.total} (${item.pct}%)</strong>
+      <span>${safeHTML(item.scopeLabel || 'ทุกหัวข้อ')} · ${safeHTML(formatDate(item.attemptedAt) || '')}</span>
+    </div>`).join('');
+}
+
+function openQuizModal() {
+  buildQuizBank();
+  el('quizBankCount').textContent = `พร้อมใช้ ${state.quizBank.length} คำถาม`;
+  el('quizHistoryBox').innerHTML = quizHistoryHTML();
+  el('quizHome').classList.remove('hidden');
+  el('quizRunner').classList.add('hidden');
+  quizModal.classList.remove('hidden');
+}
+
+function closeQuizModal() {
+  state.quizSession = null;
+  quizModal.classList.add('hidden');
+}
+
+function startQuizSession() {
+  const count = Number(el('quizCountSelect').value || 10);
+  const scope = el('quizScopeSelect').value || 'all';
+  const bank = quizScopedBank(scope);
+  if (bank.length < 2) {
+    alert('คำถามยังไม่พอสำหรับหมวดนี้');
+    return;
+  }
+  state.quizSession = {
+    scope,
+    scopeLabel: el('quizScopeSelect').selectedOptions[0]?.textContent || 'ทุกหัวข้อ',
+    questions: shuffleArray(bank).slice(0, Math.min(count, bank.length)),
+    current: 0,
+    answers: []
+  };
+  renderQuizQuestion();
+}
+
+function renderQuizQuestion() {
+  const session = state.quizSession;
+  if (!session) return;
+  if (session.current >= session.questions.length) {
+    renderQuizResult();
+    return;
+  }
+  const q = session.questions[session.current];
+  el('quizHome').classList.add('hidden');
+  const wrap = el('quizRunner');
+  wrap.classList.remove('hidden');
+  wrap.dataset.answered = '0';
+  wrap.innerHTML = `
+    <div class="quiz-progress-row">
+      <div class="tag-row"><span class="tag">${safeHTML(q.category)}</span><span class="tag">ข้อ ${session.current + 1}/${session.questions.length}</span></div>
+      <div class="mini-meta">${safeHTML(session.scopeLabel)}</div>
+    </div>
+    <div class="section-box">
+      <h3 class="quiz-prompt">${safeHTML(q.prompt).replace(/\n/g, '<br>')}</h3>
+      <div class="quiz-options">
+        ${q.options.map((opt, index) => `<button class="quiz-option" data-opt="${index}" type="button">${safeHTML(opt)}</button>`).join('')}
+      </div>
+      <div id="quizFeedback" class="hidden"></div>
+    </div>
+    <div class="editor-actions">
+      <button id="cancelQuizRunBtn" class="ghost-btn" type="button">ยกเลิก Quiz</button>
+      <div class="editor-actions-right"><button id="nextQuizBtn" class="primary-btn hidden" type="button">ข้อต่อไป</button></div>
+    </div>
+  `;
+  wrap.querySelectorAll('[data-opt]').forEach(btn => btn.addEventListener('click', () => {
+    if (wrap.dataset.answered === '1') return;
+    wrap.dataset.answered = '1';
+    const chosen = Number(btn.dataset.opt);
+    const correct = chosen === q.correctIndex;
+    session.answers.push({ questionId: q.id, category: q.category, correct, chosenIndex: chosen, correctIndex: q.correctIndex });
+    wrap.querySelectorAll('[data-opt]').forEach(node => {
+      const idx = Number(node.dataset.opt);
+      node.disabled = true;
+      node.classList.toggle('correct', idx === q.correctIndex);
+      node.classList.toggle('wrong', idx === chosen && idx !== q.correctIndex);
+    });
+    const feedback = el('quizFeedback');
+    feedback.classList.remove('hidden');
+    feedback.className = `quiz-feedback ${correct ? 'ok' : 'bad'}`;
+    feedback.innerHTML = `<strong>${correct ? 'ตอบถูก' : 'ยังไม่ถูก'}</strong><div>${safeHTML(q.explanation || '')}</div>`;
+    el('nextQuizBtn').classList.remove('hidden');
+  }));
+  el('nextQuizBtn').onclick = () => { session.current += 1; renderQuizQuestion(); };
+  el('cancelQuizRunBtn').onclick = closeQuizModal;
+}
+
+async function saveQuizAttempt(result) {
+  state.userData.quiz ||= { attempts: [], bestScore: 0, lastScore: 0, lastAttemptAt: '' };
+  state.userData.quiz.attempts = [...state.userData.quiz.attempts.slice(-9), result];
+  state.userData.quiz.lastScore = result.pct;
+  state.userData.quiz.bestScore = Math.max(Number(state.userData.quiz.bestScore || 0), result.pct);
+  state.userData.quiz.lastAttemptAt = result.attemptedAt;
+  await saveUserData(true);
+  if (state.isDemo || !state.user) return;
+  await db.collection('quiz_attempts').add({
+    userUid: state.user.uid,
+    userName: userLabel(),
+    userEmail: state.user.email || '',
+    employeeCode: state.userProfile?.employeeCode || '',
+    role: userRole(),
+    scope: result.scope,
+    scopeLabel: result.scopeLabel,
+    score: result.score,
+    total: result.total,
+    pct: result.pct,
+    categoryStats: result.categoryStats,
+    strengths: result.strengths,
+    weaknesses: result.weaknesses,
+    answers: result.answers,
+    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+  });
+}
+
+async function renderQuizResult() {
+  const session = state.quizSession;
+  const total = session.questions.length;
+  const score = session.answers.filter(a => a.correct).length;
+  const pct = Math.round((score / Math.max(total, 1)) * 100);
+  const grouped = {};
+  session.answers.forEach(a => {
+    grouped[a.category] ||= { correct: 0, total: 0 };
+    grouped[a.category].total += 1;
+    if (a.correct) grouped[a.category].correct += 1;
+  });
+  const categoryStats = Object.fromEntries(Object.entries(grouped).map(([k,v]) => [k, { ...v, pct: Math.round((v.correct / Math.max(v.total,1))*100) }]));
+  const sortedCats = Object.entries(categoryStats).sort((a,b)=> b[1].pct - a[1].pct);
+  const result = {
+    scope: session.scope,
+    scopeLabel: session.scopeLabel,
+    score,
+    total,
+    pct,
+    answers: session.answers,
+    categoryStats,
+    strengths: sortedCats.slice(0,2).map(([k]) => k),
+    weaknesses: sortedCats.slice(-2).map(([k]) => k),
+    attemptedAt: new Date().toISOString()
+  };
+  try {
+    await saveQuizAttempt(result);
+  } catch (err) {
+    console.error('saveQuizAttempt failed', err);
+  }
+  const wrap = el('quizRunner');
+  wrap.innerHTML = `
+    <div class="section-box">
+      <h3>สรุปผล Quiz</h3>
+      <div class="quiz-result-score">${score}/${total} <span>${pct}%</span></div>
+      <div class="admin-summary-grid">
+        ${Object.entries(categoryStats).map(([cat, stat]) => `<div class="stat-card"><span>${safeHTML(cat)}</span><strong>${stat.correct}/${stat.total}</strong><div class="mini-meta">${stat.pct}%</div></div>`).join('')}
+      </div>
+      <div class="quiz-info-box"><strong>จุดเด่น:</strong> ${safeHTML(result.strengths.join(', ') || '-')}<br><strong>ควรพัฒนาเพิ่ม:</strong> ${safeHTML(result.weaknesses.join(', ') || '-')}</div>
+    </div>
+    <div class="editor-actions">
+      <button id="quizBackHomeBtn" class="ghost-btn" type="button">กลับหน้า Quiz</button>
+      <div class="editor-actions-right"><button id="quizRetryBtn" class="primary-btn" type="button">สุ่มใหม่อีกครั้ง</button></div>
+    </div>
+  `;
+  el('quizBackHomeBtn').onclick = openQuizModal;
+  el('quizRetryBtn').onclick = startQuizSession;
+  updateHeader();
+}
+
+async function loadAdminQuizDashboard() {
+  if (!isAdminLike()) return;
+  el('adminQuizMeta').textContent = 'กำลังโหลดข้อมูล...';
+  if (state.isDemo) {
+    el('adminQuizMeta').textContent = 'Demo mode ไม่มีข้อมูลทีมใน Firebase';
+    el('adminQuizSummary').innerHTML = '<div class="empty-box">ไม่มีข้อมูล</div>';
+    el('adminQuizUsers').innerHTML = '<div class="empty-box">ไม่มีข้อมูล</div>';
+    el('adminQuizAttempts').innerHTML = '<div class="empty-box">ไม่มีข้อมูล</div>';
+    return;
+  }
+  const snap = await db.collection('quiz_attempts').orderBy('createdAt', 'desc').limit(200).get();
+  state.adminQuizData = snap.docs.map(doc => ({ id: doc.id, ...(doc.data() || {}) }));
+  const attempts = state.adminQuizData;
+  el('adminQuizMeta').textContent = `ดึงข้อมูล ${attempts.length} รายการล่าสุด`;
+  const avg = attempts.length ? Math.round(attempts.reduce((s,a)=>s+Number(a.pct||0),0)/attempts.length) : 0;
+  const users = {};
+  attempts.forEach(a => {
+    const key = a.userUid || a.userEmail || a.userName || 'unknown';
+    users[key] ||= { name: a.userName || a.userEmail || key, attempts: 0, best: 0, latest: Number(a.pct || 0), categories: {} };
+    users[key].attempts += 1;
+    users[key].best = Math.max(users[key].best, Number(a.pct||0));
+    Object.entries(a.categoryStats || {}).forEach(([cat, stat]) => {
+      users[key].categories[cat] ||= { correct: 0, total: 0 };
+      users[key].categories[cat].correct += Number(stat.correct || 0);
+      users[key].categories[cat].total += Number(stat.total || 0);
+    });
+  });
+  const userList = Object.values(users).map(u => {
+    const ranking = Object.entries(u.categories).map(([cat, stat]) => ({ cat, pct: Math.round((stat.correct / Math.max(stat.total,1))*100) })).sort((a,b)=>b.pct-a.pct);
+    return { ...u, strengths: ranking.slice(0,2).map(x=>`${x.cat} ${x.pct}%`), needs: ranking.slice(-2).map(x=>`${x.cat} ${x.pct}%`) };
+  }).sort((a,b)=>b.best-a.best);
+  el('adminQuizSummary').innerHTML = `
+    <div class="stat-card"><span>ผู้ทำแบบทดสอบ</span><strong>${userList.length}</strong></div>
+    <div class="stat-card"><span>จำนวนครั้งทั้งหมด</span><strong>${attempts.length}</strong></div>
+    <div class="stat-card"><span>คะแนนเฉลี่ยทีม</span><strong>${avg}%</strong></div>
+  `;
+  el('adminQuizUsers').innerHTML = userList.length ? userList.map(u => `
+    <div class="admin-user-card">
+      <div><strong>${safeHTML(u.name)}</strong><div class="mini-meta">ทำ ${u.attempts} ครั้ง · คะแนนสูงสุด ${u.best}%</div></div>
+      <div class="admin-user-skills"><span><strong>เด่น:</strong> ${safeHTML(u.strengths.join(', ') || '-')}</span><span><strong>ควรพัฒนา:</strong> ${safeHTML(u.needs.join(', ') || '-')}</span></div>
+    </div>`).join('') : '<div class="empty-box">ยังไม่มีข้อมูลคะแนนทีม</div>';
+  el('adminQuizAttempts').innerHTML = attempts.length ? attempts.slice(0,30).map(a => `
+    <div class="admin-attempt-card">
+      <strong>${safeHTML(a.userName || a.employeeCode || a.userEmail || 'Unknown')}</strong>
+      <span>${a.score}/${a.total} (${a.pct}%) · ${safeHTML(a.scopeLabel || 'ทุกหัวข้อ')} · ${safeHTML(formatDate(a.createdAt) || '')}</span>
+    </div>`).join('') : '<div class="empty-box">ยังไม่มีประวัติการทำ Quiz</div>';
+}
+
+function openAdminQuizModal() {
+  if (!isAdminLike()) return;
+  adminQuizModal.classList.remove('hidden');
+  loadAdminQuizDashboard().catch(err => {
+    console.error(err);
+    el('adminQuizMeta').textContent = 'โหลดข้อมูลไม่สำเร็จ';
+  });
+}
+
+function closeAdminQuizModal() {
+  adminQuizModal.classList.add('hidden');
 }
 
 function renderChips() {
@@ -921,6 +1309,7 @@ function lessonSortValue(lesson) {
 }
 
 function renderLessons() {
+  buildQuizBank();
   updateHeader();
   renderChips();
   const visibleLessons = allLessons()
@@ -960,8 +1349,6 @@ function renderLessons() {
       <div class="card-actions">
         <button class="primary-btn open-btn">เปิดอ่าน</button>
         <button class="icon-btn fav-btn">${fav ? '★ โปรด' : '☆ โปรด'}</button>
-        ${canEditLesson(lesson) ? '<button class="ghost-btn lesson-edit-btn">แก้ไข</button>' : ''}
-        ${canDeleteLesson(lesson) ? '<button class="danger-btn lesson-delete-btn">ลบ</button>' : ''}
       </div>
     `;
     card.querySelector('.open-btn').onclick = () => openLesson(lesson.id);
@@ -973,24 +1360,6 @@ function renderLessons() {
         : state.userData.favorites.filter(x => x !== lesson.id);
       await saveUserData(true);
       renderLessons();
-    };
-    const lessonEditBtn = card.querySelector('.lesson-edit-btn');
-    if (lessonEditBtn) lessonEditBtn.onclick = () => openEditorForLesson(lesson);
-    const lessonDeleteBtn = card.querySelector('.lesson-delete-btn');
-    if (lessonDeleteBtn) lessonDeleteBtn.onclick = async () => {
-      if (!confirm(`ลบบทเรียน "${lesson.title}" ใช่หรือไม่`)) return;
-      try {
-        if (state.isDemo) {
-          state.communityLessons = state.communityLessons.filter(item => item.firestoreId !== lesson.firestoreId);
-          saveDemoCommunity();
-          renderLessons();
-          return;
-        }
-        await db.collection('community_lessons').doc(lesson.firestoreId).delete();
-        renderLessons();
-      } catch (err) {
-        alert(err.message || 'ลบบทเรียนไม่สำเร็จ');
-      }
     };
     lessonGrid.appendChild(card);
   });
@@ -1251,13 +1620,6 @@ function canEditLesson(lesson) {
   return lesson.authorId && lesson.authorId === state.user?.uid;
 }
 
-function canDeleteLesson(lesson) {
-  if (!lesson || lesson.source !== 'community') return false;
-  if (state.isDemo) return true;
-  const currentUserRole = state.accountProfile?.role || 'staff';
-  return lesson.authorId === state.user?.uid || currentUserRole === 'admin';
-}
-
 function openLesson(id, opts = {}) {
   const lesson = lessonById(id);
   if (!lesson) return;
@@ -1284,10 +1646,7 @@ function openLesson(id, opts = {}) {
           <strong>บทเรียนจากทีม</strong>
           <span>เขียนโดย ${safeHTML(lesson.authorName || 'Team Member')} · ${safeHTML(formatDate(lesson.updatedAt) || formatDate(lesson.createdAt) || '')}</span>
         </div>
-        <div class="author-actions">
-          ${canEditLesson(lesson) ? '<button id="editCommunityLessonBtn" class="ghost-btn">แก้ไขบทเรียนนี้</button>' : ''}
-          ${canDeleteLesson(lesson) ? '<button id="deleteCommunityLessonReaderBtn" class="danger-btn">ลบบทเรียนนี้</button>' : ''}
-        </div>
+        ${canEditLesson(lesson) ? '<button id="editCommunityLessonBtn" class="ghost-btn">แก้ไขบทเรียนนี้</button>' : ''}
       </section>
     `
     : '';
@@ -1359,25 +1718,6 @@ function openLesson(id, opts = {}) {
   const editBtn = el('editCommunityLessonBtn');
   if (editBtn) {
     editBtn.onclick = () => openEditorForLesson(lesson);
-  }
-
-  const deleteReaderBtn = el('deleteCommunityLessonReaderBtn');
-  if (deleteReaderBtn) {
-    deleteReaderBtn.onclick = async () => {
-      if (!confirm(`ลบบทเรียน "${lesson.title}" ใช่หรือไม่`)) return;
-      try {
-        if (state.isDemo) {
-          state.communityLessons = state.communityLessons.filter(item => item.firestoreId !== lesson.firestoreId);
-          saveDemoCommunity();
-          closeLesson();
-          return;
-        }
-        await db.collection('community_lessons').doc(lesson.firestoreId).delete();
-        closeLesson();
-      } catch (err) {
-        alert(err.message || 'ลบบทเรียนไม่สำเร็จ');
-      }
-    };
   }
 
   el('saveNoteBtn').onclick = async () => {
@@ -1617,7 +1957,26 @@ async function handleWineSave() {
 backBtn.addEventListener('click', closeLesson);
 el('searchInput').addEventListener('input', e => { state.search = e.target.value; renderLessons(); });
 addLessonBtn.addEventListener('click', openEditor);
+
 openEditorSecondaryBtn.addEventListener('click', openEditor);
+el('openQuizBtn').addEventListener('click', openQuizModal);
+el('closeQuizBtn').addEventListener('click', closeQuizModal);
+quizModal.querySelectorAll('[data-close-quiz="true"]').forEach(node => node.addEventListener('click', closeQuizModal));
+el('startQuizBtn').addEventListener('click', startQuizSession);
+el('openAdminQuizBtn').addEventListener('click', openAdminQuizModal);
+el('closeAdminQuizBtn').addEventListener('click', closeAdminQuizModal);
+adminQuizModal.querySelectorAll('[data-close-admin-quiz="true"]').forEach(node => node.addEventListener('click', closeAdminQuizModal));
+el('refreshAdminQuizBtn').addEventListener('click', () => loadAdminQuizDashboard());
+el('exportAdminQuizBtn').addEventListener('click', () => {
+  const data = JSON.stringify(state.adminQuizData || [], null, 2);
+  const blob = new Blob([data], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `quiz-attempts-${new Date().toISOString().slice(0, 10)}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+});
 el('closeEditorBtn').addEventListener('click', closeEditor);
 el('cancelEditorBtn').addEventListener('click', closeEditor);
 el('deleteLessonBtn').addEventListener('click', async () => {
@@ -1681,7 +2040,7 @@ el('lessonEditorForm').addEventListener('submit', async e => {
 el('demoBtn').addEventListener('click', async () => {
   state.isDemo = true;
   state.user = { uid: 'demo-user', displayName: 'Demo User', email: 'demo@local' };
-  state.accountProfile = { employeeCode: 'DEMO', displayName: 'Demo User' };
+  state.userProfile = { displayName: 'Demo User', employeeCode: 'DEMO', role: 'admin' };
   await loadUserData();
   subscribeCommunityLessons();
   subscribeWineCatalog();
@@ -1727,8 +2086,9 @@ el('logoutBtn').addEventListener('click', async () => {
   if (state.isDemo) {
     state.isDemo = false;
     state.user = null;
-    state.accountProfile = null;
+    state.userProfile = null;
     state.communityLessons = [];
+    state.quizBank = [];
     state.wineCatalogSource = 'local';
     setWineBaseCatalog(BASE_WINE_MEDIA, 'local');
     mergeWineCatalog({});
@@ -1749,6 +2109,7 @@ auth.onAuthStateChanged(async user => {
     state.isDemo = false;
     state.user = user;
     await loadUserData();
+    buildQuizBank();
     subscribeCommunityLessons();
     subscribeWineCatalog();
     subscribeWineReference();
@@ -1757,8 +2118,9 @@ auth.onAuthStateChanged(async user => {
     closeLesson();
   } else if (!state.isDemo) {
     state.user = null;
-    state.accountProfile = null;
+    state.userProfile = null;
     state.communityLessons = [];
+    state.quizBank = [];
     state.wineCatalogSource = 'local';
     setWineBaseCatalog(BASE_WINE_MEDIA, 'local');
     mergeWineCatalog({});
