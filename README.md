@@ -145,3 +145,30 @@ service firebase.storage {
 - ทุกคนที่ล็อกอินแล้วกด “+ เพิ่มบทเรียน” ได้
 - บทเรียนใหม่จะถูกบันทึกใน `community_lessons`
 - เจ้าของบทเรียนแก้ไขและลบของตัวเองได้
+
+
+## Admin delete lessons
+- Add `role: "admin"` to `users/{uid}` in Firestore for any account that should be an admin.
+- Example user doc fields: `employeeCode`, `displayName`, `role`.
+- Suggested Firestore rules for team lessons:
+
+```javascript
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function isAdmin() {
+      return signedIn()
+        && exists(/databases/$(database)/documents/users/$(request.auth.uid))
+        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "admin";
+    }
+
+    match /community_lessons/{lessonId} {
+      allow read: if signedIn();
+      allow create: if signedIn() && request.resource.data.authorId == request.auth.uid;
+      allow update: if signedIn() && (resource.data.authorId == request.auth.uid || isAdmin());
+      allow delete: if signedIn() && (resource.data.authorId == request.auth.uid || isAdmin());
+    }
+  }
+}
+```

@@ -792,7 +792,8 @@ async function loadUserData() {
   const raw = snap.exists ? snap.data() : {};
   state.accountProfile = {
     employeeCode: raw.employeeCode || employeeCodeFromEmail(state.user.email),
-    displayName: raw.displayName || state.user.displayName || ''
+    displayName: raw.displayName || state.user.displayName || '',
+    role: raw.role || 'staff'
   };
   state.userData = mergeUserData(raw);
 }
@@ -959,7 +960,8 @@ function renderLessons() {
       <div class="card-actions">
         <button class="primary-btn open-btn">เปิดอ่าน</button>
         <button class="icon-btn fav-btn">${fav ? '★ โปรด' : '☆ โปรด'}</button>
-        ${canEditLesson(lesson) ? '<button class="ghost-btn lesson-edit-btn">แก้ไข</button><button class="danger-btn lesson-delete-btn">ลบ</button>' : ''}
+        ${canEditLesson(lesson) ? '<button class="ghost-btn lesson-edit-btn">แก้ไข</button>' : ''}
+        ${canDeleteLesson(lesson) ? '<button class="danger-btn lesson-delete-btn">ลบ</button>' : ''}
       </div>
     `;
     card.querySelector('.open-btn').onclick = () => openLesson(lesson.id);
@@ -1249,6 +1251,13 @@ function canEditLesson(lesson) {
   return lesson.authorId && lesson.authorId === state.user?.uid;
 }
 
+function canDeleteLesson(lesson) {
+  if (!lesson || lesson.source !== 'community') return false;
+  if (state.isDemo) return true;
+  const currentUserRole = state.accountProfile?.role || 'staff';
+  return lesson.authorId === state.user?.uid || currentUserRole === 'admin';
+}
+
 function openLesson(id, opts = {}) {
   const lesson = lessonById(id);
   if (!lesson) return;
@@ -1275,7 +1284,10 @@ function openLesson(id, opts = {}) {
           <strong>บทเรียนจากทีม</strong>
           <span>เขียนโดย ${safeHTML(lesson.authorName || 'Team Member')} · ${safeHTML(formatDate(lesson.updatedAt) || formatDate(lesson.createdAt) || '')}</span>
         </div>
-        ${canEditLesson(lesson) ? '<div class="author-actions"><button id="editCommunityLessonBtn" class="ghost-btn">แก้ไขบทเรียนนี้</button><button id="deleteCommunityLessonReaderBtn" class="danger-btn">ลบบทเรียนนี้</button></div>' : ''}
+        <div class="author-actions">
+          ${canEditLesson(lesson) ? '<button id="editCommunityLessonBtn" class="ghost-btn">แก้ไขบทเรียนนี้</button>' : ''}
+          ${canDeleteLesson(lesson) ? '<button id="deleteCommunityLessonReaderBtn" class="danger-btn">ลบบทเรียนนี้</button>' : ''}
+        </div>
       </section>
     `
     : '';
@@ -1698,6 +1710,7 @@ el('authForm').addEventListener('submit', async e => {
         employeeCode,
         employeeCodeNorm: employeeCode,
         displayName,
+        role: 'staff',
         ...defaultUserData(),
         createdAt: firebase.firestore.FieldValue.serverTimestamp()
       }, { merge: true });

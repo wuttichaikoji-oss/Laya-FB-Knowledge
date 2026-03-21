@@ -53,3 +53,30 @@ service cloud.firestore {
 ล็อกอินเวอร์ชันนี้ใช้ “รหัสพนักงาน + รหัสผ่าน”
 โดยแอปจะสร้างอีเมลภายในระบบให้อัตโนมัติบน Firebase Authentication เช่น
 FB001 -> emp.fb001@laya-training.local
+
+
+## Admin delete lessons
+- Add `role: "admin"` to `users/{uid}` in Firestore for any account that should be an admin.
+- Example user doc fields: `employeeCode`, `displayName`, `role`.
+- Suggested Firestore rules for team lessons:
+
+```javascript
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function isAdmin() {
+      return signedIn()
+        && exists(/databases/$(database)/documents/users/$(request.auth.uid))
+        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "admin";
+    }
+
+    match /community_lessons/{lessonId} {
+      allow read: if signedIn();
+      allow create: if signedIn() && request.resource.data.authorId == request.auth.uid;
+      allow update: if signedIn() && (resource.data.authorId == request.auth.uid || isAdmin());
+      allow delete: if signedIn() && (resource.data.authorId == request.auth.uid || isAdmin());
+    }
+  }
+}
+```
