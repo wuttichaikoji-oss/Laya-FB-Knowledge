@@ -1578,15 +1578,17 @@ function renderLessons() {
         ${lesson.source === 'community' ? '<span class="tag team-tag">Team</span>' : ''}
         ${done ? '<span class="tag success-tag">อ่านจบแล้ว</span>' : ''}
       </div>
-      <div>
+      <div class="card-main">
         <h3>${safeHTML(lesson.title)}</h3>
         <p>${safeHTML(lesson.summary || '')}</p>
       </div>
-      ${authorText}
-      <div class="mini-meta">${safeHTML(extra)} · เปิด ${prog.openedCount || 0} ครั้ง</div>
-      <div class="card-actions">
-        <button class="primary-btn open-btn">เปิดอ่าน</button>
-        <button class="icon-btn fav-btn">${fav ? '★ โปรด' : '☆ โปรด'}</button>
+      <div class="card-meta">
+        ${authorText}
+        <div class="mini-meta">${safeHTML(extra)} · เปิด ${prog.openedCount || 0} ครั้ง</div>
+        <div class="card-actions">
+          <button class="primary-btn open-btn">เปิดอ่าน</button>
+          <button class="icon-btn fav-btn">${fav ? '★ โปรด' : '☆ โปรด'}</button>
+        </div>
       </div>
     `;
     card.querySelector('.open-btn').onclick = () => openLesson(lesson.id);
