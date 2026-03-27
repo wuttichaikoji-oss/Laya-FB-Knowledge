@@ -81,3 +81,10 @@ match /quiz_attempts/{attemptId} {
     || (signedIn() && resource.data.userUid == request.auth.uid);
   allow delete: if isSupervisorOrAdmin();
 }
+
+
+Quiz Bank Importer:
+- เปิดไฟล์ quiz-importer.html
+- ล็อกอินด้วยบัญชี admin/supervisor
+- เลือกไฟล์ laya_quiz_bank_300.json
+- กดตรวจไฟล์ แล้วกดเริ่ม Import

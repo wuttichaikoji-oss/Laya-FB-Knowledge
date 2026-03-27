@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Laya Quiz Bank Importer</title>
+  <style>
+    :root{--bg:#f6f8fb;--card:#fff;--line:#d9e0ea;--text:#18202a;--muted:#627082;--brand:#165d53;--brand2:#0f4a42;--danger:#b64646;--ok:#1f7a4d}
+    *{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--text)}
+    .wrap{max-width:980px;margin:0 auto;padding:24px}
+    .hero{margin-bottom:18px}.hero h1{margin:0 0 8px;font-size:28px}.hero p{margin:0;color:var(--muted);line-height:1.5}
+    .grid{display:grid;grid-template-columns:1.1fr 1.4fr;gap:18px}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 6px 20px rgba(16,24,40,.05)}
+    .card h2{margin:0 0 14px;font-size:18px}.field{margin-bottom:12px}.label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
+    input[type=text],input[type=password],input[type=file],select,textarea{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:#fff;font:inherit;color:var(--text)}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.btns{display:flex;gap:10px;flex-wrap:wrap}.btn{appearance:none;border:0;border-radius:12px;padding:12px 16px;font-weight:700;cursor:pointer}
+    .btn.primary{background:var(--brand);color:#fff}.btn.primary:hover{background:var(--brand2)}.btn.secondary{background:#edf2f7;color:#223042}.btn.danger{background:#fff1f1;color:var(--danger);border:1px solid #f2cccc}
+    .meta{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}.chip{background:#f2f5f9;border:1px solid var(--line);padding:8px 10px;border-radius:999px;font-size:13px;color:#334155}
+    .status{margin-top:12px;padding:12px 14px;border-radius:12px;background:#f8fafc;border:1px solid var(--line);font-size:14px;line-height:1.5;white-space:pre-wrap}
+    .progress{height:14px;border-radius:999px;background:#e9eef5;overflow:hidden;margin:12px 0}.bar{height:100%;width:0;background:linear-gradient(90deg,var(--brand),#2e8b78)}
+    .list{margin:10px 0 0;padding-left:18px;color:var(--muted);line-height:1.6}.small{font-size:12px;color:var(--muted)}
+    .ok{color:var(--ok)} .warn{color:#b7791f} .err{color:var(--danger)}
+    @media (max-width:820px){.grid,.row{grid-template-columns:1fr}.wrap{padding:16px}.hero h1{font-size:24px}}
+  </style>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+</head>
+<body>
+  <div class="wrap">
+    <div class="hero">
+      <h1>Laya Quiz Bank Importer</h1>
+      <p>ใช้หน้านี้สำหรับนำเข้า <strong>quiz_bank</strong> เข้า Firestore แบบครั้งละหลายร้อยข้อได้ง่าย ๆ โดยไม่ต้องเพิ่มทีละ document ใน Firebase Console</p>
+    </div>
+
+    <div class="grid">
+      <section class="card">
+        <h2>1) ล็อกอิน</h2>
+        <div class="field">
+          <label class="label">รหัสพนักงาน หรือ อีเมล</label>
+          <input id="loginId" type="text" placeholder="เช่น 126247 หรือ admin@example.com">
+        </div>
+        <div class="field">
+          <label class="label">รหัสผ่าน</label>
+          <input id="password" type="password" placeholder="รหัสผ่าน">
+        </div>
+        <div class="btns">
+          <button class="btn primary" id="loginBtn">ล็อกอิน</button>
+          <button class="btn secondary" id="checkRoleBtn">เช็กสิทธิ์</button>
+          <button class="btn danger" id="logoutBtn">ออกจากระบบ</button>
+        </div>
+        <div class="meta">
+          <div class="chip">สถานะ: <span id="authState">ยังไม่ได้ล็อกอิน</span></div>
+          <div class="chip">สิทธิ์: <span id="roleState">-</span></div>
+        </div>
+        <div class="status" id="authStatus">พร้อมเริ่มต้น</div>
+        <ul class="list">
+          <li>ถ้าใส่รหัสพนักงาน ระบบจะลองแปลงเป็นอีเมลภายในอัตโนมัติ</li>
+          <li>ต้องเป็นบัญชีที่มีสิทธิ์ <strong>admin</strong> หรือ <strong>supervisor</strong> ตาม Firestore Rules</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>2) เลือกไฟล์และ Import</h2>
+        <div class="field">
+          <label class="label">ไฟล์ JSON</label>
+          <input id="jsonFile" type="file" accept="application/json,.json">
+          <div class="small">ใน ZIP นี้มีไฟล์ <strong>laya_quiz_bank_300.json</strong> มาให้แล้ว เลือกไฟล์นั้นได้เลย</div>
+        </div>
+        <div class="row">
+          <div class="field">
+            <label class="label">Collection</label>
+            <input id="collectionName" type="text" value="quiz_bank">
+          </div>
+          <div class="field">
+            <label class="label">โหมดนำเข้า</label>
+            <select id="importMode">
+              <option value="merge">merge / update ถ้ามี id ซ้ำ</option>
+              <option value="skip">ข้ามถ้ามี id ซ้ำ</option>
+            </select>
+          </div>
+        </div>
+        <div class="btns">
+          <button class="btn primary" id="validateBtn">ตรวจไฟล์</button>
+          <button class="btn primary" id="importBtn">เริ่ม Import</button>
+        </div>
+        <div class="meta">
+          <div class="chip">จำนวนข้อในไฟล์: <span id="fileCount">0</span></div>
+          <div class="chip">พร้อมนำเข้า: <span id="readyCount">0</span></div>
+          <div class="chip">นำเข้าแล้ว: <span id="doneCount">0</span></div>
+        </div>
+        <div class="progress"><div class="bar" id="bar"></div></div>
+        <div class="status" id="importStatus">ยังไม่ได้เลือกไฟล์</div>
+        <ul class="list">
+          <li>Importer นี้จะเขียนลง Firestore ทีละ batch เพื่อให้เสถียรกว่า</li>
+          <li>ใช้ document id จาก field <strong>id</strong> ใน JSON เช่น <code>q001</code></li>
+          <li>หากเลือกโหมด merge และ id ซ้ำ ระบบจะอัปเดตทับ document เดิม</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyAaiMSOeGDahZuVDqWhgeuSHBf129wXv6g",
+  authDomain: "laya-training.firebaseapp.com",
+  projectId: "laya-training",
+  storageBucket: "laya-training.firebasestorage.app",
+  messagingSenderId: "843807988908",
+  appId: "1:843807988908:web:cda1a814a2bcb41c4a9309",
+  measurementId: "G-QB481YNZCJ"
+};
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+const $ = (id) => document.getElementById(id);
+let parsedQuestions = [];
+let currentRole = null;
+
+function setStatus(id, text){ $(id).textContent = text; }
+function setBar(v){ $('bar').style.width = `${Math.max(0, Math.min(100, v))}%`; }
+function normalizeCode(v){ return String(v || '').trim().toLowerCase().replace(/\s+/g,''); }
+function toCandidateEmails(loginId){
+  const raw = normalizeCode(loginId);
+  if (!raw) return [];
+  if (raw.includes('@')) return [raw];
+  return [
+    `emp.${raw}@laya-training.local`,
+    `${raw}@laya-training.local`,
+    `${raw}@laya.local`
+  ];
+}
+
+async function login() {
+  const loginId = $('loginId').value;
+  const password = $('password').value;
+  if (!loginId || !password) {
+    setStatus('authStatus', 'กรุณากรอกข้อมูลให้ครบ');
+    return;
+  }
+  setStatus('authStatus', 'กำลังล็อกอิน...');
+  const candidates = toCandidateEmails(loginId);
+  let lastErr = null;
+  for (const email of candidates) {
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      setStatus('authStatus', `ล็อกอินสำเร็จ: ${email}`);
+      await refreshRole();
+      return;
+    } catch (err) {
+      lastErr = err;
+    }
+  }
+  setStatus('authStatus', `ล็อกอินไม่สำเร็จ: ${lastErr?.message || 'unknown error'}`);
+}
+
+async function refreshRole(){
+  const user = auth.currentUser;
+  if (!user) {
+    $('authState').textContent = 'ยังไม่ได้ล็อกอิน';
+    $('roleState').textContent = '-';
+    currentRole = null;
+    return;
+  }
+  $('authState').textContent = user.uid;
+  try {
+    const snap = await db.collection('users').doc(user.uid).get();
+    const data = snap.exists ? snap.data() : {};
+    currentRole = data.role || null;
+    $('roleState').textContent = currentRole || 'ไม่พบ role';
+    setStatus('authStatus', `ล็อกอินแล้ว\nuid: ${user.uid}\nemployeeCode: ${data.employeeCode || '-'}\nrole: ${currentRole || '-'}`);
+  } catch (e) {
+    currentRole = null;
+    $('roleState').textContent = 'อ่าน role ไม่ได้';
+    setStatus('authStatus', `ล็อกอินแล้ว แต่เช็ก role ไม่ได้\n${e.message}`);
+  }
+}
+
+function validateQuestion(q, idx){
+  const need = ['id','question_th','question_en','options','answer','category'];
+  for (const k of need) {
+    if (!(k in q)) return `ข้อที่ ${idx+1} ขาด field ${k}`;
+  }
+  if (!Array.isArray(q.options) || q.options.length < 2) return `ข้อที่ ${idx+1} options ไม่ถูกต้อง`;
+  return null;
+}
+
+async function readSelectedFile(){
+  const file = $('jsonFile').files?.[0];
+  if (!file) throw new Error('ยังไม่ได้เลือกไฟล์ JSON');
+  const text = await file.text();
+  const data = JSON.parse(text);
+  if (!Array.isArray(data)) throw new Error('ไฟล์ JSON ต้องเป็น array ของคำถาม');
+  return data;
+}
+
+async function validateFile(){
+  try {
+    parsedQuestions = await readSelectedFile();
+    $('fileCount').textContent = parsedQuestions.length;
+    const errors = [];
+    const ids = new Set();
+    let ready = 0;
+    parsedQuestions.forEach((q, i) => {
+      const err = validateQuestion(q, i);
+      if (err) errors.push(err);
+      else if (ids.has(q.id)) errors.push(`id ซ้ำ: ${q.id}`);
+      else { ids.add(q.id); ready++; }
+    });
+    $('readyCount').textContent = ready;
+    if (errors.length) {
+      setStatus('importStatus', `ตรวจไฟล์แล้วพบปัญหา ${errors.length} จุด\n- ${errors.slice(0,10).join('\n- ')}`);
+    } else {
+      setStatus('importStatus', `ตรวจไฟล์ผ่าน\nพร้อมนำเข้า ${ready} ข้อ`);
+    }
+  } catch (e) {
+    setStatus('importStatus', `ตรวจไฟล์ไม่สำเร็จ: ${e.message}`);
+  }
+}
+
+async function importQuestions(){
+  if (!auth.currentUser) {
+    setStatus('importStatus', 'กรุณาล็อกอินก่อน');
+    return;
+  }
+  if (!['admin','supervisor'].includes(currentRole || '')) {
+    setStatus('importStatus', `บัญชีนี้ role = ${currentRole || '-'}\nปกติควรเป็น admin หรือ supervisor เพื่อ import`);
+  }
+  if (!parsedQuestions.length) {
+    await validateFile();
+    if (!parsedQuestions.length) return;
+  }
+
+  const mode = $('importMode').value;
+  const collection = $('collectionName').value.trim() || 'quiz_bank';
+  const valid = parsedQuestions.filter((q, i) => !validateQuestion(q, i));
+  const CHUNK = 200;
+  let done = 0;
+  $('doneCount').textContent = '0';
+  setBar(0);
+  setStatus('importStatus', 'กำลังนำเข้า...');
+
+  for (let i = 0; i < valid.length; i += CHUNK) {
+    const chunk = valid.slice(i, i + CHUNK);
+    const batch = db.batch();
+
+    if (mode === 'skip') {
+      const checks = await Promise.all(chunk.map(q => db.collection(collection).doc(q.id).get()));
+      checks.forEach((snap, idx) => {
+        if (!snap.exists) {
+          const q = chunk[idx];
+          batch.set(db.collection(collection).doc(q.id), {
+            ...q,
+            importedAt: firebase.firestore.FieldValue.serverTimestamp(),
+            importedBy: auth.currentUser.uid
+          }, { merge: true });
+        }
+      });
+    } else {
+      chunk.forEach(q => {
+        batch.set(db.collection(collection).doc(q.id), {
+          ...q,
+          importedAt: firebase.firestore.FieldValue.serverTimestamp(),
+          importedBy: auth.currentUser.uid
+        }, { merge: true });
+      });
+    }
+
+    await batch.commit();
+    done = Math.min(valid.length, i + CHUNK);
+    $('doneCount').textContent = String(done);
+    setBar((done / valid.length) * 100);
+    setStatus('importStatus', `กำลังนำเข้า... ${done}/${valid.length}`);
+  }
+
+  const summary = {};
+  valid.forEach(q => summary[q.category] = (summary[q.category] || 0) + 1);
+  setStatus('importStatus', `นำเข้าเสร็จแล้ว ${valid.length} ข้อ\n\nสรุปตามหมวด:\n${Object.entries(summary).map(([k,v]) => `- ${k}: ${v}`).join('\n')}`);
+}
+
+$('loginBtn').addEventListener('click', login);
+$('checkRoleBtn').addEventListener('click', refreshRole);
+$('logoutBtn').addEventListener('click', async () => { await auth.signOut(); setStatus('authStatus', 'ออกจากระบบแล้ว'); refreshRole(); });
+$('validateBtn').addEventListener('click', validateFile);
+$('importBtn').addEventListener('click', importQuestions);
+auth.onAuthStateChanged(refreshRole);
+</script>
+</body>
+</html>

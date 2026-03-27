@@ -1,0 +1,4862 @@
+[
+  {
+    "id": "q001",
+    "question_th": "ไวน์ขาวชนิดใดมักเข้ากับอาหารทะเล",
+    "question_en": "Which white wine commonly pairs with seafood?",
+    "options": [
+      "Shiraz",
+      "Merlot",
+      "Sauvignon Blanc",
+      "Chardonnay"
+    ],
+    "answer": "Sauvignon Blanc",
+    "category": "Wine",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q002",
+    "question_th": "Rosé wine ได้สีจากอะไร",
+    "question_en": "What gives rosé wine its color?",
+    "options": [
+      "การผสมไวน์แดงกับน้ำ",
+      "การใช้ผลไม้สีชมพู",
+      "การหมักกับเปลือกองุ่นช่วงสั้น",
+      "การเติมสี"
+    ],
+    "answer": "การหมักกับเปลือกองุ่นช่วงสั้น",
+    "category": "Wine",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q003",
+    "question_th": "Sparkling wine มีลักษณะเด่นอะไร",
+    "question_en": "What is the key characteristic of sparkling wine?",
+    "options": [
+      "หวานเสมอ",
+      "มีฟอง",
+      "มีแทนนินสูง",
+      "สีเข้ม"
+    ],
+    "answer": "มีฟอง",
+    "category": "Wine",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q004",
+    "question_th": "คำว่า body ของไวน์หมายถึงอะไร",
+    "question_en": "What does body mean in wine?",
+    "options": [
+      "กลิ่นเท่านั้น",
+      "สีของไวน์",
+      "ปีผลิต",
+      "ความหนักเบาในปาก"
+    ],
+    "answer": "ความหนักเบาในปาก",
+    "category": "Wine",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q005",
+    "question_th": "ไวน์แดงมักเหมาะกับอาหารประเภทใด",
+    "question_en": "Red wine usually pairs well with which type of food?",
+    "options": [
+      "เนื้อแดง",
+      "ปลาเนื้อขาว",
+      "ไอศกรีม",
+      "สลัดผลไม้"
+    ],
+    "answer": "เนื้อแดง",
+    "category": "Wine",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q006",
+    "question_th": "อุณหภูมิเสิร์ฟไวน์ขาวควรเป็นแบบใด",
+    "question_en": "White wine is best served at what temperature style?",
+    "options": [
+      "ร้อน",
+      "อุ่น",
+      "อุณหภูมิเดือด",
+      "แช่เย็น"
+    ],
+    "answer": "แช่เย็น",
+    "category": "Wine",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q007",
+    "question_th": "ไวน์ขาวชนิดใดมักเข้ากับอาหารทะเล",
+    "question_en": "Which white wine commonly pairs with seafood?",
+    "options": [
+      "Sauvignon Blanc",
+      "Merlot",
+      "Chardonnay",
+      "Shiraz"
+    ],
+    "answer": "Sauvignon Blanc",
+    "category": "Wine",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q008",
+    "question_th": "Rosé wine ได้สีจากอะไร",
+    "question_en": "What gives rosé wine its color?",
+    "options": [
+      "การเติมสี",
+      "การใช้ผลไม้สีชมพู",
+      "การหมักกับเปลือกองุ่นช่วงสั้น",
+      "การผสมไวน์แดงกับน้ำ"
+    ],
+    "answer": "การหมักกับเปลือกองุ่นช่วงสั้น",
+    "category": "Wine",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q009",
+    "question_th": "Sparkling wine มีลักษณะเด่นอะไร",
+    "question_en": "What is the key characteristic of sparkling wine?",
+    "options": [
+      "สีเข้ม",
+      "มีแทนนินสูง",
+      "มีฟอง",
+      "หวานเสมอ"
+    ],
+    "answer": "มีฟอง",
+    "category": "Wine",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q010",
+    "question_th": "คำว่า body ของไวน์หมายถึงอะไร",
+    "question_en": "What does body mean in wine?",
+    "options": [
+      "สีของไวน์",
+      "ปีผลิต",
+      "กลิ่นเท่านั้น",
+      "ความหนักเบาในปาก"
+    ],
+    "answer": "ความหนักเบาในปาก",
+    "category": "Wine",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q011",
+    "question_th": "ไวน์แดงมักเหมาะกับอาหารประเภทใด",
+    "question_en": "Red wine usually pairs well with which type of food?",
+    "options": [
+      "สลัดผลไม้",
+      "ไอศกรีม",
+      "ปลาเนื้อขาว",
+      "เนื้อแดง"
+    ],
+    "answer": "เนื้อแดง",
+    "category": "Wine",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q012",
+    "question_th": "อุณหภูมิเสิร์ฟไวน์ขาวควรเป็นแบบใด",
+    "question_en": "White wine is best served at what temperature style?",
+    "options": [
+      "แช่เย็น",
+      "อุณหภูมิเดือด",
+      "ร้อน",
+      "อุ่น"
+    ],
+    "answer": "แช่เย็น",
+    "category": "Wine",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q013",
+    "question_th": "ไวน์ขาวชนิดใดมักเข้ากับอาหารทะเล",
+    "question_en": "Which white wine commonly pairs with seafood?",
+    "options": [
+      "Chardonnay",
+      "Merlot",
+      "Sauvignon Blanc",
+      "Shiraz"
+    ],
+    "answer": "Sauvignon Blanc",
+    "category": "Wine",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q014",
+    "question_th": "Rosé wine ได้สีจากอะไร",
+    "question_en": "What gives rosé wine its color?",
+    "options": [
+      "การเติมสี",
+      "การผสมไวน์แดงกับน้ำ",
+      "การหมักกับเปลือกองุ่นช่วงสั้น",
+      "การใช้ผลไม้สีชมพู"
+    ],
+    "answer": "การหมักกับเปลือกองุ่นช่วงสั้น",
+    "category": "Wine",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q015",
+    "question_th": "Sparkling wine มีลักษณะเด่นอะไร",
+    "question_en": "What is the key characteristic of sparkling wine?",
+    "options": [
+      "หวานเสมอ",
+      "มีแทนนินสูง",
+      "สีเข้ม",
+      "มีฟอง"
+    ],
+    "answer": "มีฟอง",
+    "category": "Wine",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q016",
+    "question_th": "คำว่า body ของไวน์หมายถึงอะไร",
+    "question_en": "What does body mean in wine?",
+    "options": [
+      "ปีผลิต",
+      "กลิ่นเท่านั้น",
+      "ความหนักเบาในปาก",
+      "สีของไวน์"
+    ],
+    "answer": "ความหนักเบาในปาก",
+    "category": "Wine",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q017",
+    "question_th": "ไวน์แดงมักเหมาะกับอาหารประเภทใด",
+    "question_en": "Red wine usually pairs well with which type of food?",
+    "options": [
+      "ปลาเนื้อขาว",
+      "สลัดผลไม้",
+      "ไอศกรีม",
+      "เนื้อแดง"
+    ],
+    "answer": "เนื้อแดง",
+    "category": "Wine",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q018",
+    "question_th": "อุณหภูมิเสิร์ฟไวน์ขาวควรเป็นแบบใด",
+    "question_en": "White wine is best served at what temperature style?",
+    "options": [
+      "แช่เย็น",
+      "อุณหภูมิเดือด",
+      "ร้อน",
+      "อุ่น"
+    ],
+    "answer": "แช่เย็น",
+    "category": "Wine",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q019",
+    "question_th": "ไวน์ขาวชนิดใดมักเข้ากับอาหารทะเล",
+    "question_en": "Which white wine commonly pairs with seafood?",
+    "options": [
+      "Chardonnay",
+      "Merlot",
+      "Shiraz",
+      "Sauvignon Blanc"
+    ],
+    "answer": "Sauvignon Blanc",
+    "category": "Wine",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q020",
+    "question_th": "Rosé wine ได้สีจากอะไร",
+    "question_en": "What gives rosé wine its color?",
+    "options": [
+      "การผสมไวน์แดงกับน้ำ",
+      "การใช้ผลไม้สีชมพู",
+      "การหมักกับเปลือกองุ่นช่วงสั้น",
+      "การเติมสี"
+    ],
+    "answer": "การหมักกับเปลือกองุ่นช่วงสั้น",
+    "category": "Wine",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q021",
+    "question_th": "Sparkling wine มีลักษณะเด่นอะไร",
+    "question_en": "What is the key characteristic of sparkling wine?",
+    "options": [
+      "มีแทนนินสูง",
+      "สีเข้ม",
+      "หวานเสมอ",
+      "มีฟอง"
+    ],
+    "answer": "มีฟอง",
+    "category": "Wine",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q022",
+    "question_th": "คำว่า body ของไวน์หมายถึงอะไร",
+    "question_en": "What does body mean in wine?",
+    "options": [
+      "ปีผลิต",
+      "กลิ่นเท่านั้น",
+      "สีของไวน์",
+      "ความหนักเบาในปาก"
+    ],
+    "answer": "ความหนักเบาในปาก",
+    "category": "Wine",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q023",
+    "question_th": "ไวน์แดงมักเหมาะกับอาหารประเภทใด",
+    "question_en": "Red wine usually pairs well with which type of food?",
+    "options": [
+      "สลัดผลไม้",
+      "ไอศกรีม",
+      "ปลาเนื้อขาว",
+      "เนื้อแดง"
+    ],
+    "answer": "เนื้อแดง",
+    "category": "Wine",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q024",
+    "question_th": "อุณหภูมิเสิร์ฟไวน์ขาวควรเป็นแบบใด",
+    "question_en": "White wine is best served at what temperature style?",
+    "options": [
+      "ร้อน",
+      "แช่เย็น",
+      "อุ่น",
+      "อุณหภูมิเดือด"
+    ],
+    "answer": "แช่เย็น",
+    "category": "Wine",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q025",
+    "question_th": "ไวน์ขาวชนิดใดมักเข้ากับอาหารทะเล",
+    "question_en": "Which white wine commonly pairs with seafood?",
+    "options": [
+      "Shiraz",
+      "Sauvignon Blanc",
+      "Merlot",
+      "Chardonnay"
+    ],
+    "answer": "Sauvignon Blanc",
+    "category": "Wine",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q026",
+    "question_th": "Rosé wine ได้สีจากอะไร",
+    "question_en": "What gives rosé wine its color?",
+    "options": [
+      "การหมักกับเปลือกองุ่นช่วงสั้น",
+      "การเติมสี",
+      "การผสมไวน์แดงกับน้ำ",
+      "การใช้ผลไม้สีชมพู"
+    ],
+    "answer": "การหมักกับเปลือกองุ่นช่วงสั้น",
+    "category": "Wine",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q027",
+    "question_th": "Sparkling wine มีลักษณะเด่นอะไร",
+    "question_en": "What is the key characteristic of sparkling wine?",
+    "options": [
+      "หวานเสมอ",
+      "มีแทนนินสูง",
+      "มีฟอง",
+      "สีเข้ม"
+    ],
+    "answer": "มีฟอง",
+    "category": "Wine",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q028",
+    "question_th": "คำว่า body ของไวน์หมายถึงอะไร",
+    "question_en": "What does body mean in wine?",
+    "options": [
+      "ปีผลิต",
+      "สีของไวน์",
+      "กลิ่นเท่านั้น",
+      "ความหนักเบาในปาก"
+    ],
+    "answer": "ความหนักเบาในปาก",
+    "category": "Wine",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q029",
+    "question_th": "ไวน์แดงมักเหมาะกับอาหารประเภทใด",
+    "question_en": "Red wine usually pairs well with which type of food?",
+    "options": [
+      "เนื้อแดง",
+      "ไอศกรีม",
+      "สลัดผลไม้",
+      "ปลาเนื้อขาว"
+    ],
+    "answer": "เนื้อแดง",
+    "category": "Wine",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q030",
+    "question_th": "อุณหภูมิเสิร์ฟไวน์ขาวควรเป็นแบบใด",
+    "question_en": "White wine is best served at what temperature style?",
+    "options": [
+      "อุ่น",
+      "แช่เย็น",
+      "ร้อน",
+      "อุณหภูมิเดือด"
+    ],
+    "answer": "แช่เย็น",
+    "category": "Wine",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q031",
+    "question_th": "ไวน์ขาวชนิดใดมักเข้ากับอาหารทะเล",
+    "question_en": "Which white wine commonly pairs with seafood?",
+    "options": [
+      "Merlot",
+      "Sauvignon Blanc",
+      "Shiraz",
+      "Chardonnay"
+    ],
+    "answer": "Sauvignon Blanc",
+    "category": "Wine",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q032",
+    "question_th": "Rosé wine ได้สีจากอะไร",
+    "question_en": "What gives rosé wine its color?",
+    "options": [
+      "การหมักกับเปลือกองุ่นช่วงสั้น",
+      "การผสมไวน์แดงกับน้ำ",
+      "การเติมสี",
+      "การใช้ผลไม้สีชมพู"
+    ],
+    "answer": "การหมักกับเปลือกองุ่นช่วงสั้น",
+    "category": "Wine",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q033",
+    "question_th": "Sparkling wine มีลักษณะเด่นอะไร",
+    "question_en": "What is the key characteristic of sparkling wine?",
+    "options": [
+      "มีฟอง",
+      "หวานเสมอ",
+      "สีเข้ม",
+      "มีแทนนินสูง"
+    ],
+    "answer": "มีฟอง",
+    "category": "Wine",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q034",
+    "question_th": "คำว่า body ของไวน์หมายถึงอะไร",
+    "question_en": "What does body mean in wine?",
+    "options": [
+      "ความหนักเบาในปาก",
+      "ปีผลิต",
+      "กลิ่นเท่านั้น",
+      "สีของไวน์"
+    ],
+    "answer": "ความหนักเบาในปาก",
+    "category": "Wine",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q035",
+    "question_th": "ไวน์แดงมักเหมาะกับอาหารประเภทใด",
+    "question_en": "Red wine usually pairs well with which type of food?",
+    "options": [
+      "เนื้อแดง",
+      "ไอศกรีม",
+      "สลัดผลไม้",
+      "ปลาเนื้อขาว"
+    ],
+    "answer": "เนื้อแดง",
+    "category": "Wine",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q036",
+    "question_th": "อุณหภูมิเสิร์ฟไวน์ขาวควรเป็นแบบใด",
+    "question_en": "White wine is best served at what temperature style?",
+    "options": [
+      "อุ่น",
+      "ร้อน",
+      "อุณหภูมิเดือด",
+      "แช่เย็น"
+    ],
+    "answer": "แช่เย็น",
+    "category": "Wine",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q037",
+    "question_th": "ไวน์ขาวชนิดใดมักเข้ากับอาหารทะเล",
+    "question_en": "Which white wine commonly pairs with seafood?",
+    "options": [
+      "Chardonnay",
+      "Shiraz",
+      "Merlot",
+      "Sauvignon Blanc"
+    ],
+    "answer": "Sauvignon Blanc",
+    "category": "Wine",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q038",
+    "question_th": "Rosé wine ได้สีจากอะไร",
+    "question_en": "What gives rosé wine its color?",
+    "options": [
+      "การหมักกับเปลือกองุ่นช่วงสั้น",
+      "การเติมสี",
+      "การผสมไวน์แดงกับน้ำ",
+      "การใช้ผลไม้สีชมพู"
+    ],
+    "answer": "การหมักกับเปลือกองุ่นช่วงสั้น",
+    "category": "Wine",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q039",
+    "question_th": "Sparkling wine มีลักษณะเด่นอะไร",
+    "question_en": "What is the key characteristic of sparkling wine?",
+    "options": [
+      "หวานเสมอ",
+      "มีฟอง",
+      "มีแทนนินสูง",
+      "สีเข้ม"
+    ],
+    "answer": "มีฟอง",
+    "category": "Wine",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q040",
+    "question_th": "คำว่า body ของไวน์หมายถึงอะไร",
+    "question_en": "What does body mean in wine?",
+    "options": [
+      "กลิ่นเท่านั้น",
+      "ความหนักเบาในปาก",
+      "ปีผลิต",
+      "สีของไวน์"
+    ],
+    "answer": "ความหนักเบาในปาก",
+    "category": "Wine",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q041",
+    "question_th": "ไวน์แดงมักเหมาะกับอาหารประเภทใด",
+    "question_en": "Red wine usually pairs well with which type of food?",
+    "options": [
+      "ไอศกรีม",
+      "ปลาเนื้อขาว",
+      "สลัดผลไม้",
+      "เนื้อแดง"
+    ],
+    "answer": "เนื้อแดง",
+    "category": "Wine",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q042",
+    "question_th": "อุณหภูมิเสิร์ฟไวน์ขาวควรเป็นแบบใด",
+    "question_en": "White wine is best served at what temperature style?",
+    "options": [
+      "อุณหภูมิเดือด",
+      "อุ่น",
+      "ร้อน",
+      "แช่เย็น"
+    ],
+    "answer": "แช่เย็น",
+    "category": "Wine",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q043",
+    "question_th": "ไวน์ขาวชนิดใดมักเข้ากับอาหารทะเล",
+    "question_en": "Which white wine commonly pairs with seafood?",
+    "options": [
+      "Chardonnay",
+      "Merlot",
+      "Sauvignon Blanc",
+      "Shiraz"
+    ],
+    "answer": "Sauvignon Blanc",
+    "category": "Wine",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q044",
+    "question_th": "Rosé wine ได้สีจากอะไร",
+    "question_en": "What gives rosé wine its color?",
+    "options": [
+      "การเติมสี",
+      "การใช้ผลไม้สีชมพู",
+      "การผสมไวน์แดงกับน้ำ",
+      "การหมักกับเปลือกองุ่นช่วงสั้น"
+    ],
+    "answer": "การหมักกับเปลือกองุ่นช่วงสั้น",
+    "category": "Wine",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q045",
+    "question_th": "Sparkling wine มีลักษณะเด่นอะไร",
+    "question_en": "What is the key characteristic of sparkling wine?",
+    "options": [
+      "มีฟอง",
+      "หวานเสมอ",
+      "สีเข้ม",
+      "มีแทนนินสูง"
+    ],
+    "answer": "มีฟอง",
+    "category": "Wine",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q046",
+    "question_th": "คำว่า body ของไวน์หมายถึงอะไร",
+    "question_en": "What does body mean in wine?",
+    "options": [
+      "สีของไวน์",
+      "กลิ่นเท่านั้น",
+      "ปีผลิต",
+      "ความหนักเบาในปาก"
+    ],
+    "answer": "ความหนักเบาในปาก",
+    "category": "Wine",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q047",
+    "question_th": "ไวน์แดงมักเหมาะกับอาหารประเภทใด",
+    "question_en": "Red wine usually pairs well with which type of food?",
+    "options": [
+      "ไอศกรีม",
+      "สลัดผลไม้",
+      "เนื้อแดง",
+      "ปลาเนื้อขาว"
+    ],
+    "answer": "เนื้อแดง",
+    "category": "Wine",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q048",
+    "question_th": "อุณหภูมิเสิร์ฟไวน์ขาวควรเป็นแบบใด",
+    "question_en": "White wine is best served at what temperature style?",
+    "options": [
+      "อุ่น",
+      "อุณหภูมิเดือด",
+      "ร้อน",
+      "แช่เย็น"
+    ],
+    "answer": "แช่เย็น",
+    "category": "Wine",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q049",
+    "question_th": "ไวน์ขาวชนิดใดมักเข้ากับอาหารทะเล",
+    "question_en": "Which white wine commonly pairs with seafood?",
+    "options": [
+      "Shiraz",
+      "Merlot",
+      "Sauvignon Blanc",
+      "Chardonnay"
+    ],
+    "answer": "Sauvignon Blanc",
+    "category": "Wine",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q050",
+    "question_th": "Rosé wine ได้สีจากอะไร",
+    "question_en": "What gives rosé wine its color?",
+    "options": [
+      "การเติมสี",
+      "การหมักกับเปลือกองุ่นช่วงสั้น",
+      "การใช้ผลไม้สีชมพู",
+      "การผสมไวน์แดงกับน้ำ"
+    ],
+    "answer": "การหมักกับเปลือกองุ่นช่วงสั้น",
+    "category": "Wine",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q051",
+    "question_th": "Sparkling wine มีลักษณะเด่นอะไร",
+    "question_en": "What is the key characteristic of sparkling wine?",
+    "options": [
+      "สีเข้ม",
+      "มีฟอง",
+      "หวานเสมอ",
+      "มีแทนนินสูง"
+    ],
+    "answer": "มีฟอง",
+    "category": "Wine",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q052",
+    "question_th": "คำว่า body ของไวน์หมายถึงอะไร",
+    "question_en": "What does body mean in wine?",
+    "options": [
+      "กลิ่นเท่านั้น",
+      "ความหนักเบาในปาก",
+      "สีของไวน์",
+      "ปีผลิต"
+    ],
+    "answer": "ความหนักเบาในปาก",
+    "category": "Wine",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q053",
+    "question_th": "ไวน์แดงมักเหมาะกับอาหารประเภทใด",
+    "question_en": "Red wine usually pairs well with which type of food?",
+    "options": [
+      "ไอศกรีม",
+      "สลัดผลไม้",
+      "ปลาเนื้อขาว",
+      "เนื้อแดง"
+    ],
+    "answer": "เนื้อแดง",
+    "category": "Wine",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q054",
+    "question_th": "อุณหภูมิเสิร์ฟไวน์ขาวควรเป็นแบบใด",
+    "question_en": "White wine is best served at what temperature style?",
+    "options": [
+      "อุ่น",
+      "แช่เย็น",
+      "ร้อน",
+      "อุณหภูมิเดือด"
+    ],
+    "answer": "แช่เย็น",
+    "category": "Wine",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q055",
+    "question_th": "'Would you like to order now?' แปลว่าอะไร",
+    "question_en": "What does 'Would you like to order now?' mean?",
+    "options": [
+      "ต้องการน้ำไหม",
+      "ต้องการย้ายโต๊ะไหม",
+      "พร้อมสั่งอาหารตอนนี้ไหม",
+      "ต้องการเช็กบิลไหม"
+    ],
+    "answer": "พร้อมสั่งอาหารตอนนี้ไหม",
+    "category": "English",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q056",
+    "question_th": "คำว่า bill ในร้านอาหารหมายถึงอะไร",
+    "question_en": "In a restaurant, what does bill mean?",
+    "options": [
+      "ใบเสร็จ/บิล",
+      "ถาดเสิร์ฟ",
+      "เมนู",
+      "ครัว"
+    ],
+    "answer": "ใบเสร็จ/บิล",
+    "category": "English",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q057",
+    "question_th": "'Still water or sparkling water?' ใช้ถามเรื่องอะไร",
+    "question_en": "What is asked by 'Still water or sparkling water?'",
+    "options": [
+      "จำนวนคน",
+      "การจอง",
+      "ประเภทน้ำดื่ม",
+      "ระดับความเผ็ด"
+    ],
+    "answer": "ประเภทน้ำดื่ม",
+    "category": "English",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q058",
+    "question_th": "คำว่า reservation แปลว่าอะไร",
+    "question_en": "What does reservation mean?",
+    "options": [
+      "ของหวาน",
+      "ส่วนลด",
+      "ห้องน้ำ",
+      "การจองโต๊ะ"
+    ],
+    "answer": "การจองโต๊ะ",
+    "category": "English",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q059",
+    "question_th": "'Please let me confirm your allergy.' ควรใช้เมื่อใด",
+    "question_en": "When should you use 'Please let me confirm your allergy.'?",
+    "options": [
+      "ตอนล้างโต๊ะ",
+      "ตอนรับข้อมูลการแพ้อาหาร",
+      "ตอนเสิร์ฟไวน์",
+      "ตอนเก็บเงิน"
+    ],
+    "answer": "ตอนรับข้อมูลการแพ้อาหาร",
+    "category": "English",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q060",
+    "question_th": "คำว่า sold out หมายถึงอะไร",
+    "question_en": "What does sold out mean?",
+    "options": [
+      "ลดราคา",
+      "หมดแล้ว",
+      "ทำสด",
+      "เผ็ดมาก"
+    ],
+    "answer": "หมดแล้ว",
+    "category": "English",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q061",
+    "question_th": "'Would you like to order now?' แปลว่าอะไร",
+    "question_en": "What does 'Would you like to order now?' mean?",
+    "options": [
+      "ต้องการน้ำไหม",
+      "ต้องการเช็กบิลไหม",
+      "ต้องการย้ายโต๊ะไหม",
+      "พร้อมสั่งอาหารตอนนี้ไหม"
+    ],
+    "answer": "พร้อมสั่งอาหารตอนนี้ไหม",
+    "category": "English",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q062",
+    "question_th": "คำว่า bill ในร้านอาหารหมายถึงอะไร",
+    "question_en": "In a restaurant, what does bill mean?",
+    "options": [
+      "ใบเสร็จ/บิล",
+      "ครัว",
+      "ถาดเสิร์ฟ",
+      "เมนู"
+    ],
+    "answer": "ใบเสร็จ/บิล",
+    "category": "English",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q063",
+    "question_th": "'Still water or sparkling water?' ใช้ถามเรื่องอะไร",
+    "question_en": "What is asked by 'Still water or sparkling water?'",
+    "options": [
+      "การจอง",
+      "จำนวนคน",
+      "ระดับความเผ็ด",
+      "ประเภทน้ำดื่ม"
+    ],
+    "answer": "ประเภทน้ำดื่ม",
+    "category": "English",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q064",
+    "question_th": "คำว่า reservation แปลว่าอะไร",
+    "question_en": "What does reservation mean?",
+    "options": [
+      "การจองโต๊ะ",
+      "ส่วนลด",
+      "ห้องน้ำ",
+      "ของหวาน"
+    ],
+    "answer": "การจองโต๊ะ",
+    "category": "English",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q065",
+    "question_th": "'Please let me confirm your allergy.' ควรใช้เมื่อใด",
+    "question_en": "When should you use 'Please let me confirm your allergy.'?",
+    "options": [
+      "ตอนเสิร์ฟไวน์",
+      "ตอนล้างโต๊ะ",
+      "ตอนเก็บเงิน",
+      "ตอนรับข้อมูลการแพ้อาหาร"
+    ],
+    "answer": "ตอนรับข้อมูลการแพ้อาหาร",
+    "category": "English",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q066",
+    "question_th": "คำว่า sold out หมายถึงอะไร",
+    "question_en": "What does sold out mean?",
+    "options": [
+      "หมดแล้ว",
+      "ทำสด",
+      "เผ็ดมาก",
+      "ลดราคา"
+    ],
+    "answer": "หมดแล้ว",
+    "category": "English",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q067",
+    "question_th": "'Would you like to order now?' แปลว่าอะไร",
+    "question_en": "What does 'Would you like to order now?' mean?",
+    "options": [
+      "ต้องการเช็กบิลไหม",
+      "พร้อมสั่งอาหารตอนนี้ไหม",
+      "ต้องการน้ำไหม",
+      "ต้องการย้ายโต๊ะไหม"
+    ],
+    "answer": "พร้อมสั่งอาหารตอนนี้ไหม",
+    "category": "English",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q068",
+    "question_th": "คำว่า bill ในร้านอาหารหมายถึงอะไร",
+    "question_en": "In a restaurant, what does bill mean?",
+    "options": [
+      "ครัว",
+      "ถาดเสิร์ฟ",
+      "เมนู",
+      "ใบเสร็จ/บิล"
+    ],
+    "answer": "ใบเสร็จ/บิล",
+    "category": "English",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q069",
+    "question_th": "'Still water or sparkling water?' ใช้ถามเรื่องอะไร",
+    "question_en": "What is asked by 'Still water or sparkling water?'",
+    "options": [
+      "ประเภทน้ำดื่ม",
+      "ระดับความเผ็ด",
+      "การจอง",
+      "จำนวนคน"
+    ],
+    "answer": "ประเภทน้ำดื่ม",
+    "category": "English",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q070",
+    "question_th": "คำว่า reservation แปลว่าอะไร",
+    "question_en": "What does reservation mean?",
+    "options": [
+      "ของหวาน",
+      "ส่วนลด",
+      "การจองโต๊ะ",
+      "ห้องน้ำ"
+    ],
+    "answer": "การจองโต๊ะ",
+    "category": "English",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q071",
+    "question_th": "'Please let me confirm your allergy.' ควรใช้เมื่อใด",
+    "question_en": "When should you use 'Please let me confirm your allergy.'?",
+    "options": [
+      "ตอนรับข้อมูลการแพ้อาหาร",
+      "ตอนเก็บเงิน",
+      "ตอนล้างโต๊ะ",
+      "ตอนเสิร์ฟไวน์"
+    ],
+    "answer": "ตอนรับข้อมูลการแพ้อาหาร",
+    "category": "English",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q072",
+    "question_th": "คำว่า sold out หมายถึงอะไร",
+    "question_en": "What does sold out mean?",
+    "options": [
+      "หมดแล้ว",
+      "เผ็ดมาก",
+      "ลดราคา",
+      "ทำสด"
+    ],
+    "answer": "หมดแล้ว",
+    "category": "English",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q073",
+    "question_th": "'Would you like to order now?' แปลว่าอะไร",
+    "question_en": "What does 'Would you like to order now?' mean?",
+    "options": [
+      "พร้อมสั่งอาหารตอนนี้ไหม",
+      "ต้องการย้ายโต๊ะไหม",
+      "ต้องการเช็กบิลไหม",
+      "ต้องการน้ำไหม"
+    ],
+    "answer": "พร้อมสั่งอาหารตอนนี้ไหม",
+    "category": "English",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q074",
+    "question_th": "คำว่า bill ในร้านอาหารหมายถึงอะไร",
+    "question_en": "In a restaurant, what does bill mean?",
+    "options": [
+      "ครัว",
+      "ถาดเสิร์ฟ",
+      "เมนู",
+      "ใบเสร็จ/บิล"
+    ],
+    "answer": "ใบเสร็จ/บิล",
+    "category": "English",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q075",
+    "question_th": "'Still water or sparkling water?' ใช้ถามเรื่องอะไร",
+    "question_en": "What is asked by 'Still water or sparkling water?'",
+    "options": [
+      "ประเภทน้ำดื่ม",
+      "จำนวนคน",
+      "การจอง",
+      "ระดับความเผ็ด"
+    ],
+    "answer": "ประเภทน้ำดื่ม",
+    "category": "English",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q076",
+    "question_th": "คำว่า reservation แปลว่าอะไร",
+    "question_en": "What does reservation mean?",
+    "options": [
+      "การจองโต๊ะ",
+      "ห้องน้ำ",
+      "ส่วนลด",
+      "ของหวาน"
+    ],
+    "answer": "การจองโต๊ะ",
+    "category": "English",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q077",
+    "question_th": "'Please let me confirm your allergy.' ควรใช้เมื่อใด",
+    "question_en": "When should you use 'Please let me confirm your allergy.'?",
+    "options": [
+      "ตอนรับข้อมูลการแพ้อาหาร",
+      "ตอนล้างโต๊ะ",
+      "ตอนเสิร์ฟไวน์",
+      "ตอนเก็บเงิน"
+    ],
+    "answer": "ตอนรับข้อมูลการแพ้อาหาร",
+    "category": "English",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q078",
+    "question_th": "คำว่า sold out หมายถึงอะไร",
+    "question_en": "What does sold out mean?",
+    "options": [
+      "หมดแล้ว",
+      "เผ็ดมาก",
+      "ทำสด",
+      "ลดราคา"
+    ],
+    "answer": "หมดแล้ว",
+    "category": "English",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q079",
+    "question_th": "'Would you like to order now?' แปลว่าอะไร",
+    "question_en": "What does 'Would you like to order now?' mean?",
+    "options": [
+      "ต้องการน้ำไหม",
+      "ต้องการย้ายโต๊ะไหม",
+      "ต้องการเช็กบิลไหม",
+      "พร้อมสั่งอาหารตอนนี้ไหม"
+    ],
+    "answer": "พร้อมสั่งอาหารตอนนี้ไหม",
+    "category": "English",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q080",
+    "question_th": "คำว่า bill ในร้านอาหารหมายถึงอะไร",
+    "question_en": "In a restaurant, what does bill mean?",
+    "options": [
+      "ถาดเสิร์ฟ",
+      "ใบเสร็จ/บิล",
+      "เมนู",
+      "ครัว"
+    ],
+    "answer": "ใบเสร็จ/บิล",
+    "category": "English",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q081",
+    "question_th": "'Still water or sparkling water?' ใช้ถามเรื่องอะไร",
+    "question_en": "What is asked by 'Still water or sparkling water?'",
+    "options": [
+      "การจอง",
+      "ระดับความเผ็ด",
+      "ประเภทน้ำดื่ม",
+      "จำนวนคน"
+    ],
+    "answer": "ประเภทน้ำดื่ม",
+    "category": "English",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q082",
+    "question_th": "คำว่า reservation แปลว่าอะไร",
+    "question_en": "What does reservation mean?",
+    "options": [
+      "ส่วนลด",
+      "ของหวาน",
+      "การจองโต๊ะ",
+      "ห้องน้ำ"
+    ],
+    "answer": "การจองโต๊ะ",
+    "category": "English",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q083",
+    "question_th": "'Please let me confirm your allergy.' ควรใช้เมื่อใด",
+    "question_en": "When should you use 'Please let me confirm your allergy.'?",
+    "options": [
+      "ตอนรับข้อมูลการแพ้อาหาร",
+      "ตอนล้างโต๊ะ",
+      "ตอนเสิร์ฟไวน์",
+      "ตอนเก็บเงิน"
+    ],
+    "answer": "ตอนรับข้อมูลการแพ้อาหาร",
+    "category": "English",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q084",
+    "question_th": "คำว่า sold out หมายถึงอะไร",
+    "question_en": "What does sold out mean?",
+    "options": [
+      "หมดแล้ว",
+      "เผ็ดมาก",
+      "ทำสด",
+      "ลดราคา"
+    ],
+    "answer": "หมดแล้ว",
+    "category": "English",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q085",
+    "question_th": "'Would you like to order now?' แปลว่าอะไร",
+    "question_en": "What does 'Would you like to order now?' mean?",
+    "options": [
+      "ต้องการเช็กบิลไหม",
+      "ต้องการน้ำไหม",
+      "พร้อมสั่งอาหารตอนนี้ไหม",
+      "ต้องการย้ายโต๊ะไหม"
+    ],
+    "answer": "พร้อมสั่งอาหารตอนนี้ไหม",
+    "category": "English",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q086",
+    "question_th": "คำว่า bill ในร้านอาหารหมายถึงอะไร",
+    "question_en": "In a restaurant, what does bill mean?",
+    "options": [
+      "ถาดเสิร์ฟ",
+      "เมนู",
+      "ใบเสร็จ/บิล",
+      "ครัว"
+    ],
+    "answer": "ใบเสร็จ/บิล",
+    "category": "English",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q087",
+    "question_th": "'Still water or sparkling water?' ใช้ถามเรื่องอะไร",
+    "question_en": "What is asked by 'Still water or sparkling water?'",
+    "options": [
+      "ประเภทน้ำดื่ม",
+      "ระดับความเผ็ด",
+      "การจอง",
+      "จำนวนคน"
+    ],
+    "answer": "ประเภทน้ำดื่ม",
+    "category": "English",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q088",
+    "question_th": "คำว่า reservation แปลว่าอะไร",
+    "question_en": "What does reservation mean?",
+    "options": [
+      "การจองโต๊ะ",
+      "ห้องน้ำ",
+      "ของหวาน",
+      "ส่วนลด"
+    ],
+    "answer": "การจองโต๊ะ",
+    "category": "English",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q089",
+    "question_th": "'Please let me confirm your allergy.' ควรใช้เมื่อใด",
+    "question_en": "When should you use 'Please let me confirm your allergy.'?",
+    "options": [
+      "ตอนเสิร์ฟไวน์",
+      "ตอนล้างโต๊ะ",
+      "ตอนเก็บเงิน",
+      "ตอนรับข้อมูลการแพ้อาหาร"
+    ],
+    "answer": "ตอนรับข้อมูลการแพ้อาหาร",
+    "category": "English",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q090",
+    "question_th": "คำว่า sold out หมายถึงอะไร",
+    "question_en": "What does sold out mean?",
+    "options": [
+      "หมดแล้ว",
+      "เผ็ดมาก",
+      "ทำสด",
+      "ลดราคา"
+    ],
+    "answer": "หมดแล้ว",
+    "category": "English",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q091",
+    "question_th": "'Would you like to order now?' แปลว่าอะไร",
+    "question_en": "What does 'Would you like to order now?' mean?",
+    "options": [
+      "ต้องการน้ำไหม",
+      "ต้องการเช็กบิลไหม",
+      "พร้อมสั่งอาหารตอนนี้ไหม",
+      "ต้องการย้ายโต๊ะไหม"
+    ],
+    "answer": "พร้อมสั่งอาหารตอนนี้ไหม",
+    "category": "English",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q092",
+    "question_th": "คำว่า bill ในร้านอาหารหมายถึงอะไร",
+    "question_en": "In a restaurant, what does bill mean?",
+    "options": [
+      "ใบเสร็จ/บิล",
+      "เมนู",
+      "ครัว",
+      "ถาดเสิร์ฟ"
+    ],
+    "answer": "ใบเสร็จ/บิล",
+    "category": "English",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q093",
+    "question_th": "'Still water or sparkling water?' ใช้ถามเรื่องอะไร",
+    "question_en": "What is asked by 'Still water or sparkling water?'",
+    "options": [
+      "ประเภทน้ำดื่ม",
+      "จำนวนคน",
+      "การจอง",
+      "ระดับความเผ็ด"
+    ],
+    "answer": "ประเภทน้ำดื่ม",
+    "category": "English",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q094",
+    "question_th": "คำว่า reservation แปลว่าอะไร",
+    "question_en": "What does reservation mean?",
+    "options": [
+      "การจองโต๊ะ",
+      "ส่วนลด",
+      "ของหวาน",
+      "ห้องน้ำ"
+    ],
+    "answer": "การจองโต๊ะ",
+    "category": "English",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q095",
+    "question_th": "'Please let me confirm your allergy.' ควรใช้เมื่อใด",
+    "question_en": "When should you use 'Please let me confirm your allergy.'?",
+    "options": [
+      "ตอนรับข้อมูลการแพ้อาหาร",
+      "ตอนเสิร์ฟไวน์",
+      "ตอนเก็บเงิน",
+      "ตอนล้างโต๊ะ"
+    ],
+    "answer": "ตอนรับข้อมูลการแพ้อาหาร",
+    "category": "English",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q096",
+    "question_th": "คำว่า sold out หมายถึงอะไร",
+    "question_en": "What does sold out mean?",
+    "options": [
+      "หมดแล้ว",
+      "ลดราคา",
+      "เผ็ดมาก",
+      "ทำสด"
+    ],
+    "answer": "หมดแล้ว",
+    "category": "English",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q097",
+    "question_th": "'Would you like to order now?' แปลว่าอะไร",
+    "question_en": "What does 'Would you like to order now?' mean?",
+    "options": [
+      "ต้องการย้ายโต๊ะไหม",
+      "พร้อมสั่งอาหารตอนนี้ไหม",
+      "ต้องการเช็กบิลไหม",
+      "ต้องการน้ำไหม"
+    ],
+    "answer": "พร้อมสั่งอาหารตอนนี้ไหม",
+    "category": "English",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q098",
+    "question_th": "คำว่า bill ในร้านอาหารหมายถึงอะไร",
+    "question_en": "In a restaurant, what does bill mean?",
+    "options": [
+      "ครัว",
+      "เมนู",
+      "ถาดเสิร์ฟ",
+      "ใบเสร็จ/บิล"
+    ],
+    "answer": "ใบเสร็จ/บิล",
+    "category": "English",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q099",
+    "question_th": "'Still water or sparkling water?' ใช้ถามเรื่องอะไร",
+    "question_en": "What is asked by 'Still water or sparkling water?'",
+    "options": [
+      "ประเภทน้ำดื่ม",
+      "จำนวนคน",
+      "การจอง",
+      "ระดับความเผ็ด"
+    ],
+    "answer": "ประเภทน้ำดื่ม",
+    "category": "English",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q100",
+    "question_th": "คำว่า reservation แปลว่าอะไร",
+    "question_en": "What does reservation mean?",
+    "options": [
+      "ของหวาน",
+      "ส่วนลด",
+      "การจองโต๊ะ",
+      "ห้องน้ำ"
+    ],
+    "answer": "การจองโต๊ะ",
+    "category": "English",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q101",
+    "question_th": "'Please let me confirm your allergy.' ควรใช้เมื่อใด",
+    "question_en": "When should you use 'Please let me confirm your allergy.'?",
+    "options": [
+      "ตอนเสิร์ฟไวน์",
+      "ตอนล้างโต๊ะ",
+      "ตอนเก็บเงิน",
+      "ตอนรับข้อมูลการแพ้อาหาร"
+    ],
+    "answer": "ตอนรับข้อมูลการแพ้อาหาร",
+    "category": "English",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q102",
+    "question_th": "คำว่า sold out หมายถึงอะไร",
+    "question_en": "What does sold out mean?",
+    "options": [
+      "หมดแล้ว",
+      "ทำสด",
+      "เผ็ดมาก",
+      "ลดราคา"
+    ],
+    "answer": "หมดแล้ว",
+    "category": "English",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q103",
+    "question_th": "'Would you like to order now?' แปลว่าอะไร",
+    "question_en": "What does 'Would you like to order now?' mean?",
+    "options": [
+      "พร้อมสั่งอาหารตอนนี้ไหม",
+      "ต้องการเช็กบิลไหม",
+      "ต้องการน้ำไหม",
+      "ต้องการย้ายโต๊ะไหม"
+    ],
+    "answer": "พร้อมสั่งอาหารตอนนี้ไหม",
+    "category": "English",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q104",
+    "question_th": "คำว่า bill ในร้านอาหารหมายถึงอะไร",
+    "question_en": "In a restaurant, what does bill mean?",
+    "options": [
+      "เมนู",
+      "ถาดเสิร์ฟ",
+      "ใบเสร็จ/บิล",
+      "ครัว"
+    ],
+    "answer": "ใบเสร็จ/บิล",
+    "category": "English",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q105",
+    "question_th": "'Still water or sparkling water?' ใช้ถามเรื่องอะไร",
+    "question_en": "What is asked by 'Still water or sparkling water?'",
+    "options": [
+      "การจอง",
+      "จำนวนคน",
+      "ระดับความเผ็ด",
+      "ประเภทน้ำดื่ม"
+    ],
+    "answer": "ประเภทน้ำดื่ม",
+    "category": "English",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q106",
+    "question_th": "คำว่า reservation แปลว่าอะไร",
+    "question_en": "What does reservation mean?",
+    "options": [
+      "ห้องน้ำ",
+      "ส่วนลด",
+      "การจองโต๊ะ",
+      "ของหวาน"
+    ],
+    "answer": "การจองโต๊ะ",
+    "category": "English",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q107",
+    "question_th": "'Please let me confirm your allergy.' ควรใช้เมื่อใด",
+    "question_en": "When should you use 'Please let me confirm your allergy.'?",
+    "options": [
+      "ตอนรับข้อมูลการแพ้อาหาร",
+      "ตอนเก็บเงิน",
+      "ตอนล้างโต๊ะ",
+      "ตอนเสิร์ฟไวน์"
+    ],
+    "answer": "ตอนรับข้อมูลการแพ้อาหาร",
+    "category": "English",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q108",
+    "question_th": "คำว่า sold out หมายถึงอะไร",
+    "question_en": "What does sold out mean?",
+    "options": [
+      "เผ็ดมาก",
+      "หมดแล้ว",
+      "ลดราคา",
+      "ทำสด"
+    ],
+    "answer": "หมดแล้ว",
+    "category": "English",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q109",
+    "question_th": "อาหารร้อนควรรักษาไว้สูงกว่าเท่าใด",
+    "question_en": "Hot food should be kept above what temperature?",
+    "options": [
+      "60°C",
+      "100°C",
+      "5°C",
+      "20°C"
+    ],
+    "answer": "60°C",
+    "category": "Hygiene",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q110",
+    "question_th": "FIFO ย่อมาจากอะไร",
+    "question_en": "What does FIFO stand for?",
+    "options": [
+      "Food In Food Out",
+      "Fast In Fast Out",
+      "First In First Out",
+      "First Item Final Order"
+    ],
+    "answer": "First In First Out",
+    "category": "Hygiene",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q111",
+    "question_th": "ควรล้างมืออย่างน้อยกี่วินาที",
+    "question_en": "How many seconds should you wash your hands at minimum?",
+    "options": [
+      "10",
+      "5",
+      "20",
+      "60"
+    ],
+    "answer": "20",
+    "category": "Hygiene",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q112",
+    "question_th": "การใส่เครื่องประดับขณะเตรียมอาหารควรทำหรือไม่",
+    "question_en": "Should jewelry be worn while preparing food?",
+    "options": [
+      "เฉพาะแหวนได้",
+      "ควร",
+      "เฉพาะสร้อยได้",
+      "ไม่ควร"
+    ],
+    "answer": "ไม่ควร",
+    "category": "Hygiene",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q113",
+    "question_th": "Cleaning ต่างจาก Sanitizing อย่างไร",
+    "question_en": "How is cleaning different from sanitizing?",
+    "options": [
+      "Sanitizing ใช้กับแก้วเท่านั้น",
+      "เหมือนกัน",
+      "Cleaning ฆ่าเชื้ออย่างเดียว",
+      "Cleaning ขจัดคราบ, Sanitizing ลดเชื้อ"
+    ],
+    "answer": "Cleaning ขจัดคราบ, Sanitizing ลดเชื้อ",
+    "category": "Hygiene",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q114",
+    "question_th": "หลังจับเงินควรทำอะไร ก่อนจับอาหาร",
+    "question_en": "What should be done after handling money before touching food?",
+    "options": [
+      "ล้างมือ",
+      "เปลี่ยนโต๊ะ",
+      "ใส่ผ้ากันเปื้อน",
+      "ชิมอาหาร"
+    ],
+    "answer": "ล้างมือ",
+    "category": "Hygiene",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q115",
+    "question_th": "อาหารร้อนควรรักษาไว้สูงกว่าเท่าใด",
+    "question_en": "Hot food should be kept above what temperature?",
+    "options": [
+      "20°C",
+      "5°C",
+      "60°C",
+      "100°C"
+    ],
+    "answer": "60°C",
+    "category": "Hygiene",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q116",
+    "question_th": "FIFO ย่อมาจากอะไร",
+    "question_en": "What does FIFO stand for?",
+    "options": [
+      "First Item Final Order",
+      "Food In Food Out",
+      "Fast In Fast Out",
+      "First In First Out"
+    ],
+    "answer": "First In First Out",
+    "category": "Hygiene",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q117",
+    "question_th": "ควรล้างมืออย่างน้อยกี่วินาที",
+    "question_en": "How many seconds should you wash your hands at minimum?",
+    "options": [
+      "20",
+      "10",
+      "60",
+      "5"
+    ],
+    "answer": "20",
+    "category": "Hygiene",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q118",
+    "question_th": "การใส่เครื่องประดับขณะเตรียมอาหารควรทำหรือไม่",
+    "question_en": "Should jewelry be worn while preparing food?",
+    "options": [
+      "ไม่ควร",
+      "ควร",
+      "เฉพาะแหวนได้",
+      "เฉพาะสร้อยได้"
+    ],
+    "answer": "ไม่ควร",
+    "category": "Hygiene",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q119",
+    "question_th": "Cleaning ต่างจาก Sanitizing อย่างไร",
+    "question_en": "How is cleaning different from sanitizing?",
+    "options": [
+      "เหมือนกัน",
+      "Cleaning ฆ่าเชื้ออย่างเดียว",
+      "Cleaning ขจัดคราบ, Sanitizing ลดเชื้อ",
+      "Sanitizing ใช้กับแก้วเท่านั้น"
+    ],
+    "answer": "Cleaning ขจัดคราบ, Sanitizing ลดเชื้อ",
+    "category": "Hygiene",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q120",
+    "question_th": "หลังจับเงินควรทำอะไร ก่อนจับอาหาร",
+    "question_en": "What should be done after handling money before touching food?",
+    "options": [
+      "ล้างมือ",
+      "เปลี่ยนโต๊ะ",
+      "ใส่ผ้ากันเปื้อน",
+      "ชิมอาหาร"
+    ],
+    "answer": "ล้างมือ",
+    "category": "Hygiene",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q121",
+    "question_th": "อาหารร้อนควรรักษาไว้สูงกว่าเท่าใด",
+    "question_en": "Hot food should be kept above what temperature?",
+    "options": [
+      "60°C",
+      "5°C",
+      "100°C",
+      "20°C"
+    ],
+    "answer": "60°C",
+    "category": "Hygiene",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q122",
+    "question_th": "FIFO ย่อมาจากอะไร",
+    "question_en": "What does FIFO stand for?",
+    "options": [
+      "Fast In Fast Out",
+      "Food In Food Out",
+      "First In First Out",
+      "First Item Final Order"
+    ],
+    "answer": "First In First Out",
+    "category": "Hygiene",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q123",
+    "question_th": "ควรล้างมืออย่างน้อยกี่วินาที",
+    "question_en": "How many seconds should you wash your hands at minimum?",
+    "options": [
+      "60",
+      "20",
+      "5",
+      "10"
+    ],
+    "answer": "20",
+    "category": "Hygiene",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q124",
+    "question_th": "การใส่เครื่องประดับขณะเตรียมอาหารควรทำหรือไม่",
+    "question_en": "Should jewelry be worn while preparing food?",
+    "options": [
+      "ควร",
+      "เฉพาะแหวนได้",
+      "เฉพาะสร้อยได้",
+      "ไม่ควร"
+    ],
+    "answer": "ไม่ควร",
+    "category": "Hygiene",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q125",
+    "question_th": "Cleaning ต่างจาก Sanitizing อย่างไร",
+    "question_en": "How is cleaning different from sanitizing?",
+    "options": [
+      "Cleaning ขจัดคราบ, Sanitizing ลดเชื้อ",
+      "Sanitizing ใช้กับแก้วเท่านั้น",
+      "Cleaning ฆ่าเชื้ออย่างเดียว",
+      "เหมือนกัน"
+    ],
+    "answer": "Cleaning ขจัดคราบ, Sanitizing ลดเชื้อ",
+    "category": "Hygiene",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q126",
+    "question_th": "หลังจับเงินควรทำอะไร ก่อนจับอาหาร",
+    "question_en": "What should be done after handling money before touching food?",
+    "options": [
+      "ใส่ผ้ากันเปื้อน",
+      "ล้างมือ",
+      "ชิมอาหาร",
+      "เปลี่ยนโต๊ะ"
+    ],
+    "answer": "ล้างมือ",
+    "category": "Hygiene",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q127",
+    "question_th": "อาหารร้อนควรรักษาไว้สูงกว่าเท่าใด",
+    "question_en": "Hot food should be kept above what temperature?",
+    "options": [
+      "60°C",
+      "5°C",
+      "100°C",
+      "20°C"
+    ],
+    "answer": "60°C",
+    "category": "Hygiene",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q128",
+    "question_th": "FIFO ย่อมาจากอะไร",
+    "question_en": "What does FIFO stand for?",
+    "options": [
+      "Fast In Fast Out",
+      "First In First Out",
+      "Food In Food Out",
+      "First Item Final Order"
+    ],
+    "answer": "First In First Out",
+    "category": "Hygiene",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q129",
+    "question_th": "ควรล้างมืออย่างน้อยกี่วินาที",
+    "question_en": "How many seconds should you wash your hands at minimum?",
+    "options": [
+      "10",
+      "20",
+      "60",
+      "5"
+    ],
+    "answer": "20",
+    "category": "Hygiene",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q130",
+    "question_th": "การใส่เครื่องประดับขณะเตรียมอาหารควรทำหรือไม่",
+    "question_en": "Should jewelry be worn while preparing food?",
+    "options": [
+      "ไม่ควร",
+      "เฉพาะสร้อยได้",
+      "เฉพาะแหวนได้",
+      "ควร"
+    ],
+    "answer": "ไม่ควร",
+    "category": "Hygiene",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q131",
+    "question_th": "Cleaning ต่างจาก Sanitizing อย่างไร",
+    "question_en": "How is cleaning different from sanitizing?",
+    "options": [
+      "Cleaning ขจัดคราบ, Sanitizing ลดเชื้อ",
+      "Cleaning ฆ่าเชื้ออย่างเดียว",
+      "เหมือนกัน",
+      "Sanitizing ใช้กับแก้วเท่านั้น"
+    ],
+    "answer": "Cleaning ขจัดคราบ, Sanitizing ลดเชื้อ",
+    "category": "Hygiene",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q132",
+    "question_th": "หลังจับเงินควรทำอะไร ก่อนจับอาหาร",
+    "question_en": "What should be done after handling money before touching food?",
+    "options": [
+      "ล้างมือ",
+      "เปลี่ยนโต๊ะ",
+      "ใส่ผ้ากันเปื้อน",
+      "ชิมอาหาร"
+    ],
+    "answer": "ล้างมือ",
+    "category": "Hygiene",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q133",
+    "question_th": "อาหารร้อนควรรักษาไว้สูงกว่าเท่าใด",
+    "question_en": "Hot food should be kept above what temperature?",
+    "options": [
+      "100°C",
+      "5°C",
+      "20°C",
+      "60°C"
+    ],
+    "answer": "60°C",
+    "category": "Hygiene",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q134",
+    "question_th": "FIFO ย่อมาจากอะไร",
+    "question_en": "What does FIFO stand for?",
+    "options": [
+      "First Item Final Order",
+      "Food In Food Out",
+      "Fast In Fast Out",
+      "First In First Out"
+    ],
+    "answer": "First In First Out",
+    "category": "Hygiene",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q135",
+    "question_th": "ควรล้างมืออย่างน้อยกี่วินาที",
+    "question_en": "How many seconds should you wash your hands at minimum?",
+    "options": [
+      "60",
+      "5",
+      "20",
+      "10"
+    ],
+    "answer": "20",
+    "category": "Hygiene",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q136",
+    "question_th": "การใส่เครื่องประดับขณะเตรียมอาหารควรทำหรือไม่",
+    "question_en": "Should jewelry be worn while preparing food?",
+    "options": [
+      "เฉพาะแหวนได้",
+      "เฉพาะสร้อยได้",
+      "ควร",
+      "ไม่ควร"
+    ],
+    "answer": "ไม่ควร",
+    "category": "Hygiene",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q137",
+    "question_th": "Cleaning ต่างจาก Sanitizing อย่างไร",
+    "question_en": "How is cleaning different from sanitizing?",
+    "options": [
+      "Cleaning ฆ่าเชื้ออย่างเดียว",
+      "Sanitizing ใช้กับแก้วเท่านั้น",
+      "Cleaning ขจัดคราบ, Sanitizing ลดเชื้อ",
+      "เหมือนกัน"
+    ],
+    "answer": "Cleaning ขจัดคราบ, Sanitizing ลดเชื้อ",
+    "category": "Hygiene",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q138",
+    "question_th": "หลังจับเงินควรทำอะไร ก่อนจับอาหาร",
+    "question_en": "What should be done after handling money before touching food?",
+    "options": [
+      "เปลี่ยนโต๊ะ",
+      "ใส่ผ้ากันเปื้อน",
+      "ชิมอาหาร",
+      "ล้างมือ"
+    ],
+    "answer": "ล้างมือ",
+    "category": "Hygiene",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q139",
+    "question_th": "อาหารร้อนควรรักษาไว้สูงกว่าเท่าใด",
+    "question_en": "Hot food should be kept above what temperature?",
+    "options": [
+      "100°C",
+      "5°C",
+      "60°C",
+      "20°C"
+    ],
+    "answer": "60°C",
+    "category": "Hygiene",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q140",
+    "question_th": "FIFO ย่อมาจากอะไร",
+    "question_en": "What does FIFO stand for?",
+    "options": [
+      "First In First Out",
+      "Food In Food Out",
+      "Fast In Fast Out",
+      "First Item Final Order"
+    ],
+    "answer": "First In First Out",
+    "category": "Hygiene",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q141",
+    "question_th": "ควรล้างมืออย่างน้อยกี่วินาที",
+    "question_en": "How many seconds should you wash your hands at minimum?",
+    "options": [
+      "5",
+      "60",
+      "10",
+      "20"
+    ],
+    "answer": "20",
+    "category": "Hygiene",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q142",
+    "question_th": "การใส่เครื่องประดับขณะเตรียมอาหารควรทำหรือไม่",
+    "question_en": "Should jewelry be worn while preparing food?",
+    "options": [
+      "เฉพาะแหวนได้",
+      "เฉพาะสร้อยได้",
+      "ควร",
+      "ไม่ควร"
+    ],
+    "answer": "ไม่ควร",
+    "category": "Hygiene",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q143",
+    "question_th": "Cleaning ต่างจาก Sanitizing อย่างไร",
+    "question_en": "How is cleaning different from sanitizing?",
+    "options": [
+      "Cleaning ขจัดคราบ, Sanitizing ลดเชื้อ",
+      "เหมือนกัน",
+      "Sanitizing ใช้กับแก้วเท่านั้น",
+      "Cleaning ฆ่าเชื้ออย่างเดียว"
+    ],
+    "answer": "Cleaning ขจัดคราบ, Sanitizing ลดเชื้อ",
+    "category": "Hygiene",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q144",
+    "question_th": "หลังจับเงินควรทำอะไร ก่อนจับอาหาร",
+    "question_en": "What should be done after handling money before touching food?",
+    "options": [
+      "เปลี่ยนโต๊ะ",
+      "ใส่ผ้ากันเปื้อน",
+      "ชิมอาหาร",
+      "ล้างมือ"
+    ],
+    "answer": "ล้างมือ",
+    "category": "Hygiene",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q145",
+    "question_th": "อาหารร้อนควรรักษาไว้สูงกว่าเท่าใด",
+    "question_en": "Hot food should be kept above what temperature?",
+    "options": [
+      "100°C",
+      "60°C",
+      "5°C",
+      "20°C"
+    ],
+    "answer": "60°C",
+    "category": "Hygiene",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q146",
+    "question_th": "FIFO ย่อมาจากอะไร",
+    "question_en": "What does FIFO stand for?",
+    "options": [
+      "First In First Out",
+      "Fast In Fast Out",
+      "Food In Food Out",
+      "First Item Final Order"
+    ],
+    "answer": "First In First Out",
+    "category": "Hygiene",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q147",
+    "question_th": "ควรล้างมืออย่างน้อยกี่วินาที",
+    "question_en": "How many seconds should you wash your hands at minimum?",
+    "options": [
+      "20",
+      "60",
+      "10",
+      "5"
+    ],
+    "answer": "20",
+    "category": "Hygiene",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q148",
+    "question_th": "การใส่เครื่องประดับขณะเตรียมอาหารควรทำหรือไม่",
+    "question_en": "Should jewelry be worn while preparing food?",
+    "options": [
+      "เฉพาะแหวนได้",
+      "ควร",
+      "เฉพาะสร้อยได้",
+      "ไม่ควร"
+    ],
+    "answer": "ไม่ควร",
+    "category": "Hygiene",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q149",
+    "question_th": "Cleaning ต่างจาก Sanitizing อย่างไร",
+    "question_en": "How is cleaning different from sanitizing?",
+    "options": [
+      "Cleaning ฆ่าเชื้ออย่างเดียว",
+      "Cleaning ขจัดคราบ, Sanitizing ลดเชื้อ",
+      "เหมือนกัน",
+      "Sanitizing ใช้กับแก้วเท่านั้น"
+    ],
+    "answer": "Cleaning ขจัดคราบ, Sanitizing ลดเชื้อ",
+    "category": "Hygiene",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q150",
+    "question_th": "หลังจับเงินควรทำอะไร ก่อนจับอาหาร",
+    "question_en": "What should be done after handling money before touching food?",
+    "options": [
+      "ชิมอาหาร",
+      "ล้างมือ",
+      "เปลี่ยนโต๊ะ",
+      "ใส่ผ้ากันเปื้อน"
+    ],
+    "answer": "ล้างมือ",
+    "category": "Hygiene",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q151",
+    "question_th": "อาหารร้อนควรรักษาไว้สูงกว่าเท่าใด",
+    "question_en": "Hot food should be kept above what temperature?",
+    "options": [
+      "20°C",
+      "60°C",
+      "5°C",
+      "100°C"
+    ],
+    "answer": "60°C",
+    "category": "Hygiene",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q152",
+    "question_th": "FIFO ย่อมาจากอะไร",
+    "question_en": "What does FIFO stand for?",
+    "options": [
+      "Food In Food Out",
+      "Fast In Fast Out",
+      "First Item Final Order",
+      "First In First Out"
+    ],
+    "answer": "First In First Out",
+    "category": "Hygiene",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q153",
+    "question_th": "ควรล้างมืออย่างน้อยกี่วินาที",
+    "question_en": "How many seconds should you wash your hands at minimum?",
+    "options": [
+      "10",
+      "60",
+      "20",
+      "5"
+    ],
+    "answer": "20",
+    "category": "Hygiene",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q154",
+    "question_th": "การใส่เครื่องประดับขณะเตรียมอาหารควรทำหรือไม่",
+    "question_en": "Should jewelry be worn while preparing food?",
+    "options": [
+      "เฉพาะสร้อยได้",
+      "ไม่ควร",
+      "ควร",
+      "เฉพาะแหวนได้"
+    ],
+    "answer": "ไม่ควร",
+    "category": "Hygiene",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q155",
+    "question_th": "Cleaning ต่างจาก Sanitizing อย่างไร",
+    "question_en": "How is cleaning different from sanitizing?",
+    "options": [
+      "Cleaning ฆ่าเชื้ออย่างเดียว",
+      "Sanitizing ใช้กับแก้วเท่านั้น",
+      "เหมือนกัน",
+      "Cleaning ขจัดคราบ, Sanitizing ลดเชื้อ"
+    ],
+    "answer": "Cleaning ขจัดคราบ, Sanitizing ลดเชื้อ",
+    "category": "Hygiene",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q156",
+    "question_th": "หลังจับเงินควรทำอะไร ก่อนจับอาหาร",
+    "question_en": "What should be done after handling money before touching food?",
+    "options": [
+      "เปลี่ยนโต๊ะ",
+      "ชิมอาหาร",
+      "ล้างมือ",
+      "ใส่ผ้ากันเปื้อน"
+    ],
+    "answer": "ล้างมือ",
+    "category": "Hygiene",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q157",
+    "question_th": "อาหารร้อนควรรักษาไว้สูงกว่าเท่าใด",
+    "question_en": "Hot food should be kept above what temperature?",
+    "options": [
+      "60°C",
+      "5°C",
+      "100°C",
+      "20°C"
+    ],
+    "answer": "60°C",
+    "category": "Hygiene",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q158",
+    "question_th": "FIFO ย่อมาจากอะไร",
+    "question_en": "What does FIFO stand for?",
+    "options": [
+      "First Item Final Order",
+      "Fast In Fast Out",
+      "First In First Out",
+      "Food In Food Out"
+    ],
+    "answer": "First In First Out",
+    "category": "Hygiene",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q159",
+    "question_th": "ควรล้างมืออย่างน้อยกี่วินาที",
+    "question_en": "How many seconds should you wash your hands at minimum?",
+    "options": [
+      "60",
+      "10",
+      "5",
+      "20"
+    ],
+    "answer": "20",
+    "category": "Hygiene",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q160",
+    "question_th": "การใส่เครื่องประดับขณะเตรียมอาหารควรทำหรือไม่",
+    "question_en": "Should jewelry be worn while preparing food?",
+    "options": [
+      "เฉพาะสร้อยได้",
+      "ควร",
+      "ไม่ควร",
+      "เฉพาะแหวนได้"
+    ],
+    "answer": "ไม่ควร",
+    "category": "Hygiene",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q161",
+    "question_th": "Cleaning ต่างจาก Sanitizing อย่างไร",
+    "question_en": "How is cleaning different from sanitizing?",
+    "options": [
+      "Cleaning ฆ่าเชื้ออย่างเดียว",
+      "Sanitizing ใช้กับแก้วเท่านั้น",
+      "เหมือนกัน",
+      "Cleaning ขจัดคราบ, Sanitizing ลดเชื้อ"
+    ],
+    "answer": "Cleaning ขจัดคราบ, Sanitizing ลดเชื้อ",
+    "category": "Hygiene",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q162",
+    "question_th": "หลังจับเงินควรทำอะไร ก่อนจับอาหาร",
+    "question_en": "What should be done after handling money before touching food?",
+    "options": [
+      "เปลี่ยนโต๊ะ",
+      "ล้างมือ",
+      "ชิมอาหาร",
+      "ใส่ผ้ากันเปื้อน"
+    ],
+    "answer": "ล้างมือ",
+    "category": "Hygiene",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q163",
+    "question_th": "Cross-contact คืออะไร",
+    "question_en": "What is cross-contact?",
+    "options": [
+      "การปนเปื้อนสารก่อภูมิแพ้สู่อาหารอื่น",
+      "การจัดโต๊ะ",
+      "การแช่แข็ง",
+      "การหุงข้าว"
+    ],
+    "answer": "การปนเปื้อนสารก่อภูมิแพ้สู่อาหารอื่น",
+    "category": "Allergy",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q164",
+    "question_th": "ถ้าลูกค้าแจ้งว่าแพ้ถั่ว ควรทำอะไรก่อน",
+    "question_en": "If a guest says they are allergic to nuts, what should you do first?",
+    "options": [
+      "เสนอของหวาน",
+      "ย้ายโต๊ะ",
+      "เสิร์ฟน้ำ",
+      "แจ้งครัวและยืนยันข้อมูล"
+    ],
+    "answer": "แจ้งครัวและยืนยันข้อมูล",
+    "category": "Allergy",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q165",
+    "question_th": "ข้อใดเป็นสารก่อภูมิแพ้หลักที่พบบ่อย",
+    "question_en": "Which is a common major allergen?",
+    "options": [
+      "เกลือ",
+      "ถั่วลิสง",
+      "น้ำตาล",
+      "พริกไทย"
+    ],
+    "answer": "ถั่วลิสง",
+    "category": "Allergy",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q166",
+    "question_th": "ใช้เขียงเดียวกับไก่ดิบและผักสดได้หรือไม่",
+    "question_en": "Can the same board be used for raw chicken and fresh vegetables?",
+    "options": [
+      "ได้เฉพาะตอนเช้า",
+      "ไม่ได้",
+      "ได้ถ้าล้างน้ำเฉยๆ",
+      "ได้"
+    ],
+    "answer": "ไม่ได้",
+    "category": "Allergy",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q167",
+    "question_th": "หากลูกค้าเริ่มหายใจลำบากหลังรับประทานอาหาร ควรทำอย่างไร",
+    "question_en": "What should you do if a guest has trouble breathing after eating?",
+    "options": [
+      "เสิร์ฟขนมปัง",
+      "ให้เดินเล่น",
+      "แจ้งผู้จัดการและเรียกฉุกเฉินทันที",
+      "รอดูอาการ"
+    ],
+    "answer": "แจ้งผู้จัดการและเรียกฉุกเฉินทันที",
+    "category": "Allergy",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q168",
+    "question_th": "ความร้อนทำลายสารก่อภูมิแพ้เสมอหรือไม่",
+    "question_en": "Does heat always destroy allergens?",
+    "options": [
+      "เฉพาะนม",
+      "ไม่เสมอ/ไม่จริง",
+      "เสมอ",
+      "เฉพาะถั่ว"
+    ],
+    "answer": "ไม่เสมอ/ไม่จริง",
+    "category": "Allergy",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q169",
+    "question_th": "Cross-contact คืออะไร",
+    "question_en": "What is cross-contact?",
+    "options": [
+      "การแช่แข็ง",
+      "การจัดโต๊ะ",
+      "การหุงข้าว",
+      "การปนเปื้อนสารก่อภูมิแพ้สู่อาหารอื่น"
+    ],
+    "answer": "การปนเปื้อนสารก่อภูมิแพ้สู่อาหารอื่น",
+    "category": "Allergy",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q170",
+    "question_th": "ถ้าลูกค้าแจ้งว่าแพ้ถั่ว ควรทำอะไรก่อน",
+    "question_en": "If a guest says they are allergic to nuts, what should you do first?",
+    "options": [
+      "ย้ายโต๊ะ",
+      "แจ้งครัวและยืนยันข้อมูล",
+      "เสิร์ฟน้ำ",
+      "เสนอของหวาน"
+    ],
+    "answer": "แจ้งครัวและยืนยันข้อมูล",
+    "category": "Allergy",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q171",
+    "question_th": "ข้อใดเป็นสารก่อภูมิแพ้หลักที่พบบ่อย",
+    "question_en": "Which is a common major allergen?",
+    "options": [
+      "ถั่วลิสง",
+      "พริกไทย",
+      "น้ำตาล",
+      "เกลือ"
+    ],
+    "answer": "ถั่วลิสง",
+    "category": "Allergy",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q172",
+    "question_th": "ใช้เขียงเดียวกับไก่ดิบและผักสดได้หรือไม่",
+    "question_en": "Can the same board be used for raw chicken and fresh vegetables?",
+    "options": [
+      "ได้ถ้าล้างน้ำเฉยๆ",
+      "ได้เฉพาะตอนเช้า",
+      "ได้",
+      "ไม่ได้"
+    ],
+    "answer": "ไม่ได้",
+    "category": "Allergy",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q173",
+    "question_th": "หากลูกค้าเริ่มหายใจลำบากหลังรับประทานอาหาร ควรทำอย่างไร",
+    "question_en": "What should you do if a guest has trouble breathing after eating?",
+    "options": [
+      "เสิร์ฟขนมปัง",
+      "แจ้งผู้จัดการและเรียกฉุกเฉินทันที",
+      "ให้เดินเล่น",
+      "รอดูอาการ"
+    ],
+    "answer": "แจ้งผู้จัดการและเรียกฉุกเฉินทันที",
+    "category": "Allergy",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q174",
+    "question_th": "ความร้อนทำลายสารก่อภูมิแพ้เสมอหรือไม่",
+    "question_en": "Does heat always destroy allergens?",
+    "options": [
+      "เสมอ",
+      "เฉพาะนม",
+      "ไม่เสมอ/ไม่จริง",
+      "เฉพาะถั่ว"
+    ],
+    "answer": "ไม่เสมอ/ไม่จริง",
+    "category": "Allergy",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q175",
+    "question_th": "Cross-contact คืออะไร",
+    "question_en": "What is cross-contact?",
+    "options": [
+      "การจัดโต๊ะ",
+      "การปนเปื้อนสารก่อภูมิแพ้สู่อาหารอื่น",
+      "การแช่แข็ง",
+      "การหุงข้าว"
+    ],
+    "answer": "การปนเปื้อนสารก่อภูมิแพ้สู่อาหารอื่น",
+    "category": "Allergy",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q176",
+    "question_th": "ถ้าลูกค้าแจ้งว่าแพ้ถั่ว ควรทำอะไรก่อน",
+    "question_en": "If a guest says they are allergic to nuts, what should you do first?",
+    "options": [
+      "แจ้งครัวและยืนยันข้อมูล",
+      "ย้ายโต๊ะ",
+      "เสิร์ฟน้ำ",
+      "เสนอของหวาน"
+    ],
+    "answer": "แจ้งครัวและยืนยันข้อมูล",
+    "category": "Allergy",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q177",
+    "question_th": "ข้อใดเป็นสารก่อภูมิแพ้หลักที่พบบ่อย",
+    "question_en": "Which is a common major allergen?",
+    "options": [
+      "น้ำตาล",
+      "พริกไทย",
+      "เกลือ",
+      "ถั่วลิสง"
+    ],
+    "answer": "ถั่วลิสง",
+    "category": "Allergy",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q178",
+    "question_th": "ใช้เขียงเดียวกับไก่ดิบและผักสดได้หรือไม่",
+    "question_en": "Can the same board be used for raw chicken and fresh vegetables?",
+    "options": [
+      "ได้เฉพาะตอนเช้า",
+      "ได้",
+      "ไม่ได้",
+      "ได้ถ้าล้างน้ำเฉยๆ"
+    ],
+    "answer": "ไม่ได้",
+    "category": "Allergy",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q179",
+    "question_th": "หากลูกค้าเริ่มหายใจลำบากหลังรับประทานอาหาร ควรทำอย่างไร",
+    "question_en": "What should you do if a guest has trouble breathing after eating?",
+    "options": [
+      "รอดูอาการ",
+      "เสิร์ฟขนมปัง",
+      "ให้เดินเล่น",
+      "แจ้งผู้จัดการและเรียกฉุกเฉินทันที"
+    ],
+    "answer": "แจ้งผู้จัดการและเรียกฉุกเฉินทันที",
+    "category": "Allergy",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q180",
+    "question_th": "ความร้อนทำลายสารก่อภูมิแพ้เสมอหรือไม่",
+    "question_en": "Does heat always destroy allergens?",
+    "options": [
+      "เฉพาะถั่ว",
+      "เสมอ",
+      "ไม่เสมอ/ไม่จริง",
+      "เฉพาะนม"
+    ],
+    "answer": "ไม่เสมอ/ไม่จริง",
+    "category": "Allergy",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q181",
+    "question_th": "Cross-contact คืออะไร",
+    "question_en": "What is cross-contact?",
+    "options": [
+      "การจัดโต๊ะ",
+      "การแช่แข็ง",
+      "การหุงข้าว",
+      "การปนเปื้อนสารก่อภูมิแพ้สู่อาหารอื่น"
+    ],
+    "answer": "การปนเปื้อนสารก่อภูมิแพ้สู่อาหารอื่น",
+    "category": "Allergy",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q182",
+    "question_th": "ถ้าลูกค้าแจ้งว่าแพ้ถั่ว ควรทำอะไรก่อน",
+    "question_en": "If a guest says they are allergic to nuts, what should you do first?",
+    "options": [
+      "เสิร์ฟน้ำ",
+      "ย้ายโต๊ะ",
+      "แจ้งครัวและยืนยันข้อมูล",
+      "เสนอของหวาน"
+    ],
+    "answer": "แจ้งครัวและยืนยันข้อมูล",
+    "category": "Allergy",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q183",
+    "question_th": "ข้อใดเป็นสารก่อภูมิแพ้หลักที่พบบ่อย",
+    "question_en": "Which is a common major allergen?",
+    "options": [
+      "น้ำตาล",
+      "พริกไทย",
+      "เกลือ",
+      "ถั่วลิสง"
+    ],
+    "answer": "ถั่วลิสง",
+    "category": "Allergy",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q184",
+    "question_th": "ใช้เขียงเดียวกับไก่ดิบและผักสดได้หรือไม่",
+    "question_en": "Can the same board be used for raw chicken and fresh vegetables?",
+    "options": [
+      "ได้เฉพาะตอนเช้า",
+      "ได้",
+      "ไม่ได้",
+      "ได้ถ้าล้างน้ำเฉยๆ"
+    ],
+    "answer": "ไม่ได้",
+    "category": "Allergy",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q185",
+    "question_th": "หากลูกค้าเริ่มหายใจลำบากหลังรับประทานอาหาร ควรทำอย่างไร",
+    "question_en": "What should you do if a guest has trouble breathing after eating?",
+    "options": [
+      "เสิร์ฟขนมปัง",
+      "รอดูอาการ",
+      "ให้เดินเล่น",
+      "แจ้งผู้จัดการและเรียกฉุกเฉินทันที"
+    ],
+    "answer": "แจ้งผู้จัดการและเรียกฉุกเฉินทันที",
+    "category": "Allergy",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q186",
+    "question_th": "ความร้อนทำลายสารก่อภูมิแพ้เสมอหรือไม่",
+    "question_en": "Does heat always destroy allergens?",
+    "options": [
+      "เฉพาะถั่ว",
+      "เฉพาะนม",
+      "ไม่เสมอ/ไม่จริง",
+      "เสมอ"
+    ],
+    "answer": "ไม่เสมอ/ไม่จริง",
+    "category": "Allergy",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q187",
+    "question_th": "Cross-contact คืออะไร",
+    "question_en": "What is cross-contact?",
+    "options": [
+      "การปนเปื้อนสารก่อภูมิแพ้สู่อาหารอื่น",
+      "การจัดโต๊ะ",
+      "การหุงข้าว",
+      "การแช่แข็ง"
+    ],
+    "answer": "การปนเปื้อนสารก่อภูมิแพ้สู่อาหารอื่น",
+    "category": "Allergy",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q188",
+    "question_th": "ถ้าลูกค้าแจ้งว่าแพ้ถั่ว ควรทำอะไรก่อน",
+    "question_en": "If a guest says they are allergic to nuts, what should you do first?",
+    "options": [
+      "เสนอของหวาน",
+      "แจ้งครัวและยืนยันข้อมูล",
+      "ย้ายโต๊ะ",
+      "เสิร์ฟน้ำ"
+    ],
+    "answer": "แจ้งครัวและยืนยันข้อมูล",
+    "category": "Allergy",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q189",
+    "question_th": "ข้อใดเป็นสารก่อภูมิแพ้หลักที่พบบ่อย",
+    "question_en": "Which is a common major allergen?",
+    "options": [
+      "ถั่วลิสง",
+      "น้ำตาล",
+      "พริกไทย",
+      "เกลือ"
+    ],
+    "answer": "ถั่วลิสง",
+    "category": "Allergy",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q190",
+    "question_th": "ใช้เขียงเดียวกับไก่ดิบและผักสดได้หรือไม่",
+    "question_en": "Can the same board be used for raw chicken and fresh vegetables?",
+    "options": [
+      "ได้",
+      "ได้เฉพาะตอนเช้า",
+      "ได้ถ้าล้างน้ำเฉยๆ",
+      "ไม่ได้"
+    ],
+    "answer": "ไม่ได้",
+    "category": "Allergy",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q191",
+    "question_th": "หากลูกค้าเริ่มหายใจลำบากหลังรับประทานอาหาร ควรทำอย่างไร",
+    "question_en": "What should you do if a guest has trouble breathing after eating?",
+    "options": [
+      "แจ้งผู้จัดการและเรียกฉุกเฉินทันที",
+      "เสิร์ฟขนมปัง",
+      "รอดูอาการ",
+      "ให้เดินเล่น"
+    ],
+    "answer": "แจ้งผู้จัดการและเรียกฉุกเฉินทันที",
+    "category": "Allergy",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q192",
+    "question_th": "ความร้อนทำลายสารก่อภูมิแพ้เสมอหรือไม่",
+    "question_en": "Does heat always destroy allergens?",
+    "options": [
+      "ไม่เสมอ/ไม่จริง",
+      "เฉพาะถั่ว",
+      "เสมอ",
+      "เฉพาะนม"
+    ],
+    "answer": "ไม่เสมอ/ไม่จริง",
+    "category": "Allergy",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q193",
+    "question_th": "Cross-contact คืออะไร",
+    "question_en": "What is cross-contact?",
+    "options": [
+      "การแช่แข็ง",
+      "การจัดโต๊ะ",
+      "การหุงข้าว",
+      "การปนเปื้อนสารก่อภูมิแพ้สู่อาหารอื่น"
+    ],
+    "answer": "การปนเปื้อนสารก่อภูมิแพ้สู่อาหารอื่น",
+    "category": "Allergy",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q194",
+    "question_th": "ถ้าลูกค้าแจ้งว่าแพ้ถั่ว ควรทำอะไรก่อน",
+    "question_en": "If a guest says they are allergic to nuts, what should you do first?",
+    "options": [
+      "เสนอของหวาน",
+      "ย้ายโต๊ะ",
+      "เสิร์ฟน้ำ",
+      "แจ้งครัวและยืนยันข้อมูล"
+    ],
+    "answer": "แจ้งครัวและยืนยันข้อมูล",
+    "category": "Allergy",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q195",
+    "question_th": "ข้อใดเป็นสารก่อภูมิแพ้หลักที่พบบ่อย",
+    "question_en": "Which is a common major allergen?",
+    "options": [
+      "น้ำตาล",
+      "เกลือ",
+      "ถั่วลิสง",
+      "พริกไทย"
+    ],
+    "answer": "ถั่วลิสง",
+    "category": "Allergy",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q196",
+    "question_th": "ใช้เขียงเดียวกับไก่ดิบและผักสดได้หรือไม่",
+    "question_en": "Can the same board be used for raw chicken and fresh vegetables?",
+    "options": [
+      "ได้",
+      "ได้ถ้าล้างน้ำเฉยๆ",
+      "ได้เฉพาะตอนเช้า",
+      "ไม่ได้"
+    ],
+    "answer": "ไม่ได้",
+    "category": "Allergy",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q197",
+    "question_th": "หากลูกค้าเริ่มหายใจลำบากหลังรับประทานอาหาร ควรทำอย่างไร",
+    "question_en": "What should you do if a guest has trouble breathing after eating?",
+    "options": [
+      "แจ้งผู้จัดการและเรียกฉุกเฉินทันที",
+      "ให้เดินเล่น",
+      "รอดูอาการ",
+      "เสิร์ฟขนมปัง"
+    ],
+    "answer": "แจ้งผู้จัดการและเรียกฉุกเฉินทันที",
+    "category": "Allergy",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q198",
+    "question_th": "ความร้อนทำลายสารก่อภูมิแพ้เสมอหรือไม่",
+    "question_en": "Does heat always destroy allergens?",
+    "options": [
+      "เฉพาะถั่ว",
+      "ไม่เสมอ/ไม่จริง",
+      "เฉพาะนม",
+      "เสมอ"
+    ],
+    "answer": "ไม่เสมอ/ไม่จริง",
+    "category": "Allergy",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q199",
+    "question_th": "Cross-contact คืออะไร",
+    "question_en": "What is cross-contact?",
+    "options": [
+      "การหุงข้าว",
+      "การแช่แข็ง",
+      "การจัดโต๊ะ",
+      "การปนเปื้อนสารก่อภูมิแพ้สู่อาหารอื่น"
+    ],
+    "answer": "การปนเปื้อนสารก่อภูมิแพ้สู่อาหารอื่น",
+    "category": "Allergy",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q200",
+    "question_th": "ถ้าลูกค้าแจ้งว่าแพ้ถั่ว ควรทำอะไรก่อน",
+    "question_en": "If a guest says they are allergic to nuts, what should you do first?",
+    "options": [
+      "ย้ายโต๊ะ",
+      "เสนอของหวาน",
+      "แจ้งครัวและยืนยันข้อมูล",
+      "เสิร์ฟน้ำ"
+    ],
+    "answer": "แจ้งครัวและยืนยันข้อมูล",
+    "category": "Allergy",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q201",
+    "question_th": "ข้อใดเป็นสารก่อภูมิแพ้หลักที่พบบ่อย",
+    "question_en": "Which is a common major allergen?",
+    "options": [
+      "พริกไทย",
+      "เกลือ",
+      "น้ำตาล",
+      "ถั่วลิสง"
+    ],
+    "answer": "ถั่วลิสง",
+    "category": "Allergy",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q202",
+    "question_th": "ใช้เขียงเดียวกับไก่ดิบและผักสดได้หรือไม่",
+    "question_en": "Can the same board be used for raw chicken and fresh vegetables?",
+    "options": [
+      "ได้ถ้าล้างน้ำเฉยๆ",
+      "ไม่ได้",
+      "ได้",
+      "ได้เฉพาะตอนเช้า"
+    ],
+    "answer": "ไม่ได้",
+    "category": "Allergy",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q203",
+    "question_th": "หากลูกค้าเริ่มหายใจลำบากหลังรับประทานอาหาร ควรทำอย่างไร",
+    "question_en": "What should you do if a guest has trouble breathing after eating?",
+    "options": [
+      "เสิร์ฟขนมปัง",
+      "ให้เดินเล่น",
+      "รอดูอาการ",
+      "แจ้งผู้จัดการและเรียกฉุกเฉินทันที"
+    ],
+    "answer": "แจ้งผู้จัดการและเรียกฉุกเฉินทันที",
+    "category": "Allergy",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q204",
+    "question_th": "ความร้อนทำลายสารก่อภูมิแพ้เสมอหรือไม่",
+    "question_en": "Does heat always destroy allergens?",
+    "options": [
+      "เฉพาะถั่ว",
+      "ไม่เสมอ/ไม่จริง",
+      "เสมอ",
+      "เฉพาะนม"
+    ],
+    "answer": "ไม่เสมอ/ไม่จริง",
+    "category": "Allergy",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q205",
+    "question_th": "Cross-contact คืออะไร",
+    "question_en": "What is cross-contact?",
+    "options": [
+      "การปนเปื้อนสารก่อภูมิแพ้สู่อาหารอื่น",
+      "การหุงข้าว",
+      "การแช่แข็ง",
+      "การจัดโต๊ะ"
+    ],
+    "answer": "การปนเปื้อนสารก่อภูมิแพ้สู่อาหารอื่น",
+    "category": "Allergy",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q206",
+    "question_th": "ถ้าลูกค้าแจ้งว่าแพ้ถั่ว ควรทำอะไรก่อน",
+    "question_en": "If a guest says they are allergic to nuts, what should you do first?",
+    "options": [
+      "ย้ายโต๊ะ",
+      "เสิร์ฟน้ำ",
+      "แจ้งครัวและยืนยันข้อมูล",
+      "เสนอของหวาน"
+    ],
+    "answer": "แจ้งครัวและยืนยันข้อมูล",
+    "category": "Allergy",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q207",
+    "question_th": "ข้อใดเป็นสารก่อภูมิแพ้หลักที่พบบ่อย",
+    "question_en": "Which is a common major allergen?",
+    "options": [
+      "น้ำตาล",
+      "ถั่วลิสง",
+      "พริกไทย",
+      "เกลือ"
+    ],
+    "answer": "ถั่วลิสง",
+    "category": "Allergy",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q208",
+    "question_th": "ใช้เขียงเดียวกับไก่ดิบและผักสดได้หรือไม่",
+    "question_en": "Can the same board be used for raw chicken and fresh vegetables?",
+    "options": [
+      "ไม่ได้",
+      "ได้ถ้าล้างน้ำเฉยๆ",
+      "ได้",
+      "ได้เฉพาะตอนเช้า"
+    ],
+    "answer": "ไม่ได้",
+    "category": "Allergy",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q209",
+    "question_th": "หากลูกค้าเริ่มหายใจลำบากหลังรับประทานอาหาร ควรทำอย่างไร",
+    "question_en": "What should you do if a guest has trouble breathing after eating?",
+    "options": [
+      "เสิร์ฟขนมปัง",
+      "ให้เดินเล่น",
+      "แจ้งผู้จัดการและเรียกฉุกเฉินทันที",
+      "รอดูอาการ"
+    ],
+    "answer": "แจ้งผู้จัดการและเรียกฉุกเฉินทันที",
+    "category": "Allergy",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q210",
+    "question_th": "ความร้อนทำลายสารก่อภูมิแพ้เสมอหรือไม่",
+    "question_en": "Does heat always destroy allergens?",
+    "options": [
+      "เฉพาะนม",
+      "เฉพาะถั่ว",
+      "ไม่เสมอ/ไม่จริง",
+      "เสมอ"
+    ],
+    "answer": "ไม่เสมอ/ไม่จริง",
+    "category": "Allergy",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q211",
+    "question_th": "Cross-contact คืออะไร",
+    "question_en": "What is cross-contact?",
+    "options": [
+      "การหุงข้าว",
+      "การปนเปื้อนสารก่อภูมิแพ้สู่อาหารอื่น",
+      "การจัดโต๊ะ",
+      "การแช่แข็ง"
+    ],
+    "answer": "การปนเปื้อนสารก่อภูมิแพ้สู่อาหารอื่น",
+    "category": "Allergy",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q212",
+    "question_th": "ถ้าลูกค้าแจ้งว่าแพ้ถั่ว ควรทำอะไรก่อน",
+    "question_en": "If a guest says they are allergic to nuts, what should you do first?",
+    "options": [
+      "ย้ายโต๊ะ",
+      "เสนอของหวาน",
+      "แจ้งครัวและยืนยันข้อมูล",
+      "เสิร์ฟน้ำ"
+    ],
+    "answer": "แจ้งครัวและยืนยันข้อมูล",
+    "category": "Allergy",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q213",
+    "question_th": "ข้อใดเป็นสารก่อภูมิแพ้หลักที่พบบ่อย",
+    "question_en": "Which is a common major allergen?",
+    "options": [
+      "เกลือ",
+      "พริกไทย",
+      "น้ำตาล",
+      "ถั่วลิสง"
+    ],
+    "answer": "ถั่วลิสง",
+    "category": "Allergy",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q214",
+    "question_th": "ใช้เขียงเดียวกับไก่ดิบและผักสดได้หรือไม่",
+    "question_en": "Can the same board be used for raw chicken and fresh vegetables?",
+    "options": [
+      "ได้เฉพาะตอนเช้า",
+      "ไม่ได้",
+      "ได้",
+      "ได้ถ้าล้างน้ำเฉยๆ"
+    ],
+    "answer": "ไม่ได้",
+    "category": "Allergy",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q215",
+    "question_th": "หากลูกค้าเริ่มหายใจลำบากหลังรับประทานอาหาร ควรทำอย่างไร",
+    "question_en": "What should you do if a guest has trouble breathing after eating?",
+    "options": [
+      "ให้เดินเล่น",
+      "รอดูอาการ",
+      "แจ้งผู้จัดการและเรียกฉุกเฉินทันที",
+      "เสิร์ฟขนมปัง"
+    ],
+    "answer": "แจ้งผู้จัดการและเรียกฉุกเฉินทันที",
+    "category": "Allergy",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q216",
+    "question_th": "ความร้อนทำลายสารก่อภูมิแพ้เสมอหรือไม่",
+    "question_en": "Does heat always destroy allergens?",
+    "options": [
+      "เฉพาะนม",
+      "ไม่เสมอ/ไม่จริง",
+      "เฉพาะถั่ว",
+      "เสมอ"
+    ],
+    "answer": "ไม่เสมอ/ไม่จริง",
+    "category": "Allergy",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q217",
+    "question_th": "ควรถามเรื่องอาหารแพ้เมื่อใด",
+    "question_en": "When should you ask about food allergies?",
+    "options": [
+      "ก่อนรับออเดอร์",
+      "หลังเสิร์ฟ",
+      "ไม่ต้องถาม",
+      "ตอนคิดเงิน"
+    ],
+    "answer": "ก่อนรับออเดอร์",
+    "category": "Service",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q218",
+    "question_th": "เมื่อแขกยังไม่พร้อมสั่งอาหาร ควรพูดอย่างไร",
+    "question_en": "What should you say if the guest is not ready to order?",
+    "options": [
+      "Kitchen is closed.",
+      "I'll come back shortly.",
+      "No problem, cancel order.",
+      "Pay now."
+    ],
+    "answer": "I'll come back shortly.",
+    "category": "Service",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q219",
+    "question_th": "หากแขกร้องเรียนว่าอาหารช้า สิ่งแรกที่ควรทำคืออะไร",
+    "question_en": "If a guest complains food is late, what is the first thing to do?",
+    "options": [
+      "เถียงกลับ",
+      "เก็บจาน",
+      "เมินเฉย",
+      "ขอโทษและตรวจสอบทันที"
+    ],
+    "answer": "ขอโทษและตรวจสอบทันที",
+    "category": "Service",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q220",
+    "question_th": "ควรยืนยันออเดอร์ซ้ำกับแขกหรือไม่",
+    "question_en": "Should you repeat the order back to the guest?",
+    "options": [
+      "ไม่ควร",
+      "เฉพาะของหวาน",
+      "ควร",
+      "เฉพาะไวน์"
+    ],
+    "answer": "ควร",
+    "category": "Service",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q221",
+    "question_th": "การเสิร์ฟไวน์ที่ถูกต้องควรแสดงฉลากให้ใครดูก่อน",
+    "question_en": "Who should you show the wine label to first?",
+    "options": [
+      "พนักงานแคชเชียร์",
+      "ผู้จัดการ",
+      "พนักงานครัว",
+      "แขกที่สั่ง"
+    ],
+    "answer": "แขกที่สั่ง",
+    "category": "Service",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q222",
+    "question_th": "เมื่อต้องแนะนำเมนู ควรเน้นอะไร",
+    "question_en": "When recommending a dish, what should you emphasize?",
+    "options": [
+      "คุณลักษณะเด่นและรสชาติ",
+      "ชื่อเชฟอย่างเดียว",
+      "คำสั้นที่สุด",
+      "ราคาอย่างเดียว"
+    ],
+    "answer": "คุณลักษณะเด่นและรสชาติ",
+    "category": "Service",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q223",
+    "question_th": "ควรถามเรื่องอาหารแพ้เมื่อใด",
+    "question_en": "When should you ask about food allergies?",
+    "options": [
+      "ก่อนรับออเดอร์",
+      "ไม่ต้องถาม",
+      "ตอนคิดเงิน",
+      "หลังเสิร์ฟ"
+    ],
+    "answer": "ก่อนรับออเดอร์",
+    "category": "Service",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q224",
+    "question_th": "เมื่อแขกยังไม่พร้อมสั่งอาหาร ควรพูดอย่างไร",
+    "question_en": "What should you say if the guest is not ready to order?",
+    "options": [
+      "Pay now.",
+      "No problem, cancel order.",
+      "Kitchen is closed.",
+      "I'll come back shortly."
+    ],
+    "answer": "I'll come back shortly.",
+    "category": "Service",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q225",
+    "question_th": "หากแขกร้องเรียนว่าอาหารช้า สิ่งแรกที่ควรทำคืออะไร",
+    "question_en": "If a guest complains food is late, what is the first thing to do?",
+    "options": [
+      "ขอโทษและตรวจสอบทันที",
+      "เถียงกลับ",
+      "เมินเฉย",
+      "เก็บจาน"
+    ],
+    "answer": "ขอโทษและตรวจสอบทันที",
+    "category": "Service",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q226",
+    "question_th": "ควรยืนยันออเดอร์ซ้ำกับแขกหรือไม่",
+    "question_en": "Should you repeat the order back to the guest?",
+    "options": [
+      "ไม่ควร",
+      "ควร",
+      "เฉพาะไวน์",
+      "เฉพาะของหวาน"
+    ],
+    "answer": "ควร",
+    "category": "Service",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q227",
+    "question_th": "การเสิร์ฟไวน์ที่ถูกต้องควรแสดงฉลากให้ใครดูก่อน",
+    "question_en": "Who should you show the wine label to first?",
+    "options": [
+      "ผู้จัดการ",
+      "แขกที่สั่ง",
+      "พนักงานครัว",
+      "พนักงานแคชเชียร์"
+    ],
+    "answer": "แขกที่สั่ง",
+    "category": "Service",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q228",
+    "question_th": "เมื่อต้องแนะนำเมนู ควรเน้นอะไร",
+    "question_en": "When recommending a dish, what should you emphasize?",
+    "options": [
+      "ราคาอย่างเดียว",
+      "คุณลักษณะเด่นและรสชาติ",
+      "คำสั้นที่สุด",
+      "ชื่อเชฟอย่างเดียว"
+    ],
+    "answer": "คุณลักษณะเด่นและรสชาติ",
+    "category": "Service",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q229",
+    "question_th": "ควรถามเรื่องอาหารแพ้เมื่อใด",
+    "question_en": "When should you ask about food allergies?",
+    "options": [
+      "ตอนคิดเงิน",
+      "หลังเสิร์ฟ",
+      "ก่อนรับออเดอร์",
+      "ไม่ต้องถาม"
+    ],
+    "answer": "ก่อนรับออเดอร์",
+    "category": "Service",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q230",
+    "question_th": "เมื่อแขกยังไม่พร้อมสั่งอาหาร ควรพูดอย่างไร",
+    "question_en": "What should you say if the guest is not ready to order?",
+    "options": [
+      "I'll come back shortly.",
+      "No problem, cancel order.",
+      "Pay now.",
+      "Kitchen is closed."
+    ],
+    "answer": "I'll come back shortly.",
+    "category": "Service",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q231",
+    "question_th": "หากแขกร้องเรียนว่าอาหารช้า สิ่งแรกที่ควรทำคืออะไร",
+    "question_en": "If a guest complains food is late, what is the first thing to do?",
+    "options": [
+      "เก็บจาน",
+      "เถียงกลับ",
+      "เมินเฉย",
+      "ขอโทษและตรวจสอบทันที"
+    ],
+    "answer": "ขอโทษและตรวจสอบทันที",
+    "category": "Service",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q232",
+    "question_th": "ควรยืนยันออเดอร์ซ้ำกับแขกหรือไม่",
+    "question_en": "Should you repeat the order back to the guest?",
+    "options": [
+      "ไม่ควร",
+      "เฉพาะของหวาน",
+      "ควร",
+      "เฉพาะไวน์"
+    ],
+    "answer": "ควร",
+    "category": "Service",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q233",
+    "question_th": "การเสิร์ฟไวน์ที่ถูกต้องควรแสดงฉลากให้ใครดูก่อน",
+    "question_en": "Who should you show the wine label to first?",
+    "options": [
+      "ผู้จัดการ",
+      "พนักงานครัว",
+      "พนักงานแคชเชียร์",
+      "แขกที่สั่ง"
+    ],
+    "answer": "แขกที่สั่ง",
+    "category": "Service",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q234",
+    "question_th": "เมื่อต้องแนะนำเมนู ควรเน้นอะไร",
+    "question_en": "When recommending a dish, what should you emphasize?",
+    "options": [
+      "ราคาอย่างเดียว",
+      "คำสั้นที่สุด",
+      "ชื่อเชฟอย่างเดียว",
+      "คุณลักษณะเด่นและรสชาติ"
+    ],
+    "answer": "คุณลักษณะเด่นและรสชาติ",
+    "category": "Service",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q235",
+    "question_th": "ควรถามเรื่องอาหารแพ้เมื่อใด",
+    "question_en": "When should you ask about food allergies?",
+    "options": [
+      "ตอนคิดเงิน",
+      "หลังเสิร์ฟ",
+      "ไม่ต้องถาม",
+      "ก่อนรับออเดอร์"
+    ],
+    "answer": "ก่อนรับออเดอร์",
+    "category": "Service",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q236",
+    "question_th": "เมื่อแขกยังไม่พร้อมสั่งอาหาร ควรพูดอย่างไร",
+    "question_en": "What should you say if the guest is not ready to order?",
+    "options": [
+      "Kitchen is closed.",
+      "I'll come back shortly.",
+      "No problem, cancel order.",
+      "Pay now."
+    ],
+    "answer": "I'll come back shortly.",
+    "category": "Service",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q237",
+    "question_th": "หากแขกร้องเรียนว่าอาหารช้า สิ่งแรกที่ควรทำคืออะไร",
+    "question_en": "If a guest complains food is late, what is the first thing to do?",
+    "options": [
+      "เมินเฉย",
+      "เถียงกลับ",
+      "ขอโทษและตรวจสอบทันที",
+      "เก็บจาน"
+    ],
+    "answer": "ขอโทษและตรวจสอบทันที",
+    "category": "Service",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q238",
+    "question_th": "ควรยืนยันออเดอร์ซ้ำกับแขกหรือไม่",
+    "question_en": "Should you repeat the order back to the guest?",
+    "options": [
+      "ไม่ควร",
+      "เฉพาะของหวาน",
+      "ควร",
+      "เฉพาะไวน์"
+    ],
+    "answer": "ควร",
+    "category": "Service",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q239",
+    "question_th": "การเสิร์ฟไวน์ที่ถูกต้องควรแสดงฉลากให้ใครดูก่อน",
+    "question_en": "Who should you show the wine label to first?",
+    "options": [
+      "พนักงานครัว",
+      "แขกที่สั่ง",
+      "ผู้จัดการ",
+      "พนักงานแคชเชียร์"
+    ],
+    "answer": "แขกที่สั่ง",
+    "category": "Service",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q240",
+    "question_th": "เมื่อต้องแนะนำเมนู ควรเน้นอะไร",
+    "question_en": "When recommending a dish, what should you emphasize?",
+    "options": [
+      "คุณลักษณะเด่นและรสชาติ",
+      "คำสั้นที่สุด",
+      "ชื่อเชฟอย่างเดียว",
+      "ราคาอย่างเดียว"
+    ],
+    "answer": "คุณลักษณะเด่นและรสชาติ",
+    "category": "Service",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q241",
+    "question_th": "ควรถามเรื่องอาหารแพ้เมื่อใด",
+    "question_en": "When should you ask about food allergies?",
+    "options": [
+      "ไม่ต้องถาม",
+      "ก่อนรับออเดอร์",
+      "ตอนคิดเงิน",
+      "หลังเสิร์ฟ"
+    ],
+    "answer": "ก่อนรับออเดอร์",
+    "category": "Service",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q242",
+    "question_th": "เมื่อแขกยังไม่พร้อมสั่งอาหาร ควรพูดอย่างไร",
+    "question_en": "What should you say if the guest is not ready to order?",
+    "options": [
+      "No problem, cancel order.",
+      "I'll come back shortly.",
+      "Pay now.",
+      "Kitchen is closed."
+    ],
+    "answer": "I'll come back shortly.",
+    "category": "Service",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q243",
+    "question_th": "หากแขกร้องเรียนว่าอาหารช้า สิ่งแรกที่ควรทำคืออะไร",
+    "question_en": "If a guest complains food is late, what is the first thing to do?",
+    "options": [
+      "เถียงกลับ",
+      "ขอโทษและตรวจสอบทันที",
+      "เมินเฉย",
+      "เก็บจาน"
+    ],
+    "answer": "ขอโทษและตรวจสอบทันที",
+    "category": "Service",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q244",
+    "question_th": "ควรยืนยันออเดอร์ซ้ำกับแขกหรือไม่",
+    "question_en": "Should you repeat the order back to the guest?",
+    "options": [
+      "ควร",
+      "เฉพาะไวน์",
+      "เฉพาะของหวาน",
+      "ไม่ควร"
+    ],
+    "answer": "ควร",
+    "category": "Service",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q245",
+    "question_th": "การเสิร์ฟไวน์ที่ถูกต้องควรแสดงฉลากให้ใครดูก่อน",
+    "question_en": "Who should you show the wine label to first?",
+    "options": [
+      "พนักงานแคชเชียร์",
+      "พนักงานครัว",
+      "ผู้จัดการ",
+      "แขกที่สั่ง"
+    ],
+    "answer": "แขกที่สั่ง",
+    "category": "Service",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q246",
+    "question_th": "เมื่อต้องแนะนำเมนู ควรเน้นอะไร",
+    "question_en": "When recommending a dish, what should you emphasize?",
+    "options": [
+      "ราคาอย่างเดียว",
+      "คุณลักษณะเด่นและรสชาติ",
+      "คำสั้นที่สุด",
+      "ชื่อเชฟอย่างเดียว"
+    ],
+    "answer": "คุณลักษณะเด่นและรสชาติ",
+    "category": "Service",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q247",
+    "question_th": "ควรถามเรื่องอาหารแพ้เมื่อใด",
+    "question_en": "When should you ask about food allergies?",
+    "options": [
+      "ก่อนรับออเดอร์",
+      "ไม่ต้องถาม",
+      "ตอนคิดเงิน",
+      "หลังเสิร์ฟ"
+    ],
+    "answer": "ก่อนรับออเดอร์",
+    "category": "Service",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q248",
+    "question_th": "เมื่อแขกยังไม่พร้อมสั่งอาหาร ควรพูดอย่างไร",
+    "question_en": "What should you say if the guest is not ready to order?",
+    "options": [
+      "Pay now.",
+      "I'll come back shortly.",
+      "Kitchen is closed.",
+      "No problem, cancel order."
+    ],
+    "answer": "I'll come back shortly.",
+    "category": "Service",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q249",
+    "question_th": "หากแขกร้องเรียนว่าอาหารช้า สิ่งแรกที่ควรทำคืออะไร",
+    "question_en": "If a guest complains food is late, what is the first thing to do?",
+    "options": [
+      "เก็บจาน",
+      "เถียงกลับ",
+      "ขอโทษและตรวจสอบทันที",
+      "เมินเฉย"
+    ],
+    "answer": "ขอโทษและตรวจสอบทันที",
+    "category": "Service",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q250",
+    "question_th": "ควรยืนยันออเดอร์ซ้ำกับแขกหรือไม่",
+    "question_en": "Should you repeat the order back to the guest?",
+    "options": [
+      "เฉพาะของหวาน",
+      "เฉพาะไวน์",
+      "ควร",
+      "ไม่ควร"
+    ],
+    "answer": "ควร",
+    "category": "Service",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q251",
+    "question_th": "การเสิร์ฟไวน์ที่ถูกต้องควรแสดงฉลากให้ใครดูก่อน",
+    "question_en": "Who should you show the wine label to first?",
+    "options": [
+      "แขกที่สั่ง",
+      "พนักงานครัว",
+      "พนักงานแคชเชียร์",
+      "ผู้จัดการ"
+    ],
+    "answer": "แขกที่สั่ง",
+    "category": "Service",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q252",
+    "question_th": "เมื่อต้องแนะนำเมนู ควรเน้นอะไร",
+    "question_en": "When recommending a dish, what should you emphasize?",
+    "options": [
+      "คำสั้นที่สุด",
+      "ชื่อเชฟอย่างเดียว",
+      "ราคาอย่างเดียว",
+      "คุณลักษณะเด่นและรสชาติ"
+    ],
+    "answer": "คุณลักษณะเด่นและรสชาติ",
+    "category": "Service",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q253",
+    "question_th": "ควรถามเรื่องอาหารแพ้เมื่อใด",
+    "question_en": "When should you ask about food allergies?",
+    "options": [
+      "หลังเสิร์ฟ",
+      "ตอนคิดเงิน",
+      "ไม่ต้องถาม",
+      "ก่อนรับออเดอร์"
+    ],
+    "answer": "ก่อนรับออเดอร์",
+    "category": "Service",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q254",
+    "question_th": "เมื่อแขกยังไม่พร้อมสั่งอาหาร ควรพูดอย่างไร",
+    "question_en": "What should you say if the guest is not ready to order?",
+    "options": [
+      "Kitchen is closed.",
+      "Pay now.",
+      "No problem, cancel order.",
+      "I'll come back shortly."
+    ],
+    "answer": "I'll come back shortly.",
+    "category": "Service",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q255",
+    "question_th": "หากแขกร้องเรียนว่าอาหารช้า สิ่งแรกที่ควรทำคืออะไร",
+    "question_en": "If a guest complains food is late, what is the first thing to do?",
+    "options": [
+      "เมินเฉย",
+      "เก็บจาน",
+      "ขอโทษและตรวจสอบทันที",
+      "เถียงกลับ"
+    ],
+    "answer": "ขอโทษและตรวจสอบทันที",
+    "category": "Service",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q256",
+    "question_th": "ควรยืนยันออเดอร์ซ้ำกับแขกหรือไม่",
+    "question_en": "Should you repeat the order back to the guest?",
+    "options": [
+      "ควร",
+      "เฉพาะของหวาน",
+      "เฉพาะไวน์",
+      "ไม่ควร"
+    ],
+    "answer": "ควร",
+    "category": "Service",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q257",
+    "question_th": "การเสิร์ฟไวน์ที่ถูกต้องควรแสดงฉลากให้ใครดูก่อน",
+    "question_en": "Who should you show the wine label to first?",
+    "options": [
+      "พนักงานแคชเชียร์",
+      "ผู้จัดการ",
+      "แขกที่สั่ง",
+      "พนักงานครัว"
+    ],
+    "answer": "แขกที่สั่ง",
+    "category": "Service",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q258",
+    "question_th": "เมื่อต้องแนะนำเมนู ควรเน้นอะไร",
+    "question_en": "When recommending a dish, what should you emphasize?",
+    "options": [
+      "คำสั้นที่สุด",
+      "คุณลักษณะเด่นและรสชาติ",
+      "ราคาอย่างเดียว",
+      "ชื่อเชฟอย่างเดียว"
+    ],
+    "answer": "คุณลักษณะเด่นและรสชาติ",
+    "category": "Service",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q259",
+    "question_th": "ควรถามเรื่องอาหารแพ้เมื่อใด",
+    "question_en": "When should you ask about food allergies?",
+    "options": [
+      "หลังเสิร์ฟ",
+      "ไม่ต้องถาม",
+      "ก่อนรับออเดอร์",
+      "ตอนคิดเงิน"
+    ],
+    "answer": "ก่อนรับออเดอร์",
+    "category": "Service",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q260",
+    "question_th": "เมื่อแขกยังไม่พร้อมสั่งอาหาร ควรพูดอย่างไร",
+    "question_en": "What should you say if the guest is not ready to order?",
+    "options": [
+      "I'll come back shortly.",
+      "No problem, cancel order.",
+      "Pay now.",
+      "Kitchen is closed."
+    ],
+    "answer": "I'll come back shortly.",
+    "category": "Service",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q261",
+    "question_th": "หากแขกร้องเรียนว่าอาหารช้า สิ่งแรกที่ควรทำคืออะไร",
+    "question_en": "If a guest complains food is late, what is the first thing to do?",
+    "options": [
+      "เถียงกลับ",
+      "เมินเฉย",
+      "เก็บจาน",
+      "ขอโทษและตรวจสอบทันที"
+    ],
+    "answer": "ขอโทษและตรวจสอบทันที",
+    "category": "Service",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q262",
+    "question_th": "ควรยืนยันออเดอร์ซ้ำกับแขกหรือไม่",
+    "question_en": "Should you repeat the order back to the guest?",
+    "options": [
+      "เฉพาะของหวาน",
+      "เฉพาะไวน์",
+      "ควร",
+      "ไม่ควร"
+    ],
+    "answer": "ควร",
+    "category": "Service",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q263",
+    "question_th": "การเสิร์ฟไวน์ที่ถูกต้องควรแสดงฉลากให้ใครดูก่อน",
+    "question_en": "Who should you show the wine label to first?",
+    "options": [
+      "แขกที่สั่ง",
+      "พนักงานแคชเชียร์",
+      "พนักงานครัว",
+      "ผู้จัดการ"
+    ],
+    "answer": "แขกที่สั่ง",
+    "category": "Service",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q264",
+    "question_th": "เมื่อต้องแนะนำเมนู ควรเน้นอะไร",
+    "question_en": "When recommending a dish, what should you emphasize?",
+    "options": [
+      "ราคาอย่างเดียว",
+      "ชื่อเชฟอย่างเดียว",
+      "คำสั้นที่สุด",
+      "คุณลักษณะเด่นและรสชาติ"
+    ],
+    "answer": "คุณลักษณะเด่นและรสชาติ",
+    "category": "Service",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q265",
+    "question_th": "ควรถามเรื่องอาหารแพ้เมื่อใด",
+    "question_en": "When should you ask about food allergies?",
+    "options": [
+      "ก่อนรับออเดอร์",
+      "ตอนคิดเงิน",
+      "ไม่ต้องถาม",
+      "หลังเสิร์ฟ"
+    ],
+    "answer": "ก่อนรับออเดอร์",
+    "category": "Service",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q266",
+    "question_th": "เมื่อแขกยังไม่พร้อมสั่งอาหาร ควรพูดอย่างไร",
+    "question_en": "What should you say if the guest is not ready to order?",
+    "options": [
+      "No problem, cancel order.",
+      "Pay now.",
+      "Kitchen is closed.",
+      "I'll come back shortly."
+    ],
+    "answer": "I'll come back shortly.",
+    "category": "Service",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q267",
+    "question_th": "หากแขกร้องเรียนว่าอาหารช้า สิ่งแรกที่ควรทำคืออะไร",
+    "question_en": "If a guest complains food is late, what is the first thing to do?",
+    "options": [
+      "เมินเฉย",
+      "เถียงกลับ",
+      "ขอโทษและตรวจสอบทันที",
+      "เก็บจาน"
+    ],
+    "answer": "ขอโทษและตรวจสอบทันที",
+    "category": "Service",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q268",
+    "question_th": "ควรยืนยันออเดอร์ซ้ำกับแขกหรือไม่",
+    "question_en": "Should you repeat the order back to the guest?",
+    "options": [
+      "ควร",
+      "ไม่ควร",
+      "เฉพาะของหวาน",
+      "เฉพาะไวน์"
+    ],
+    "answer": "ควร",
+    "category": "Service",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q269",
+    "question_th": "การเสิร์ฟไวน์ที่ถูกต้องควรแสดงฉลากให้ใครดูก่อน",
+    "question_en": "Who should you show the wine label to first?",
+    "options": [
+      "พนักงานครัว",
+      "แขกที่สั่ง",
+      "พนักงานแคชเชียร์",
+      "ผู้จัดการ"
+    ],
+    "answer": "แขกที่สั่ง",
+    "category": "Service",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q270",
+    "question_th": "เมื่อต้องแนะนำเมนู ควรเน้นอะไร",
+    "question_en": "When recommending a dish, what should you emphasize?",
+    "options": [
+      "คุณลักษณะเด่นและรสชาติ",
+      "คำสั้นที่สุด",
+      "ราคาอย่างเดียว",
+      "ชื่อเชฟอย่างเดียว"
+    ],
+    "answer": "คุณลักษณะเด่นและรสชาติ",
+    "category": "Service",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q271",
+    "question_th": "Spirit หมายถึงอะไร",
+    "question_en": "What does spirit mean?",
+    "options": [
+      "ไวน์ขาว",
+      "สุรากลั่น",
+      "น้ำผลไม้",
+      "เครื่องดื่มไม่มีแอลกอฮอล์"
+    ],
+    "answer": "สุรากลั่น",
+    "category": "Beverage",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q272",
+    "question_th": "Gin มี botanical หลักที่สำคัญคืออะไร",
+    "question_en": "What is the key botanical in gin?",
+    "options": [
+      "Mint",
+      "Juniper",
+      "Apple",
+      "Cinnamon"
+    ],
+    "answer": "Juniper",
+    "category": "Beverage",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q273",
+    "question_th": "Whisky กับ Whiskey ต่างกันหลักๆ ที่อะไร",
+    "question_en": "What is the main difference between whisky and whiskey?",
+    "options": [
+      "ไม่มีแอลกอฮอล์",
+      "สี",
+      "การสะกดตามประเทศ/ภูมิภาค",
+      "วิธีเสิร์ฟ"
+    ],
+    "answer": "การสะกดตามประเทศ/ภูมิภาค",
+    "category": "Beverage",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q274",
+    "question_th": "Single malt หมายถึงอะไร",
+    "question_en": "What does single malt mean?",
+    "options": [
+      "ผสมหลายโรงกลั่น",
+      "หวานมาก",
+      "ไม่มีมอลต์",
+      "มาจากโรงกลั่นเดียวและใช้มอลต์บาร์เลย์"
+    ],
+    "answer": "มาจากโรงกลั่นเดียวและใช้มอลต์บาร์เลย์",
+    "category": "Beverage",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q275",
+    "question_th": "เมื่อลูกค้าขอ cocktail ที่เบา ควรแนะนำแนวใด",
+    "question_en": "If a guest wants a light cocktail, what should you recommend?",
+    "options": [
+      "nothing",
+      "double shot only",
+      "refreshing low-intensity style",
+      "strong neat whisky"
+    ],
+    "answer": "refreshing low-intensity style",
+    "category": "Beverage",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q276",
+    "question_th": "ABV คืออะไร",
+    "question_en": "What does ABV stand for?",
+    "options": [
+      "Average Beverage Value",
+      "Alcohol By Volume",
+      "Alcohol Bottle Verification",
+      "Added Barrel Vine"
+    ],
+    "answer": "Alcohol By Volume",
+    "category": "Beverage",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q277",
+    "question_th": "Spirit หมายถึงอะไร",
+    "question_en": "What does spirit mean?",
+    "options": [
+      "ไวน์ขาว",
+      "เครื่องดื่มไม่มีแอลกอฮอล์",
+      "น้ำผลไม้",
+      "สุรากลั่น"
+    ],
+    "answer": "สุรากลั่น",
+    "category": "Beverage",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q278",
+    "question_th": "Gin มี botanical หลักที่สำคัญคืออะไร",
+    "question_en": "What is the key botanical in gin?",
+    "options": [
+      "Mint",
+      "Cinnamon",
+      "Juniper",
+      "Apple"
+    ],
+    "answer": "Juniper",
+    "category": "Beverage",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q279",
+    "question_th": "Whisky กับ Whiskey ต่างกันหลักๆ ที่อะไร",
+    "question_en": "What is the main difference between whisky and whiskey?",
+    "options": [
+      "ไม่มีแอลกอฮอล์",
+      "สี",
+      "การสะกดตามประเทศ/ภูมิภาค",
+      "วิธีเสิร์ฟ"
+    ],
+    "answer": "การสะกดตามประเทศ/ภูมิภาค",
+    "category": "Beverage",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q280",
+    "question_th": "Single malt หมายถึงอะไร",
+    "question_en": "What does single malt mean?",
+    "options": [
+      "ผสมหลายโรงกลั่น",
+      "มาจากโรงกลั่นเดียวและใช้มอลต์บาร์เลย์",
+      "หวานมาก",
+      "ไม่มีมอลต์"
+    ],
+    "answer": "มาจากโรงกลั่นเดียวและใช้มอลต์บาร์เลย์",
+    "category": "Beverage",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q281",
+    "question_th": "เมื่อลูกค้าขอ cocktail ที่เบา ควรแนะนำแนวใด",
+    "question_en": "If a guest wants a light cocktail, what should you recommend?",
+    "options": [
+      "nothing",
+      "refreshing low-intensity style",
+      "double shot only",
+      "strong neat whisky"
+    ],
+    "answer": "refreshing low-intensity style",
+    "category": "Beverage",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q282",
+    "question_th": "ABV คืออะไร",
+    "question_en": "What does ABV stand for?",
+    "options": [
+      "Added Barrel Vine",
+      "Alcohol By Volume",
+      "Alcohol Bottle Verification",
+      "Average Beverage Value"
+    ],
+    "answer": "Alcohol By Volume",
+    "category": "Beverage",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q283",
+    "question_th": "Spirit หมายถึงอะไร",
+    "question_en": "What does spirit mean?",
+    "options": [
+      "น้ำผลไม้",
+      "ไวน์ขาว",
+      "เครื่องดื่มไม่มีแอลกอฮอล์",
+      "สุรากลั่น"
+    ],
+    "answer": "สุรากลั่น",
+    "category": "Beverage",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q284",
+    "question_th": "Gin มี botanical หลักที่สำคัญคืออะไร",
+    "question_en": "What is the key botanical in gin?",
+    "options": [
+      "Cinnamon",
+      "Juniper",
+      "Apple",
+      "Mint"
+    ],
+    "answer": "Juniper",
+    "category": "Beverage",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q285",
+    "question_th": "Whisky กับ Whiskey ต่างกันหลักๆ ที่อะไร",
+    "question_en": "What is the main difference between whisky and whiskey?",
+    "options": [
+      "การสะกดตามประเทศ/ภูมิภาค",
+      "ไม่มีแอลกอฮอล์",
+      "สี",
+      "วิธีเสิร์ฟ"
+    ],
+    "answer": "การสะกดตามประเทศ/ภูมิภาค",
+    "category": "Beverage",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q286",
+    "question_th": "Single malt หมายถึงอะไร",
+    "question_en": "What does single malt mean?",
+    "options": [
+      "มาจากโรงกลั่นเดียวและใช้มอลต์บาร์เลย์",
+      "ไม่มีมอลต์",
+      "ผสมหลายโรงกลั่น",
+      "หวานมาก"
+    ],
+    "answer": "มาจากโรงกลั่นเดียวและใช้มอลต์บาร์เลย์",
+    "category": "Beverage",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q287",
+    "question_th": "เมื่อลูกค้าขอ cocktail ที่เบา ควรแนะนำแนวใด",
+    "question_en": "If a guest wants a light cocktail, what should you recommend?",
+    "options": [
+      "refreshing low-intensity style",
+      "double shot only",
+      "nothing",
+      "strong neat whisky"
+    ],
+    "answer": "refreshing low-intensity style",
+    "category": "Beverage",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q288",
+    "question_th": "ABV คืออะไร",
+    "question_en": "What does ABV stand for?",
+    "options": [
+      "Average Beverage Value",
+      "Alcohol By Volume",
+      "Added Barrel Vine",
+      "Alcohol Bottle Verification"
+    ],
+    "answer": "Alcohol By Volume",
+    "category": "Beverage",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q289",
+    "question_th": "Spirit หมายถึงอะไร",
+    "question_en": "What does spirit mean?",
+    "options": [
+      "น้ำผลไม้",
+      "เครื่องดื่มไม่มีแอลกอฮอล์",
+      "สุรากลั่น",
+      "ไวน์ขาว"
+    ],
+    "answer": "สุรากลั่น",
+    "category": "Beverage",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q290",
+    "question_th": "Gin มี botanical หลักที่สำคัญคืออะไร",
+    "question_en": "What is the key botanical in gin?",
+    "options": [
+      "Cinnamon",
+      "Juniper",
+      "Apple",
+      "Mint"
+    ],
+    "answer": "Juniper",
+    "category": "Beverage",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q291",
+    "question_th": "Whisky กับ Whiskey ต่างกันหลักๆ ที่อะไร",
+    "question_en": "What is the main difference between whisky and whiskey?",
+    "options": [
+      "การสะกดตามประเทศ/ภูมิภาค",
+      "สี",
+      "ไม่มีแอลกอฮอล์",
+      "วิธีเสิร์ฟ"
+    ],
+    "answer": "การสะกดตามประเทศ/ภูมิภาค",
+    "category": "Beverage",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q292",
+    "question_th": "Single malt หมายถึงอะไร",
+    "question_en": "What does single malt mean?",
+    "options": [
+      "หวานมาก",
+      "ผสมหลายโรงกลั่น",
+      "ไม่มีมอลต์",
+      "มาจากโรงกลั่นเดียวและใช้มอลต์บาร์เลย์"
+    ],
+    "answer": "มาจากโรงกลั่นเดียวและใช้มอลต์บาร์เลย์",
+    "category": "Beverage",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q293",
+    "question_th": "เมื่อลูกค้าขอ cocktail ที่เบา ควรแนะนำแนวใด",
+    "question_en": "If a guest wants a light cocktail, what should you recommend?",
+    "options": [
+      "double shot only",
+      "nothing",
+      "refreshing low-intensity style",
+      "strong neat whisky"
+    ],
+    "answer": "refreshing low-intensity style",
+    "category": "Beverage",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q294",
+    "question_th": "ABV คืออะไร",
+    "question_en": "What does ABV stand for?",
+    "options": [
+      "Added Barrel Vine",
+      "Alcohol By Volume",
+      "Average Beverage Value",
+      "Alcohol Bottle Verification"
+    ],
+    "answer": "Alcohol By Volume",
+    "category": "Beverage",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q295",
+    "question_th": "Spirit หมายถึงอะไร",
+    "question_en": "What does spirit mean?",
+    "options": [
+      "ไวน์ขาว",
+      "เครื่องดื่มไม่มีแอลกอฮอล์",
+      "น้ำผลไม้",
+      "สุรากลั่น"
+    ],
+    "answer": "สุรากลั่น",
+    "category": "Beverage",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q296",
+    "question_th": "Gin มี botanical หลักที่สำคัญคืออะไร",
+    "question_en": "What is the key botanical in gin?",
+    "options": [
+      "Apple",
+      "Mint",
+      "Juniper",
+      "Cinnamon"
+    ],
+    "answer": "Juniper",
+    "category": "Beverage",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q297",
+    "question_th": "Whisky กับ Whiskey ต่างกันหลักๆ ที่อะไร",
+    "question_en": "What is the main difference between whisky and whiskey?",
+    "options": [
+      "การสะกดตามประเทศ/ภูมิภาค",
+      "ไม่มีแอลกอฮอล์",
+      "สี",
+      "วิธีเสิร์ฟ"
+    ],
+    "answer": "การสะกดตามประเทศ/ภูมิภาค",
+    "category": "Beverage",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q298",
+    "question_th": "Single malt หมายถึงอะไร",
+    "question_en": "What does single malt mean?",
+    "options": [
+      "หวานมาก",
+      "ผสมหลายโรงกลั่น",
+      "มาจากโรงกลั่นเดียวและใช้มอลต์บาร์เลย์",
+      "ไม่มีมอลต์"
+    ],
+    "answer": "มาจากโรงกลั่นเดียวและใช้มอลต์บาร์เลย์",
+    "category": "Beverage",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q299",
+    "question_th": "เมื่อลูกค้าขอ cocktail ที่เบา ควรแนะนำแนวใด",
+    "question_en": "If a guest wants a light cocktail, what should you recommend?",
+    "options": [
+      "refreshing low-intensity style",
+      "nothing",
+      "double shot only",
+      "strong neat whisky"
+    ],
+    "answer": "refreshing low-intensity style",
+    "category": "Beverage",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q300",
+    "question_th": "ABV คืออะไร",
+    "question_en": "What does ABV stand for?",
+    "options": [
+      "Alcohol By Volume",
+      "Added Barrel Vine",
+      "Alcohol Bottle Verification",
+      "Average Beverage Value"
+    ],
+    "answer": "Alcohol By Volume",
+    "category": "Beverage",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q301",
+    "question_th": "Spirit หมายถึงอะไร",
+    "question_en": "What does spirit mean?",
+    "options": [
+      "เครื่องดื่มไม่มีแอลกอฮอล์",
+      "สุรากลั่น",
+      "น้ำผลไม้",
+      "ไวน์ขาว"
+    ],
+    "answer": "สุรากลั่น",
+    "category": "Beverage",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q302",
+    "question_th": "Gin มี botanical หลักที่สำคัญคืออะไร",
+    "question_en": "What is the key botanical in gin?",
+    "options": [
+      "Mint",
+      "Apple",
+      "Juniper",
+      "Cinnamon"
+    ],
+    "answer": "Juniper",
+    "category": "Beverage",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q303",
+    "question_th": "Whisky กับ Whiskey ต่างกันหลักๆ ที่อะไร",
+    "question_en": "What is the main difference between whisky and whiskey?",
+    "options": [
+      "สี",
+      "วิธีเสิร์ฟ",
+      "ไม่มีแอลกอฮอล์",
+      "การสะกดตามประเทศ/ภูมิภาค"
+    ],
+    "answer": "การสะกดตามประเทศ/ภูมิภาค",
+    "category": "Beverage",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q304",
+    "question_th": "Single malt หมายถึงอะไร",
+    "question_en": "What does single malt mean?",
+    "options": [
+      "หวานมาก",
+      "มาจากโรงกลั่นเดียวและใช้มอลต์บาร์เลย์",
+      "ผสมหลายโรงกลั่น",
+      "ไม่มีมอลต์"
+    ],
+    "answer": "มาจากโรงกลั่นเดียวและใช้มอลต์บาร์เลย์",
+    "category": "Beverage",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q305",
+    "question_th": "เมื่อลูกค้าขอ cocktail ที่เบา ควรแนะนำแนวใด",
+    "question_en": "If a guest wants a light cocktail, what should you recommend?",
+    "options": [
+      "double shot only",
+      "refreshing low-intensity style",
+      "strong neat whisky",
+      "nothing"
+    ],
+    "answer": "refreshing low-intensity style",
+    "category": "Beverage",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q306",
+    "question_th": "ABV คืออะไร",
+    "question_en": "What does ABV stand for?",
+    "options": [
+      "Alcohol Bottle Verification",
+      "Alcohol By Volume",
+      "Average Beverage Value",
+      "Added Barrel Vine"
+    ],
+    "answer": "Alcohol By Volume",
+    "category": "Beverage",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q307",
+    "question_th": "Spirit หมายถึงอะไร",
+    "question_en": "What does spirit mean?",
+    "options": [
+      "สุรากลั่น",
+      "เครื่องดื่มไม่มีแอลกอฮอล์",
+      "น้ำผลไม้",
+      "ไวน์ขาว"
+    ],
+    "answer": "สุรากลั่น",
+    "category": "Beverage",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q308",
+    "question_th": "Gin มี botanical หลักที่สำคัญคืออะไร",
+    "question_en": "What is the key botanical in gin?",
+    "options": [
+      "Apple",
+      "Juniper",
+      "Cinnamon",
+      "Mint"
+    ],
+    "answer": "Juniper",
+    "category": "Beverage",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q309",
+    "question_th": "Whisky กับ Whiskey ต่างกันหลักๆ ที่อะไร",
+    "question_en": "What is the main difference between whisky and whiskey?",
+    "options": [
+      "วิธีเสิร์ฟ",
+      "สี",
+      "ไม่มีแอลกอฮอล์",
+      "การสะกดตามประเทศ/ภูมิภาค"
+    ],
+    "answer": "การสะกดตามประเทศ/ภูมิภาค",
+    "category": "Beverage",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q310",
+    "question_th": "Single malt หมายถึงอะไร",
+    "question_en": "What does single malt mean?",
+    "options": [
+      "ผสมหลายโรงกลั่น",
+      "มาจากโรงกลั่นเดียวและใช้มอลต์บาร์เลย์",
+      "ไม่มีมอลต์",
+      "หวานมาก"
+    ],
+    "answer": "มาจากโรงกลั่นเดียวและใช้มอลต์บาร์เลย์",
+    "category": "Beverage",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q311",
+    "question_th": "เมื่อลูกค้าขอ cocktail ที่เบา ควรแนะนำแนวใด",
+    "question_en": "If a guest wants a light cocktail, what should you recommend?",
+    "options": [
+      "refreshing low-intensity style",
+      "double shot only",
+      "nothing",
+      "strong neat whisky"
+    ],
+    "answer": "refreshing low-intensity style",
+    "category": "Beverage",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q312",
+    "question_th": "ABV คืออะไร",
+    "question_en": "What does ABV stand for?",
+    "options": [
+      "Average Beverage Value",
+      "Alcohol By Volume",
+      "Added Barrel Vine",
+      "Alcohol Bottle Verification"
+    ],
+    "answer": "Alcohol By Volume",
+    "category": "Beverage",
+    "difficulty": "easy",
+    "source": "core_bank"
+  },
+  {
+    "id": "q313",
+    "question_th": "Spirit หมายถึงอะไร",
+    "question_en": "What does spirit mean?",
+    "options": [
+      "ไวน์ขาว",
+      "เครื่องดื่มไม่มีแอลกอฮอล์",
+      "น้ำผลไม้",
+      "สุรากลั่น"
+    ],
+    "answer": "สุรากลั่น",
+    "category": "Beverage",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q314",
+    "question_th": "Gin มี botanical หลักที่สำคัญคืออะไร",
+    "question_en": "What is the key botanical in gin?",
+    "options": [
+      "Cinnamon",
+      "Mint",
+      "Apple",
+      "Juniper"
+    ],
+    "answer": "Juniper",
+    "category": "Beverage",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q315",
+    "question_th": "Whisky กับ Whiskey ต่างกันหลักๆ ที่อะไร",
+    "question_en": "What is the main difference between whisky and whiskey?",
+    "options": [
+      "วิธีเสิร์ฟ",
+      "ไม่มีแอลกอฮอล์",
+      "การสะกดตามประเทศ/ภูมิภาค",
+      "สี"
+    ],
+    "answer": "การสะกดตามประเทศ/ภูมิภาค",
+    "category": "Beverage",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q316",
+    "question_th": "Single malt หมายถึงอะไร",
+    "question_en": "What does single malt mean?",
+    "options": [
+      "ไม่มีมอลต์",
+      "ผสมหลายโรงกลั่น",
+      "มาจากโรงกลั่นเดียวและใช้มอลต์บาร์เลย์",
+      "หวานมาก"
+    ],
+    "answer": "มาจากโรงกลั่นเดียวและใช้มอลต์บาร์เลย์",
+    "category": "Beverage",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q317",
+    "question_th": "เมื่อลูกค้าขอ cocktail ที่เบา ควรแนะนำแนวใด",
+    "question_en": "If a guest wants a light cocktail, what should you recommend?",
+    "options": [
+      "double shot only",
+      "nothing",
+      "strong neat whisky",
+      "refreshing low-intensity style"
+    ],
+    "answer": "refreshing low-intensity style",
+    "category": "Beverage",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q318",
+    "question_th": "ABV คืออะไร",
+    "question_en": "What does ABV stand for?",
+    "options": [
+      "Average Beverage Value",
+      "Added Barrel Vine",
+      "Alcohol By Volume",
+      "Alcohol Bottle Verification"
+    ],
+    "answer": "Alcohol By Volume",
+    "category": "Beverage",
+    "difficulty": "medium",
+    "source": "core_bank"
+  },
+  {
+    "id": "q319",
+    "question_th": "Spirit หมายถึงอะไร",
+    "question_en": "What does spirit mean?",
+    "options": [
+      "น้ำผลไม้",
+      "ไวน์ขาว",
+      "เครื่องดื่มไม่มีแอลกอฮอล์",
+      "สุรากลั่น"
+    ],
+    "answer": "สุรากลั่น",
+    "category": "Beverage",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q320",
+    "question_th": "Gin มี botanical หลักที่สำคัญคืออะไร",
+    "question_en": "What is the key botanical in gin?",
+    "options": [
+      "Cinnamon",
+      "Apple",
+      "Juniper",
+      "Mint"
+    ],
+    "answer": "Juniper",
+    "category": "Beverage",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q321",
+    "question_th": "Whisky กับ Whiskey ต่างกันหลักๆ ที่อะไร",
+    "question_en": "What is the main difference between whisky and whiskey?",
+    "options": [
+      "สี",
+      "วิธีเสิร์ฟ",
+      "การสะกดตามประเทศ/ภูมิภาค",
+      "ไม่มีแอลกอฮอล์"
+    ],
+    "answer": "การสะกดตามประเทศ/ภูมิภาค",
+    "category": "Beverage",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q322",
+    "question_th": "Single malt หมายถึงอะไร",
+    "question_en": "What does single malt mean?",
+    "options": [
+      "หวานมาก",
+      "ผสมหลายโรงกลั่น",
+      "ไม่มีมอลต์",
+      "มาจากโรงกลั่นเดียวและใช้มอลต์บาร์เลย์"
+    ],
+    "answer": "มาจากโรงกลั่นเดียวและใช้มอลต์บาร์เลย์",
+    "category": "Beverage",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q323",
+    "question_th": "เมื่อลูกค้าขอ cocktail ที่เบา ควรแนะนำแนวใด",
+    "question_en": "If a guest wants a light cocktail, what should you recommend?",
+    "options": [
+      "double shot only",
+      "strong neat whisky",
+      "refreshing low-intensity style",
+      "nothing"
+    ],
+    "answer": "refreshing low-intensity style",
+    "category": "Beverage",
+    "difficulty": "hard",
+    "source": "core_bank"
+  },
+  {
+    "id": "q324",
+    "question_th": "ABV คืออะไร",
+    "question_en": "What does ABV stand for?",
+    "options": [
+      "Alcohol Bottle Verification",
+      "Average Beverage Value",
+      "Added Barrel Vine",
+      "Alcohol By Volume"
+    ],
+    "answer": "Alcohol By Volume",
+    "category": "Beverage",
+    "difficulty": "hard",
+    "source": "core_bank"
+  }
+]
