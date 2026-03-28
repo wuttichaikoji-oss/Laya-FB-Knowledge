@@ -126,6 +126,64 @@ function normalizeWineItem(raw = {}, index = 0) {
 
 const BASE_WINE_MEDIA = RAW_WINE_MEDIA.map((item, index) => normalizeWineItem(item, index));
 
+function defaultQuizCategorySummary() {
+  return {
+    attempts: 0,
+    bestScore: 0,
+    lastScore: null,
+    previousScore: null,
+    lastAttemptAt: null,
+    previousAttemptAt: null
+  };
+}
+
+function defaultQuizSummary() {
+  return {
+    attempts: 0,
+    bestScore: 0,
+    lastScore: null,
+    previousScore: null,
+    lastAttemptAt: null,
+    previousAttemptAt: null,
+    byCategory: {}
+  };
+}
+
+function nullableScore(value) {
+  if (value === null || value === undefined || value === '') return null;
+  const num = Number(value);
+  return Number.isFinite(num) ? num : null;
+}
+
+function normalizeQuizSummary(raw = {}) {
+  const normalized = defaultQuizSummary();
+  if (!raw || typeof raw !== 'object') return normalized;
+
+  normalized.attempts = Number(raw.attempts || 0);
+  normalized.bestScore = Number(raw.bestScore || 0);
+  normalized.lastScore = nullableScore(raw.lastScore);
+  normalized.previousScore = nullableScore(raw.previousScore);
+  normalized.lastAttemptAt = raw.lastAttemptAt || null;
+  normalized.previousAttemptAt = raw.previousAttemptAt || null;
+  normalized.byCategory = {};
+
+  const sourceByCategory = raw.byCategory && typeof raw.byCategory === 'object' ? raw.byCategory : {};
+  Object.entries(sourceByCategory).forEach(([key, value]) => {
+    const cat = defaultQuizCategorySummary();
+    if (value && typeof value === 'object') {
+      cat.attempts = Number(value.attempts || 0);
+      cat.bestScore = Number(value.bestScore || 0);
+      cat.lastScore = nullableScore(value.lastScore);
+      cat.previousScore = nullableScore(value.previousScore);
+      cat.lastAttemptAt = value.lastAttemptAt || null;
+      cat.previousAttemptAt = value.previousAttemptAt || null;
+    }
+    normalized.byCategory[key] = cat;
+  });
+
+  return normalized;
+}
+
 const defaultUserData = () => ({
   done: [],
   favorites: [],
@@ -133,7 +191,7 @@ const defaultUserData = () => ({
   progress: {},
   englishProgress: {},
   quizHistory: [],
-  quizSummary: { attempts: 0, bestScore: 0, lastScore: 0, byCategory: {} }
+  quizSummary: defaultQuizSummary()
 });
 
 function normalizeEmployeeCode(raw = '') {
@@ -271,7 +329,7 @@ function mergeUserData(raw = {}) {
   merged.progress = raw.progress && typeof raw.progress === 'object' ? raw.progress : {};
   merged.englishProgress = raw.englishProgress && typeof raw.englishProgress === 'object' ? raw.englishProgress : {};
   merged.quizHistory = Array.isArray(raw.quizHistory) ? raw.quizHistory : [];
-  merged.quizSummary = raw.quizSummary && typeof raw.quizSummary === 'object' ? raw.quizSummary : { attempts: 0, bestScore: 0, lastScore: 0, byCategory: {} };
+  merged.quizSummary = normalizeQuizSummary(raw.quizSummary);
 
   merged.done.forEach(id => {
     merged.progress[id] ||= {};
@@ -1367,9 +1425,14 @@ function quizStatRow(label, value) {
 function renderQuizLauncher() {
   const body = getQuizBody();
   if (!body) throw new Error('quizBody missing');
-  const attempts = state.userData.quizSummary?.attempts || 0;
-  const bestScore = Math.round(state.userData.quizSummary?.bestScore || 0);
-  const lastScore = Math.round(state.userData.quizSummary?.lastScore || 0);
+  const summary = normalizeQuizSummary(state.userData.quizSummary);
+  state.userData.quizSummary = summary;
+  const attempts = summary.attempts || 0;
+  const bestScore = Math.round(summary.bestScore || 0);
+  const lastScoreText = summary.lastScore == null ? '-' : `${Math.round(summary.lastScore)}%`;
+  const previousScoreText = summary.previousScore == null ? '-' : `${Math.round(summary.previousScore)}%`;
+  const scoreDiff = summary.previousScore == null || summary.lastScore == null ? null : Math.round(summary.lastScore - summary.previousScore);
+  const diffText = scoreDiff == null ? '-' : `${scoreDiff > 0 ? '+' : ''}${scoreDiff}%`;
   const defaultSource = 'curated';
   const cats = quizCategories(defaultSource);
   body.innerHTML = `
@@ -1377,7 +1440,9 @@ function renderQuizLauncher() {
       <div class="quiz-stats-grid">
         ${quizStatRow('ทำไปแล้ว', `${attempts} ครั้ง`)}
         ${quizStatRow('คะแนนสูงสุด', `${bestScore}%`)}
-        ${quizStatRow('คะแนนล่าสุด', `${lastScore}%`)}
+        ${quizStatRow('คะแนนล่าสุด', lastScoreText)}
+        ${quizStatRow('คะแนนรอบก่อน', previousScoreText)}
+        ${quizStatRow('ผลต่างจากรอบก่อน', diffText)}
       </div>
       <div class="analysis-note">ระบบจะสุ่มข้อสอบจากคลังข้อสอบหลักแบบไม่ซ้ำในรอบเดียว และถ้ามี Quiz Bank ใน Firebase จะใช้ชุดนั้นก่อน</div>
       <div class="quiz-setup-grid">
@@ -1561,20 +1626,30 @@ async function finishQuiz() {
     completedAt
   };
   state.userData.quizHistory = [attempt, ...(state.userData.quizHistory || [])].slice(0, 20);
-  const summary = state.userData.quizSummary || { attempts: 0, bestScore: 0, lastScore: 0, byCategory: {} };
+  const summary = normalizeQuizSummary(state.userData.quizSummary);
   summary.attempts = (summary.attempts || 0) + 1;
   summary.bestScore = Math.max(summary.bestScore || 0, scorePercent);
+  summary.previousScore = summary.lastScore;
+  summary.previousAttemptAt = summary.lastAttemptAt || null;
   summary.lastScore = scorePercent;
+  summary.lastAttemptAt = completedAt;
   summary.byCategory ||= {};
   const key = quiz.category || 'All';
-  const cat = summary.byCategory[key] || { attempts: 0, bestScore: 0, lastScore: 0 };
+  const cat = summary.byCategory[key] ? { ...defaultQuizCategorySummary(), ...summary.byCategory[key] } : defaultQuizCategorySummary();
   cat.attempts += 1;
   cat.bestScore = Math.max(cat.bestScore || 0, scorePercent);
+  cat.previousScore = cat.lastScore;
+  cat.previousAttemptAt = cat.lastAttemptAt || null;
   cat.lastScore = scorePercent;
+  cat.lastAttemptAt = completedAt;
   summary.byCategory[key] = cat;
   state.userData.quizSummary = summary;
   await saveUserData(true);
   await saveQuizAttemptRecord(attempt, quiz, analytics);
+
+  const previousScoreText = summary.previousScore == null ? '-' : `${Math.round(summary.previousScore)}%`;
+  const scoreDiff = summary.previousScore == null ? null : Math.round(scorePercent - summary.previousScore);
+  const scoreDiffText = scoreDiff == null ? '-' : `${scoreDiff > 0 ? '+' : ''}${scoreDiff}%`;
 
   const body = getQuizBody();
   if (!body) throw new Error('quizBody missing');
@@ -1583,6 +1658,11 @@ async function finishQuiz() {
       <div class="quiz-score-circle ${scorePercent >= 80 ? 'good' : scorePercent >= 60 ? 'mid' : 'low'}">${Math.round(scorePercent)}%</div>
       <h3>สรุปผลแบบทดสอบ</h3>
       <p>ตอบถูก ${correct} จาก ${total} ข้อ · แหล่งคำถาม: ${safeHTML((quizSourceOptions().find(item => item.value === (quiz.sourceMode || 'curated')) || {}).label || 'คลังข้อสอบหลัก (Stable)')}</p>
+      <div class="quiz-stats-grid">
+        ${quizStatRow('คะแนนรอบนี้', `${Math.round(scorePercent)}%`)}
+        ${quizStatRow('คะแนนรอบก่อน', previousScoreText)}
+        ${quizStatRow('ผลต่างจากรอบก่อน', scoreDiffText)}
+      </div>
       <div class="analysis-summary">
         <div><strong>จุดแข็ง:</strong> ${analytics.strengths.length ? analytics.strengths.map(safeHTML).join(', ') : 'ยังไม่มีหมวดที่เด่นชัด'}</div>
         <div><strong>ควรพัฒนา:</strong> ${analytics.focus.length ? analytics.focus.map(safeHTML).join(', ') : 'ทำได้สมดุลดี'}</div>
