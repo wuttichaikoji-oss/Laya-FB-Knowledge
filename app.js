@@ -1144,10 +1144,19 @@ function buildWineQuestions() {
 
 
 function normalizeQuizPrompt(item = {}) {
-  const th = String(item.question_th || item.prompt || '').trim();
-  const en = String(item.question_en || '').trim();
-  if (th && en && en !== th) return `${th}\n${en}`;
-  return th || en;
+  const thRaw = String(item.question_th || item.prompt || '').trim();
+  const enRaw = String(item.question_en || '').trim();
+  const th = thRaw.replace(/^คำถามภาษาอังกฤษ\s*:\s*/i, '').trim();
+  const en = enRaw.trim();
+
+  if (th && en) {
+    const thLower = th.toLowerCase();
+    const enLower = en.toLowerCase();
+    if (thLower === enLower) return en;
+    if (thLower.includes(enLower) || enLower.includes(thLower)) return en.length >= th.length ? en : th;
+    return `${th}\n${en}`;
+  }
+  return th || en || '';
 }
 
 function normalizeQuizQuestion(item = {}, fallbackId = '') {
@@ -1219,8 +1228,9 @@ function generatedQuizBank(sourceMode = 'curated') {
     const deduped = [];
     const seen = new Set();
     normalized.forEach(item => {
-      const key = String(item.id || item.prompt || '').trim().toLowerCase();
-      if (!key || seen.has(key)) return;
+      const promptKey = String(item.prompt || '').replace(/\s+/g, ' ').trim().toLowerCase();
+      const key = `${String(item.category || 'general').trim().toLowerCase()}::${promptKey}`;
+      if (!promptKey || seen.has(key)) return;
       seen.add(key);
       deduped.push({ ...item, source: state.remoteQuizBank.length ? 'firebase' : 'curated' });
     });
@@ -1445,8 +1455,9 @@ function startQuiz(category = 'All', count = 10, sourceMode = 'curated') {
   const uniquePool = [];
   const seen = new Set();
   pool.forEach(item => {
-    const key = String(item.id || item.prompt || '').trim().toLowerCase();
-    if (!key || seen.has(key)) return;
+    const promptKey = String(item.prompt || '').replace(/\s+/g, ' ').trim().toLowerCase();
+    const key = `${String(item.category || 'general').trim().toLowerCase()}::${promptKey}`;
+    if (!promptKey || seen.has(key)) return;
     seen.add(key);
     uniquePool.push(item);
   });
